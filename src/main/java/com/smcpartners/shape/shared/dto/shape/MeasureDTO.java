@@ -25,6 +25,7 @@ public class MeasureDTO implements Serializable {
     private String exclusionsDescription;
     private boolean wellControlledNumerator;
     private boolean selected;
+    private boolean active;
 
     public MeasureDTO() {
     }
@@ -99,5 +100,13 @@ public class MeasureDTO implements Serializable {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

@@ -32,6 +32,7 @@ public class MeasureEntity {
     private String exclusionsDescription;
     private boolean wellControlledNumerator;
     private boolean selected;
+    private boolean active;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -115,13 +116,23 @@ public class MeasureEntity {
     }
 
     @Basic
-    @Column(name = "selected", columnDefinition = "TINYINT", length = 1, nullable = true, insertable = true, updatable = true)
+    @Column(name = "selected", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
     public boolean isSelected() {
         return selected;
     }
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+
+    @Basic
+    @Column(name = "active", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     @Override

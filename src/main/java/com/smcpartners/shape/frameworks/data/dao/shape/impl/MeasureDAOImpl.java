@@ -78,6 +78,7 @@ public class MeasureDAOImpl extends AbstractCrudDAO<MeasureDTO, MeasureEntity, I
         e.setNumeratorDescription(dto.getNumeratorDescription());
         e.setSelected(dto.isSelected());
         e.setWellControlledNumerator(dto.isWellControlledNumerator());
+        e.setActive(dto.isActive());
         return e;
     }
 
@@ -98,6 +99,7 @@ public class MeasureDAOImpl extends AbstractCrudDAO<MeasureDTO, MeasureEntity, I
         dto.setNumeratorDescription(entity.getNumeratorDescription());
         dto.setSelected(entity.isSelected());
         dto.setWellControlledNumerator(entity.isWellControlledNumerator());
+        dto.setActive(entity.isActive());
 
         // Check provider measures
         List<ProviderMeasureResponseDTO> pmLst = new ArrayList<>();

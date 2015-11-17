@@ -21,7 +21,7 @@ public class DBProducer {
     @Produces
     @PersistenceContext(unitName = "shape")
     @ShapeDatabase
-    private EntityManager jump;
+    private EntityManager shape;
 
     //@Produces
     //@PersistenceContext(unitName = "aerogears")
