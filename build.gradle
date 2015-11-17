@@ -1,0 +1,76 @@
+group 'com.smcpartners.shape'
+version '1.0.0'
+
+apply plugin: 'java'
+apply plugin: 'war'
+
+sourceCompatibility = 1.8
+
+def deployDir = '/Users/johndestefano/javastuff/jboss/servers/wildfly-9.0.1.Final/standalone/deployments'
+
+repositories {
+    flatDir { dirs "lib" }
+    maven { url 'https://repository.jboss.org/nexus/content/groups/public-jboss'}
+    maven { url 'https://repository.jboss.org/nexus/content/repositories/snapshots'}
+    maven { url 'https://repository.jboss.org/nexus/content/repositories/thirdparty-releases'}
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    // Provided
+    providedCompile 'org.wildfly.bom:jboss-javaee-7.0-with-all:8.2.2.Final'
+    providedCompile 'javax.enterprise:cdi-api:1.2'
+    providedCompile 'org.jboss.spec.javax.jms:jboss-jms-api_2.0_spec:1.0.0.Final'
+    //providedCompile 'org.jboss.spec.javax.producers:jboss-annotations-api_1.2_spec:1.0.0.Final'
+    providedCompile 'org.jboss.spec.javax.annotation:jboss-annotations-api_1.2_spec:1.0.0.Final'
+    providedCompile 'org.jboss.spec.javax.ws.rs:jboss-jaxrs-api_2.0_spec:1.0.0.Final'
+    providedCompile 'org.hibernate.javax.persistence:hibernate-jpa-2.0-api:1.0.1.Final'
+    providedCompile 'org.jboss.spec.javax.ejb:jboss-ejb-api_3.2_spec:1.0.0.Final'
+    providedCompile 'org.jboss.spec.javax.servlet:jboss-servlet-api_3.1_spec:1.0.0.Final'
+    providedCompile 'org.jboss.resteasy:resteasy-jackson2-provider:3.0.10.Final'
+    providedCompile 'org.jboss.resteasy:resteasy-jaxrs:3.0.10.Final'
+    providedCompile 'org.jboss.resteasy:resteasy-cache-core:3.0.10.Final'
+
+    // Libs
+    compile 'org.apache.deltaspike.core:deltaspike-core-api:1.2.1'
+    compile 'org.apache.deltaspike.core:deltaspike-core-impl:1.2.1'
+    //compile 'org.apache.deltaspike.modules:deltaspike-jpa-module-api:1.2.1'
+    //compile 'org.apache.deltaspike.modules:deltaspike-jpa-module-impl:1.2.1'
+    compile 'org.apache.deltaspike.modules:deltaspike-security-module-api:1.2.1'
+    compile 'org.apache.deltaspike.modules:deltaspike-security-module-impl:1.2.1'
+    compile 'io.jsonwebtoken:jjwt:0.5.1'
+    compile 'org.apache.commons:commons-email:1.4'
+    compile 'commons-io:commons-io:2.4'
+
+    // Mighty handy to handle java 8 short comings
+    compile 'com.diffplug.durian:durian:3.2.0'
+}
+
+//war {
+//    manifest {
+//        attributes(
+//"Dependencies": 'org.jboss.as.naming,org.jboss.as.server,org.jboss.msc,org.jboss.resteasy.resteasy-jaxrs,com.fasterxml.jackson.jaxrs.jackson-jaxrs-json-provider'//        )
+//    }
+//}
+
+war {
+    metaInf {
+        from("src/main/resources/META-INF")
+        include "apache-deltaspike.properties"
+    }
+}
+
+task deployWAR(type: Copy) {
+    println("Deploying war")
+    into deployDir
+    from "${buildDir}/libs"
+}
+
+deployWAR.dependsOn(assemble)
+
+task removeWAR(type: Delete) {
+    def delFile = "${deployDir}/${rootProject.name}-${version}.war"
+    println("Deleting " + delFile)
+    delete delFile
+}

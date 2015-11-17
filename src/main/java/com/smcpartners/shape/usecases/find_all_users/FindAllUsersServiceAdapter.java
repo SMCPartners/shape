@@ -1,0 +1,76 @@
+package com.smcpartners.shape.usecases.find_all_users;
+
+
+import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationDAO;
+import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
+import com.smcpartners.shape.shared.dto.shape.UserDTO;
+import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
+import com.smcpartners.shape.usecases.UseCaseException;
+
+import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Responsible:<br/>
+ * 1.
+ * <p>
+ * Created by johndestefano on 9/11/15.
+ * <p>
+ * <p>
+ * <p>
+ * Changes:<b/>
+ * </p>
+ */
+@RequestScoped
+public class FindAllUsersServiceAdapter implements FindAllUsersService {
+
+    @Inject
+    private Logger log;
+
+    @EJB
+    private UserDAO userDAO;
+
+    @EJB
+    private OrganizationDAO organizationDAO;
+
+    @Inject
+    private RequestScopedUserId requestScopedUserId;
+
+    /**
+     * Default constructor
+     */
+    public FindAllUsersServiceAdapter() {
+    }
+
+    @Override
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
+    public List<UserDTO> findAllUser() throws UseCaseException {
+        try {
+            List<UserDTO> lst = null;
+
+            SecurityRoleEnum reqUserRole = SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole());
+
+            // The ADMIN role can see everybody
+            // The ORG_ADMIN can see others in their ORG
+            // Everyone else gets nothing
+            if (reqUserRole == SecurityRoleEnum.ADMIN) {
+                lst = userDAO.findAll();
+            } else if (reqUserRole == SecurityRoleEnum.ORG_ADMIN) {
+                // Find the user
+                UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
+                int orgId = reqUser.getOrganizationId();
+                lst = userDAO.findByOrg(orgId);
+            }
+            return lst;
+        } catch (Exception e) {
+            log.logp(Level.SEVERE, this.getClass().getName(), "findAllUser", e.getMessage(), e);
+            throw new UseCaseException(e.getMessage());
+        }
+    }
+}
