@@ -1,7 +1,6 @@
 package com.smcpartners.shape.frameworks.data.entitymodel.shape;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 /**
  * Responsible:</br>
