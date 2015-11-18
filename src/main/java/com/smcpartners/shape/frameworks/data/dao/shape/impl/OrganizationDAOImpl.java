@@ -104,7 +104,7 @@ public class OrganizationDAOImpl extends AbstractCrudDAO<OrganizationDTO, Organi
         dto.setAddressCity(e.getAddressCity());
         dto.setAddressState(e.getAddressState());
         dto.setAddressStreet(e.getAddressStreet());
-        dto.setAddressZip(dto.getAddressZip());
+        dto.setAddressZip(e.getAddressZip());
         dto.setId(e.getId());
         dto.setName(e.getName());
         dto.setPhone(e.getPhone());

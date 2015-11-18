@@ -98,6 +98,7 @@ public class OrganizationStratificationDAOImpl extends AbstractCrudDAO<Organizat
         et.setRaceNativeHawaiian(dto.getRaceNativeHawaiian());
         et.setRaceOther(dto.getRaceOther());
         et.setRaceWhite(dto.getRaceWhite());
+        et.setRpDate(dto.getRpDate());
 
         // Look up organization
         OrganizationEntity oe = em.find(OrganizationEntity.class, dto.getOrganizationId());
@@ -137,6 +138,7 @@ public class OrganizationStratificationDAOImpl extends AbstractCrudDAO<Organizat
         dto.setRaceWhite(entity.getRaceWhite());
         dto.setOrganizationId(entity.getOrganizationByOrganizationId().getId());
         dto.setUserId(entity.getUserByUserId().getId());
+        dto.setRpDate(entity.getRpDate());
         return dto;
     }
 }

@@ -6,7 +6,7 @@ apply plugin: 'war'
 
 sourceCompatibility = 1.8
 
-def deployDir = '/Users/johndestefano/javastuff/jboss/servers/wildfly-9.0.1.Final/standalone/deployments'
+def deployDir = 'C:\\Users\\bhokanson\\Documents\\Server\\Wildfly\\standalone\\deployments'
 
 repositories {
     flatDir { dirs "lib" }

@@ -92,7 +92,7 @@ public class MeasureDAOImpl extends AbstractCrudDAO<MeasureDTO, MeasureEntity, I
         MeasureDTO dto = new MeasureDTO();
         dto.setDenominatorDescription(entity.getDenominatorDescription());
         dto.setDescription(entity.getDescription());
-        dto.setExclusionsDescription(dto.getExclusionsDescription());
+        dto.setExclusionsDescription(entity.getExclusionsDescription());
         dto.setId(entity.getId());
         dto.setName(entity.getName());
         dto.setNqfId(entity.getNqfId());

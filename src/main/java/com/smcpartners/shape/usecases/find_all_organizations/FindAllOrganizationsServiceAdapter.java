@@ -1,4 +1,4 @@
-package com.smcpartners.shape.usecases.find_all_organizations_names;
+package com.smcpartners.shape.usecases.find_all_organizations;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
@@ -6,7 +6,6 @@ import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.dto.shape.OrganizationDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
-import com.smcpartners.shape.shared.dto.shape.response.OrganizationNameResponseDTO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.usecases.UseCaseException;
 
@@ -27,7 +26,7 @@ import java.util.logging.Logger;
  * Changes:<b/>
  */
 @RequestScoped
-public class FindAllOrganizationNamesServiceAdapter implements FindAllOrganizationNamesService {
+public class FindAllOrganizationsServiceAdapter implements FindAllOrganizationsService {
 
     @Inject
     private Logger log;
@@ -41,27 +40,38 @@ public class FindAllOrganizationNamesServiceAdapter implements FindAllOrganizati
     @Inject
     private RequestScopedUserId requestScopedUserId;
 
-    public FindAllOrganizationNamesServiceAdapter() {
+    public FindAllOrganizationsServiceAdapter() {
     }
 
     @Override
     @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
-    public List<OrganizationNameResponseDTO> findAllOrganizationNames() throws UseCaseException {
+    public List<OrganizationDTO> findAllOrganizations() throws UseCaseException {
         try {
-            List<OrganizationNameResponseDTO> retLst = new ArrayList<>();
+            List<OrganizationDTO> retLst = new ArrayList<>();
 
             // ADMIN role can see all organizations
             // ORG_ADMIN can see only their organization
-            SecurityRoleEnum reqUserRole = SecurityRoleEnum.valueOf(requestScopedUserId.getRequestUserId());
+            UserDTO user = userDAO.findById(requestScopedUserId.getRequestUserId());
+            SecurityRoleEnum reqUserRole = SecurityRoleEnum.valueOf(user.getRole());
 
             if (SecurityRoleEnum.ADMIN == reqUserRole) {
                 List<OrganizationDTO> lst = organizationDAO.findAll();
                 lst.forEach(l -> {
-                    OrganizationNameResponseDTO dto = new OrganizationNameResponseDTO();
+                    OrganizationDTO dto = new OrganizationDTO();
                     dto.setId(l.getId());
                     dto.setName(l.getName());
                     dto.setActive(l.isActive());
+                    dto.setAddressStreet(l.getAddressStreet());
+                    dto.setAddressCity(l.getAddressCity());
+                    dto.setAddressState(l.getAddressState());
+                    dto.setAddressZip(l.getAddressZip());
+                    dto.setPhone(l.getPhone());
+                    dto.setPrimaryContactPhone(l.getPrimaryContactPhone());
+                    dto.setPrimaryContactName(l.getPrimaryContactName());
+                    dto.setPrimaryContactEmail(l.getPrimaryContactEmail());
+                    dto.setPrimaryContactRole(l.getPrimaryContactRole());
                     retLst.add(dto);
+
                 });
             } else if (SecurityRoleEnum.ORG_ADMIN == reqUserRole){
                 // Find the user
@@ -71,10 +81,19 @@ public class FindAllOrganizationNamesServiceAdapter implements FindAllOrganizati
                 OrganizationDTO orgDTO = organizationDAO.findById(reqUser.getOrganizationId());
 
                 // Add to lst
-                OrganizationNameResponseDTO dto = new OrganizationNameResponseDTO();
+                OrganizationDTO dto = new OrganizationDTO();
                 dto.setId(orgDTO.getId());
                 dto.setName(orgDTO.getName());
                 dto.setActive(orgDTO.isActive());
+                dto.setAddressStreet(orgDTO.getAddressStreet());
+                dto.setAddressCity(orgDTO.getAddressCity());
+                dto.setAddressState(orgDTO.getAddressState());
+                dto.setAddressZip(orgDTO.getAddressZip());
+                dto.setPhone(orgDTO.getPhone());
+                dto.setPrimaryContactPhone(orgDTO.getPrimaryContactPhone());
+                dto.setPrimaryContactName(orgDTO.getPrimaryContactName());
+                dto.setPrimaryContactEmail(orgDTO.getPrimaryContactEmail());
+                dto.setPrimaryContactRole(orgDTO.getPrimaryContactRole());
                 retLst.add(dto);
             }
 

@@ -1,6 +1,6 @@
-package com.smcpartners.shape.usecases.find_all_organizations_names;
+package com.smcpartners.shape.usecases.find_all_organizations;
 
-import com.smcpartners.shape.shared.dto.shape.response.OrganizationNameResponseDTO;
+import com.smcpartners.shape.shared.dto.shape.OrganizationDTO;
 import com.smcpartners.shape.usecases.UseCaseException;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
@@ -18,11 +18,11 @@ import java.util.List;
  * Changes:<b/>
  */
 @Path("/admin")
-public interface FindAllOrganizationNamesService {
+public interface FindAllOrganizationsService {
 
     @GET
     @NoCache
-    @Path("/organization/findNames")
+    @Path("/organization/findAll")
     @Produces("application/json")
-    List<OrganizationNameResponseDTO> findAllOrganizationNames() throws UseCaseException;
+    List<OrganizationDTO> findAllOrganizations() throws UseCaseException;
 }

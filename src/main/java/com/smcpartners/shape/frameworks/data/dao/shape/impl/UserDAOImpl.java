@@ -302,9 +302,12 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
         dto.setAdmin(entity.isAdmin());
         dto.setCreateDt(entity.getCreateDt());
         dto.setId(entity.getId());
-        dto.setOrganizationId(entity.getOrganizationById().getId());
+        dto.setOrganizationName(entity.getOrganizationById().getName());
         dto.setRole(entity.getRole());
         dto.setResetPwd(entity.isResetPwd());
+        dto.setFirstName(entity.getFirstName());
+        dto.setLastName(entity.getLastName());
+        dto.setEmail(entity.getEmail());
         return dto;
     }
 

@@ -20,7 +20,7 @@ import java.util.Collection;
 @Table(name = "measure", schema = "", catalog = "shape")
 @NamedQueries({
         @NamedQuery(name = "Measure.findAll",
-                query = "SELECT OBJECT(m) FROM ProviderEntity m")
+                query = "SELECT OBJECT(m) FROM MeasureEntity m")
 })
 public class MeasureEntity {
     private int id;

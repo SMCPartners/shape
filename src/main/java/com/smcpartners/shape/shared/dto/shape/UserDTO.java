@@ -20,6 +20,7 @@ public class UserDTO implements Serializable {
     private boolean active;
     private boolean resetPwd;
     private int organizationId;
+    private String organizationName;
     private String firstName;
     private String lastName;
     private String email;
@@ -117,4 +118,8 @@ public class UserDTO implements Serializable {
     public void setResetPwd(boolean resetPwd) {
         this.resetPwd = resetPwd;
     }
+
+    public String getOrganizationName() { return organizationName; }
+
+    public void setOrganizationName(String organizationName) { this.organizationName = organizationName; }
 }
