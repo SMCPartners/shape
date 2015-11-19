@@ -46,10 +46,10 @@ public class UsecaseResponse extends RequestResponse {
 
     public boolean isOk() {
         if (this.getResponseCode() != null &&
-                UseCaseConstants.valueOf(this.getResponseCode()) != UseCaseConstants.OK_RESPONSE) {
-            return true;
-        } else {
+                this.getResponseCode() != UseCaseConstants.OK_RESPONSE.getVal()) {
             return false;
+        } else {
+            return true;
         }
     }
 
