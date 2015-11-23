@@ -31,7 +31,7 @@ public class OrganizationDTO implements Serializable {
     private String primaryContactName;
     private String primaryContactEmail;
     private String primaryContactRole;
-    private Integer primaryContactPhone;
+    private String primaryContactPhone;
 
     public OrganizationDTO() {
     }
@@ -116,11 +116,11 @@ public class OrganizationDTO implements Serializable {
         this.primaryContactRole = primaryContactRole;
     }
 
-    public Integer getPrimaryContactPhone() {
+    public String getPrimaryContactPhone() {
         return primaryContactPhone;
     }
 
-    public void setPrimaryContactPhone(Integer primaryContactPhone) {
+    public void setPrimaryContactPhone(String primaryContactPhone) {
         this.primaryContactPhone = primaryContactPhone;
     }
 

@@ -30,21 +30,36 @@ public class OrganizationMeasureEntity {
     private Integer numeratorValue;
     private Integer denominatorValue;
     private Date rpDate;
-    private Integer genderMale;
-    private Integer genderFemale;
-    private Integer genderOther;
-    private Integer ageUnder17;
-    private Integer age1844;
-    private Integer age4564;
-    private Integer ageOver65;
-    private Integer ethnicityHispanicLatino;
-    private Integer ethnicityNotHispanicLatino;
-    private Integer raceAfricanAmerican;
-    private Integer raceAmericanIndian;
-    private Integer raceAsian;
-    private Integer raceNativeHawaiian;
-    private Integer raceWhite;
-    private Integer raceOther;
+    private Integer genderMaleNum;
+    private Integer genderMaleDen;
+    private Integer genderFemaleNum;
+    private Integer genderFemaleDen;
+    private Integer genderOtherNum;
+    private Integer genderOtherDen;
+    private Integer ageUnder17Num;
+    private Integer ageUnder17Den;
+    private Integer age1844Num;
+    private Integer age1844Den;
+    private Integer age4564Num;
+    private Integer age4564Den;
+    private Integer ageOver65Num;
+    private Integer ageOver65Den;
+    private Integer ethnicityHispanicLatinoNum;
+    private Integer ethnicityHispanicLatinoDen;
+    private Integer ethnicityNotHispanicLatinoNum;
+    private Integer ethnicityNotHispanicLatinoDen;
+    private Integer raceAfricanAmericanNum;
+    private Integer raceAfricanAmericanDen;
+    private Integer raceAmericanIndianNum;
+    private Integer raceAmericanIndianDen;
+    private Integer raceAsianNum;
+    private Integer raceAsianDen;
+    private Integer raceNativeHawaiianNum;
+    private Integer raceNativeHawaiianDen;
+    private Integer raceWhiteNum;
+    private Integer raceWhiteDen;
+    private Integer raceOtherNum;
+    private Integer raceOtherDen;
     private OrganizationEntity organizationByOrganizationId;
     private MeasureEntity measureByMeasureId;
     private UserEntity userByUserId;
@@ -93,153 +108,262 @@ public class OrganizationMeasureEntity {
     }
 
     @Basic
-    @javax.persistence.Column(name = "gender_male", nullable = true, insertable = true, updatable = true)
-    public Integer getGenderMale() {
-        return genderMale;
+    @javax.persistence.Column(name = "gender_male_num", nullable = true, insertable = true, updatable = true)
+    public Integer getGenderMaleNum() {
+        return genderMaleNum;
     }
 
-    public void setGenderMale(Integer genderMale) {
-        this.genderMale = genderMale;
-    }
-
-    @Basic
-    @javax.persistence.Column(name = "gender_female", nullable = true, insertable = true, updatable = true)
-    public Integer getGenderFemale() {
-        return genderFemale;
-    }
-
-    public void setGenderFemale(Integer genderFemale) {
-        this.genderFemale = genderFemale;
+    public void setGenderMaleNum(Integer genderMaleNum) {
+        this.genderMaleNum = genderMaleNum;
     }
 
     @Basic
-    @javax.persistence.Column(name = "gender_other", nullable = true, insertable = true, updatable = true)
-    public Integer getGenderOther() {
-        return genderOther;
+    @javax.persistence.Column(name = "gender_male_den", nullable = true, insertable = true, updatable = true)
+    public Integer getGenderMaleDen() {
+        return genderMaleDen;
     }
 
-    public void setGenderOther(Integer genderOther) {
-        this.genderOther = genderOther;
+    public void setGenderMaleDen(Integer genderMaleDen) { this.genderMaleDen = genderMaleDen; }
+
+    @Basic
+    @javax.persistence.Column(name = "gender_female_num", nullable = true, insertable = true, updatable = true)
+    public Integer getGenderFemaleNum() {
+        return genderFemaleNum;
+    }
+
+    public void setGenderFemaleNum(Integer genderFemaleNum) {
+        this.genderFemaleNum = genderFemaleNum;
     }
 
     @Basic
-    @javax.persistence.Column(name = "age_under_17", nullable = true, insertable = true, updatable = true)
-    public Integer getAgeUnder17() {
-        return ageUnder17;
+    @javax.persistence.Column(name = "gender_female_den", nullable = true, insertable = true, updatable = true)
+    public Integer getGenderFemaleDen() {
+        return genderFemaleDen;
     }
 
-    public void setAgeUnder17(Integer ageUnder17) {
-        this.ageUnder17 = ageUnder17;
-    }
-
-    @Basic
-    @javax.persistence.Column(name = "age_18_44", nullable = true, insertable = true, updatable = true)
-    public Integer getAge1844() {
-        return age1844;
-    }
-
-    public void setAge1844(Integer age1844) {
-        this.age1844 = age1844;
+    public void setGenderFemaleDen(Integer genderFemaleDen) {
+        this.genderFemaleDen = genderFemaleDen;
     }
 
     @Basic
-    @javax.persistence.Column(name = "age_45_64", nullable = true, insertable = true, updatable = true)
-    public Integer getAge4564() {
-        return age4564;
+    @javax.persistence.Column(name = "gender_other_num", nullable = true, insertable = true, updatable = true)
+    public Integer getGenderOtherNum() {
+        return genderOtherNum;
     }
 
-    public void setAge4564(Integer age4564) {
-        this.age4564 = age4564;
-    }
-
-    @Basic
-    @javax.persistence.Column(name = "age_over_65", nullable = true, insertable = true, updatable = true)
-    public Integer getAgeOver65() {
-        return ageOver65;
-    }
-
-    public void setAgeOver65(Integer ageOver65) {
-        this.ageOver65 = ageOver65;
+    public void setGenderOtherNum(Integer genderOtherNum) {
+        this.genderOtherNum = genderOtherNum;
     }
 
     @Basic
-    @javax.persistence.Column(name = "ethnicity_hispanic_latino", nullable = true, insertable = true, updatable = true)
-    public Integer getEthnicityHispanicLatino() {
-        return ethnicityHispanicLatino;
+    @javax.persistence.Column(name = "gender_other_den", nullable = true, insertable = true, updatable = true)
+    public Integer getGenderOtherDen() {
+        return genderOtherDen;
     }
 
-    public void setEthnicityHispanicLatino(Integer ethnicityHispanicLatino) {
-        this.ethnicityHispanicLatino = ethnicityHispanicLatino;
+    public void setGenderOtherDen(Integer genderOtherDen) { this.genderOtherDen = genderOtherDen; }
+
+    @Basic
+    @javax.persistence.Column(name = "age_under_17_num", nullable = true, insertable = true, updatable = true)
+    public Integer getAgeUnder17Num() {
+        return ageUnder17Num;
+    }
+
+    public void setAgeUnder17Num(Integer ageUnder17Num) {
+        this.ageUnder17Num = ageUnder17Num;
     }
 
     @Basic
-    @javax.persistence.Column(name = "ethnicity_not_hispanic_latino", nullable = true, insertable = true, updatable = true)
-    public Integer getEthnicityNotHispanicLatino() {
-        return ethnicityNotHispanicLatino;
+    @javax.persistence.Column(name = "age_under_17_den", nullable = true, insertable = true, updatable = true)
+    public Integer getAgeUnder17Den() {
+        return ageUnder17Den;
     }
 
-    public void setEthnicityNotHispanicLatino(Integer ethnicityNotHispanicLatino) {
-        this.ethnicityNotHispanicLatino = ethnicityNotHispanicLatino;
-    }
-
-    @Basic
-    @javax.persistence.Column(name = "race_african_american", nullable = true, insertable = true, updatable = true)
-    public Integer getRaceAfricanAmerican() {
-        return raceAfricanAmerican;
-    }
-
-    public void setRaceAfricanAmerican(Integer raceAfricanAmerican) {
-        this.raceAfricanAmerican = raceAfricanAmerican;
+    public void setAgeUnder17Den(Integer ageUnder17Den) {
+        this.ageUnder17Den = ageUnder17Den;
     }
 
     @Basic
-    @javax.persistence.Column(name = "race_american_indian", nullable = true, insertable = true, updatable = true)
-    public Integer getRaceAmericanIndian() {
-        return raceAmericanIndian;
-    }
+    @javax.persistence.Column(name = "age_18_44_num", nullable = true, insertable = true, updatable = true)
+    public Integer getAge1844Num() { return age1844Num; }
 
-    public void setRaceAmericanIndian(Integer raceAmericanIndian) {
-        this.raceAmericanIndian = raceAmericanIndian;
-    }
-
-    @Basic
-    @javax.persistence.Column(name = "race_asian", nullable = true, insertable = true, updatable = true)
-    public Integer getRaceAsian() {
-        return raceAsian;
-    }
-
-    public void setRaceAsian(Integer raceAsian) {
-        this.raceAsian = raceAsian;
+    public void setAge1844Num(Integer age1844Num) {
+        this.age1844Num = age1844Num;
     }
 
     @Basic
-    @javax.persistence.Column(name = "race_native_hawaiian", nullable = true, insertable = true, updatable = true)
-    public Integer getRaceNativeHawaiian() {
-        return raceNativeHawaiian;
-    }
+    @javax.persistence.Column(name = "age_18_44_den", nullable = true, insertable = true, updatable = true)
+    public Integer getAge1844Den() { return age1844Den; }
 
-    public void setRaceNativeHawaiian(Integer raceNativeHawaiian) {
-        this.raceNativeHawaiian = raceNativeHawaiian;
-    }
-
-    @Basic
-    @javax.persistence.Column(name = "race_white", nullable = true, insertable = true, updatable = true)
-    public Integer getRaceWhite() {
-        return raceWhite;
-    }
-
-    public void setRaceWhite(Integer raceWhite) {
-        this.raceWhite = raceWhite;
+    public void setAge1844Den(Integer age1844Den) {
+        this.age1844Den = age1844Den;
     }
 
     @Basic
-    @javax.persistence.Column(name = "race_other", nullable = true, insertable = true, updatable = true)
-    public Integer getRaceOther() {
-        return raceOther;
+    @javax.persistence.Column(name = "age_45_65_num", nullable = true, insertable = true, updatable = true)
+    public Integer getAge4564Num() { return age4564Num; }
+
+    public void setAge4564Num(Integer age4564Num) { this.age4564Num = age4564Num; }
+
+    @Basic
+    @javax.persistence.Column(name = "age_45_65_den", nullable = true, insertable = true, updatable = true)
+    public Integer getAge4564Den() { return age4564Den; }
+
+    public void setAge4564Den(Integer age4564Den) { this.age4564Den = age4564Den; }
+
+
+    @Basic
+    @javax.persistence.Column(name = "age_over_65_num", nullable = true, insertable = true, updatable = true)
+    public Integer getAgeOver65Num() {
+        return ageOver65Num;
     }
 
-    public void setRaceOther(Integer raceOther) {
-        this.raceOther = raceOther;
+    public void setAgeOver65Num(Integer ageOver65Num) {
+        this.ageOver65Num = ageOver65Num;
+    }
+
+    @Basic
+    @javax.persistence.Column(name = "age_over_65_den", nullable = true, insertable = true, updatable = true)
+    public Integer getAgeOver65Den() {
+        return ageOver65Den;
+    }
+
+    public void setAgeOver65Den(Integer ageOver65Den) {
+        this.ageOver65Den = ageOver65Den;
+    }
+
+    @Basic
+    @javax.persistence.Column(name = "ethnicity_hispanic_latino_num", nullable = true, insertable = true, updatable = true)
+    public Integer getEthnicityHispanicLatinoNum() {
+        return ethnicityHispanicLatinoNum;
+    }
+
+    public void setEthnicityHispanicLatinoNum(Integer ethnicityHispanicLatinoNum) { this.ethnicityHispanicLatinoNum = ethnicityHispanicLatinoNum; }
+
+    @Basic
+    @javax.persistence.Column(name = "ethnicity_hispanic_latino_den", nullable = true, insertable = true, updatable = true)
+    public Integer getEthnicityHispanicLatinoDen() {
+        return ethnicityHispanicLatinoDen;
+    }
+
+    public void setEthnicityHispanicLatinoDen(Integer ethnicityHispanicLatinoDen) { this.ethnicityHispanicLatinoDen = ethnicityHispanicLatinoDen; }
+
+    @Basic
+    @javax.persistence.Column(name = "ethnicity_not_hispanic_latino_num", nullable = true, insertable = true, updatable = true)
+    public Integer getEthnicityNotHispanicLatinoNum() {
+        return ethnicityNotHispanicLatinoNum;
+    }
+
+    public void setEthnicityNotHispanicLatinoNum(Integer ethnicityNotHispanicLatinoNum) { this.ethnicityNotHispanicLatinoNum = ethnicityNotHispanicLatinoNum; }
+
+    @Basic
+    @javax.persistence.Column(name = "ethnicity_not_hispanic_latino_den", nullable = true, insertable = true, updatable = true)
+    public Integer getEthnicityNotHispanicLatinoDen() {
+        return ethnicityNotHispanicLatinoDen;
+    }
+
+    public void setEthnicityNotHispanicLatinoDen(Integer ethnicityNotHispanicLatinoDen) { this.ethnicityNotHispanicLatinoDen = ethnicityNotHispanicLatinoDen; }
+
+    @Basic
+    @javax.persistence.Column(name = "race_african_american_num", nullable = true, insertable = true, updatable = true)
+    public Integer getRaceAfricanAmericanNum() {
+        return raceAfricanAmericanNum;
+    }
+
+    public void setRaceAfricanAmericanNum(Integer raceAfricanAmericanNum) { this.raceAfricanAmericanNum = raceAfricanAmericanNum; }
+
+    @Basic
+    @javax.persistence.Column(name = "race_african_american_den", nullable = true, insertable = true, updatable = true)
+    public Integer getRaceAfricanAmericanDen() {
+        return raceAfricanAmericanDen;
+    }
+
+    public void setRaceAfricanAmericanDen(Integer raceAfricanAmericanDen) { this.raceAfricanAmericanDen = raceAfricanAmericanDen; }
+
+    @Basic
+    @javax.persistence.Column(name = "race_american_indian_num", nullable = true, insertable = true, updatable = true)
+    public Integer getRaceAmericanIndianNum() {
+        return raceAmericanIndianNum;
+    }
+
+    public void setRaceAmericanIndianNum(Integer raceAmericanIndianNum) { this.raceAmericanIndianNum = raceAmericanIndianNum; }
+
+    @Basic
+    @javax.persistence.Column(name = "race_american_indian_den", nullable = true, insertable = true, updatable = true)
+    public Integer getRaceAmericanIndianDen() {
+        return raceAmericanIndianDen;
+    }
+
+    public void setRaceAmericanIndianDen(Integer raceAmericanIndianDen) { this.raceAmericanIndianDen = raceAmericanIndianDen; }
+
+    @Basic
+    @javax.persistence.Column(name = "race_asian_num", nullable = true, insertable = true, updatable = true)
+    public Integer getRaceAsianNum() { return raceAsianNum; }
+
+    public void setRaceAsianNum(Integer raceAsianNum) {
+        this.raceAsianNum = raceAsianNum;
+    }
+
+    @Basic
+    @javax.persistence.Column(name = "race_asian_den", nullable = true, insertable = true, updatable = true)
+    public Integer getRaceAsianDen() { return raceAsianDen; }
+
+    public void setRaceAsianDen(Integer raceAsianDen) {
+        this.raceAsianDen = raceAsianDen;
+    }
+
+    @Basic
+    @javax.persistence.Column(name = "race_native_hawaiian_num", nullable = true, insertable = true, updatable = true)
+    public Integer getRaceNativeHawaiianNum() {
+        return raceNativeHawaiianNum;
+    }
+
+    public void setRaceNativeHawaiianNum(Integer raceNativeHawaiianNum) { this.raceNativeHawaiianNum = raceNativeHawaiianNum; }
+
+    @Basic
+    @javax.persistence.Column(name = "race_native_hawaiian_den", nullable = true, insertable = true, updatable = true)
+    public Integer getRaceNativeHawaiianDen() { return raceNativeHawaiianDen; }
+
+    public void setRaceNativeHawaiianDen(Integer raceNativeHawaiianDen) { this.raceNativeHawaiianDen = raceNativeHawaiianDen; }
+
+    @Basic
+    @javax.persistence.Column(name = "race_white_num", nullable = true, insertable = true, updatable = true)
+    public Integer getRaceWhiteNum() {
+        return raceWhiteNum;
+    }
+
+    public void setRaceWhiteNum(Integer raceWhiteNum) {
+        this.raceWhiteNum = raceWhiteNum;
+    }
+
+    @Basic
+    @javax.persistence.Column(name = "race_white_den", nullable = true, insertable = true, updatable = true)
+    public Integer getRaceWhiteDen() {
+        return raceWhiteDen;
+    }
+
+    public void setRaceWhiteDen(Integer raceWhiteDen) {
+        this.raceWhiteDen = raceWhiteDen;
+    }
+
+    @Basic
+    @javax.persistence.Column(name = "race_other_num", nullable = true, insertable = true, updatable = true)
+    public Integer getRaceOtherNum() {
+        return raceOtherNum;
+    }
+
+    public void setRaceOtherNum(Integer raceOtherNum) {
+        this.raceOtherNum = raceOtherNum;
+    }
+
+    @Basic
+    @javax.persistence.Column(name = "race_other_den", nullable = true, insertable = true, updatable = true)
+    public Integer getRaceOtherDen() {
+        return raceOtherDen;
+    }
+
+    public void setRaceOtherDen(Integer raceOtherDen) {
+        this.raceOtherDen = raceOtherDen;
     }
 
     @Override
@@ -255,26 +379,46 @@ public class OrganizationMeasureEntity {
         if (denominatorValue != null ? !denominatorValue.equals(that.denominatorValue) : that.denominatorValue != null)
             return false;
         if (rpDate != null ? !rpDate.equals(that.rpDate) : that.rpDate != null) return false;
-        if (genderMale != null ? !genderMale.equals(that.genderMale) : that.genderMale != null) return false;
-        if (genderFemale != null ? !genderFemale.equals(that.genderFemale) : that.genderFemale != null) return false;
-        if (genderOther != null ? !genderOther.equals(that.genderOther) : that.genderOther != null) return false;
-        if (ageUnder17 != null ? !ageUnder17.equals(that.ageUnder17) : that.ageUnder17 != null) return false;
-        if (age1844 != null ? !age1844.equals(that.age1844) : that.age1844 != null) return false;
-        if (age4564 != null ? !age4564.equals(that.age4564) : that.age4564 != null) return false;
-        if (ageOver65 != null ? !ageOver65.equals(that.ageOver65) : that.ageOver65 != null) return false;
-        if (ethnicityHispanicLatino != null ? !ethnicityHispanicLatino.equals(that.ethnicityHispanicLatino) : that.ethnicityHispanicLatino != null)
+        if (genderMaleNum != null ? !genderMaleNum.equals(that.genderMaleNum) : that.genderMaleNum != null) return false;
+        if (genderMaleDen != null ? !genderMaleDen.equals(that.genderMaleDen) : that.genderMaleDen != null) return false;
+        if (genderFemaleNum != null ? !genderFemaleNum.equals(that.genderFemaleNum) : that.genderFemaleNum != null) return false;
+        if (genderFemaleDen != null ? !genderFemaleDen.equals(that.genderFemaleDen) : that.genderFemaleDen != null) return false;
+        if (genderOtherNum != null ? !genderOtherNum.equals(that.genderOtherNum) : that.genderOtherNum != null) return false;
+        if (genderOtherDen != null ? !genderOtherDen.equals(that.genderOtherDen) : that.genderOtherDen != null) return false;
+        if (ageUnder17Num != null ? !ageUnder17Num.equals(that.ageUnder17Num) : that.ageUnder17Num != null) return false;
+        if (ageUnder17Den != null ? !ageUnder17Den.equals(that.ageUnder17Den) : that.ageUnder17Den != null) return false;
+        if (age1844Num != null ? !age1844Num.equals(that.age1844Num) : that.age1844Num != null) return false;
+        if (age1844Den != null ? !age1844Den.equals(that.age1844Den) : that.age1844Den != null) return false;
+        if (age4564Num != null ? !age4564Num.equals(that.age4564Num) : that.age4564Num != null) return false;
+        if (age4564Den != null ? !age4564Den.equals(that.age4564Den) : that.age4564Den != null) return false;
+        if (ageOver65Num != null ? !ageOver65Num.equals(that.ageOver65Num) : that.ageOver65Num != null) return false;
+        if (ageOver65Den != null ? !ageOver65Den.equals(that.ageOver65Den) : that.ageOver65Den != null) return false;
+        if (ethnicityHispanicLatinoNum != null ? !ethnicityHispanicLatinoNum.equals(that.ethnicityHispanicLatinoNum) : that.ethnicityHispanicLatinoNum != null)
             return false;
-        if (ethnicityNotHispanicLatino != null ? !ethnicityNotHispanicLatino.equals(that.ethnicityNotHispanicLatino) : that.ethnicityNotHispanicLatino != null)
+        if (ethnicityHispanicLatinoDen != null ? !ethnicityHispanicLatinoDen.equals(that.ethnicityHispanicLatinoDen) : that.ethnicityHispanicLatinoDen != null)
             return false;
-        if (raceAfricanAmerican != null ? !raceAfricanAmerican.equals(that.raceAfricanAmerican) : that.raceAfricanAmerican != null)
+        if (ethnicityNotHispanicLatinoNum != null ? !ethnicityNotHispanicLatinoNum.equals(that.ethnicityNotHispanicLatinoNum) : that.ethnicityNotHispanicLatinoNum != null)
             return false;
-        if (raceAmericanIndian != null ? !raceAmericanIndian.equals(that.raceAmericanIndian) : that.raceAmericanIndian != null)
+        if (ethnicityNotHispanicLatinoDen != null ? !ethnicityNotHispanicLatinoDen.equals(that.ethnicityNotHispanicLatinoDen) : that.ethnicityNotHispanicLatinoDen != null)
             return false;
-        if (raceAsian != null ? !raceAsian.equals(that.raceAsian) : that.raceAsian != null) return false;
-        if (raceNativeHawaiian != null ? !raceNativeHawaiian.equals(that.raceNativeHawaiian) : that.raceNativeHawaiian != null)
+        if (raceAfricanAmericanNum != null ? !raceAfricanAmericanNum.equals(that.raceAfricanAmericanNum) : that.raceAfricanAmericanNum != null)
             return false;
-        if (raceWhite != null ? !raceWhite.equals(that.raceWhite) : that.raceWhite != null) return false;
-        if (raceOther != null ? !raceOther.equals(that.raceOther) : that.raceOther != null) return false;
+        if (raceAfricanAmericanDen != null ? !raceAfricanAmericanDen.equals(that.raceAfricanAmericanDen) : that.raceAfricanAmericanDen != null)
+            return false;
+        if (raceAmericanIndianNum != null ? !raceAmericanIndianNum.equals(that.raceAmericanIndianNum) : that.raceAmericanIndianNum != null)
+            return false;
+        if (raceAmericanIndianDen != null ? !raceAmericanIndianDen.equals(that.raceAmericanIndianDen) : that.raceAmericanIndianDen != null)
+            return false;
+        if (raceAsianNum != null ? !raceAsianNum.equals(that.raceAsianNum) : that.raceAsianNum != null) return false;
+        if (raceAsianDen != null ? !raceAsianDen.equals(that.raceAsianDen) : that.raceAsianDen != null) return false;
+        if (raceNativeHawaiianNum != null ? !raceNativeHawaiianNum.equals(that.raceNativeHawaiianNum) : that.raceNativeHawaiianNum != null)
+            return false;
+        if (raceNativeHawaiianDen != null ? !raceNativeHawaiianDen.equals(that.raceNativeHawaiianDen) : that.raceNativeHawaiianDen != null)
+            return false;
+        if (raceWhiteNum != null ? !raceWhiteNum.equals(that.raceWhiteNum) : that.raceWhiteNum != null) return false;
+        if (raceWhiteDen != null ? !raceWhiteDen.equals(that.raceWhiteDen) : that.raceWhiteDen != null) return false;
+        if (raceOtherNum != null ? !raceOtherNum.equals(that.raceOtherNum) : that.raceOtherNum != null) return false;
+        if (raceOtherDen != null ? !raceOtherDen.equals(that.raceOtherDen) : that.raceOtherDen != null) return false;
 
         return true;
     }
@@ -285,21 +429,36 @@ public class OrganizationMeasureEntity {
         result = 31 * result + (numeratorValue != null ? numeratorValue.hashCode() : 0);
         result = 31 * result + (denominatorValue != null ? denominatorValue.hashCode() : 0);
         result = 31 * result + (rpDate != null ? rpDate.hashCode() : 0);
-        result = 31 * result + (genderMale != null ? genderMale.hashCode() : 0);
-        result = 31 * result + (genderFemale != null ? genderFemale.hashCode() : 0);
-        result = 31 * result + (genderOther != null ? genderOther.hashCode() : 0);
-        result = 31 * result + (ageUnder17 != null ? ageUnder17.hashCode() : 0);
-        result = 31 * result + (age1844 != null ? age1844.hashCode() : 0);
-        result = 31 * result + (age4564 != null ? age4564.hashCode() : 0);
-        result = 31 * result + (ageOver65 != null ? ageOver65.hashCode() : 0);
-        result = 31 * result + (ethnicityHispanicLatino != null ? ethnicityHispanicLatino.hashCode() : 0);
-        result = 31 * result + (ethnicityNotHispanicLatino != null ? ethnicityNotHispanicLatino.hashCode() : 0);
-        result = 31 * result + (raceAfricanAmerican != null ? raceAfricanAmerican.hashCode() : 0);
-        result = 31 * result + (raceAmericanIndian != null ? raceAmericanIndian.hashCode() : 0);
-        result = 31 * result + (raceAsian != null ? raceAsian.hashCode() : 0);
-        result = 31 * result + (raceNativeHawaiian != null ? raceNativeHawaiian.hashCode() : 0);
-        result = 31 * result + (raceWhite != null ? raceWhite.hashCode() : 0);
-        result = 31 * result + (raceOther != null ? raceOther.hashCode() : 0);
+        result = 31 * result + (genderMaleNum != null ? genderMaleNum.hashCode() : 0);
+        result = 31 * result + (genderMaleDen != null ? genderMaleDen.hashCode() : 0);
+        result = 31 * result + (genderFemaleNum != null ? genderFemaleNum.hashCode() : 0);
+        result = 31 * result + (genderFemaleDen != null ? genderFemaleDen.hashCode() : 0);
+        result = 31 * result + (genderOtherNum != null ? genderOtherNum.hashCode() : 0);
+        result = 31 * result + (genderOtherDen != null ? genderOtherDen.hashCode() : 0);
+        result = 31 * result + (ageUnder17Num != null ? ageUnder17Num.hashCode() : 0);
+        result = 31 * result + (ageUnder17Den != null ? ageUnder17Den.hashCode() : 0);
+        result = 31 * result + (age1844Num != null ? age1844Num.hashCode() : 0);
+        result = 31 * result + (age1844Den != null ? age1844Den.hashCode() : 0);
+        result = 31 * result + (age4564Num != null ? age4564Num.hashCode() : 0);
+        result = 31 * result + (age4564Den != null ? age4564Den.hashCode() : 0);
+        result = 31 * result + (ageOver65Num != null ? ageOver65Num.hashCode() : 0);
+        result = 31 * result + (ageOver65Den != null ? ageOver65Den.hashCode() : 0);
+        result = 31 * result + (ethnicityHispanicLatinoNum != null ? ethnicityHispanicLatinoNum.hashCode() : 0);
+        result = 31 * result + (ethnicityHispanicLatinoDen != null ? ethnicityHispanicLatinoDen.hashCode() : 0);
+        result = 31 * result + (ethnicityNotHispanicLatinoNum != null ? ethnicityNotHispanicLatinoNum.hashCode() : 0);
+        result = 31 * result + (ethnicityNotHispanicLatinoDen != null ? ethnicityNotHispanicLatinoDen.hashCode() : 0);
+        result = 31 * result + (raceAfricanAmericanNum != null ? raceAfricanAmericanNum.hashCode() : 0);
+        result = 31 * result + (raceAfricanAmericanDen != null ? raceAfricanAmericanDen.hashCode() : 0);
+        result = 31 * result + (raceAmericanIndianNum != null ? raceAmericanIndianNum.hashCode() : 0);
+        result = 31 * result + (raceAmericanIndianDen != null ? raceAmericanIndianDen.hashCode() : 0);
+        result = 31 * result + (raceAsianNum != null ? raceAsianNum.hashCode() : 0);
+        result = 31 * result + (raceAsianDen != null ? raceAsianDen.hashCode() : 0);
+        result = 31 * result + (raceNativeHawaiianNum != null ? raceNativeHawaiianNum.hashCode() : 0);
+        result = 31 * result + (raceNativeHawaiianDen != null ? raceNativeHawaiianDen.hashCode() : 0);
+        result = 31 * result + (raceWhiteNum != null ? raceWhiteNum.hashCode() : 0);
+        result = 31 * result + (raceWhiteDen != null ? raceWhiteDen.hashCode() : 0);
+        result = 31 * result + (raceOtherNum != null ? raceOtherNum.hashCode() : 0);
+        result = 31 * result + (raceOtherDen != null ? raceOtherDen.hashCode() : 0);
         return result;
     }
 

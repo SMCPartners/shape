@@ -33,7 +33,7 @@ public class OrganizationEntity {
     private String primaryContactName;
     private String primaryContactEmail;
     private String primaryContactRole;
-    private Integer primaryContactPhone;
+    private String primaryContactPhone;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -147,12 +147,12 @@ public class OrganizationEntity {
     }
 
     @Basic
-    @Column(name = "primary_contact_phone", nullable = true, insertable = true, updatable = true)
-    public Integer getPrimaryContactPhone() {
+    @Column(name = "primary_contact_phone", nullable = true, insertable = true, updatable = true, length = 45)
+    public String getPrimaryContactPhone() {
         return primaryContactPhone;
     }
 
-    public void setPrimaryContactPhone(Integer primaryContactPhone) {
+    public void setPrimaryContactPhone(String primaryContactPhone) {
         this.primaryContactPhone = primaryContactPhone;
     }
 

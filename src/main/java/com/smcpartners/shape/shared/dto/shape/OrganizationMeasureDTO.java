@@ -1,5 +1,6 @@
 package com.smcpartners.shape.shared.dto.shape;
 
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,26 +17,41 @@ import java.util.Date;
  * 1. </br>
  * </p>
  */
-public class OrganizationMeasureDTO implements Serializable{
+public class OrganizationMeasureDTO implements Serializable {
     private int id;
-    private int numeratorValue;
-    private int denominatorValue;
+    private Integer numeratorValue;
+    private Integer denominatorValue;
     private Date rpDate;
-    private int genderMale;
-    private int genderFemale;
-    private int genderOther;
-    private int ageUnder17;
-    private int age1844;
-    private int age4564;
-    private int ageOver65;
-    private int ethnicityHispanicLatino;
-    private int ethnicityNotHispanicLatino;
-    private int raceAfricanAmerican;
-    private int raceAmericanIndian;
-    private int raceAsian;
-    private int raceNativeHawaiian;
-    private int raceWhite;
-    private int raceOther;
+    private Integer genderMaleNum;
+    private Integer genderMaleDen;
+    private Integer genderFemaleNum;
+    private Integer genderFemaleDen;
+    private Integer genderOtherNum;
+    private Integer genderOtherDen;
+    private Integer ageUnder17Num;
+    private Integer ageUnder17Den;
+    private Integer age1844Num;
+    private Integer age1844Den;
+    private Integer age4564Num;
+    private Integer age4564Den;
+    private Integer ageOver65Num;
+    private Integer ageOver65Den;
+    private Integer ethnicityHispanicLatinoNum;
+    private Integer ethnicityHispanicLatinoDen;
+    private Integer ethnicityNotHispanicLatinoNum;
+    private Integer ethnicityNotHispanicLatinoDen;
+    private Integer raceAfricanAmericanNum;
+    private Integer raceAfricanAmericanDen;
+    private Integer raceAmericanIndianNum;
+    private Integer raceAmericanIndianDen;
+    private Integer raceAsianNum;
+    private Integer raceAsianDen;
+    private Integer raceNativeHawaiianNum;
+    private Integer raceNativeHawaiianDen;
+    private Integer raceWhiteNum;
+    private Integer raceWhiteDen;
+    private Integer raceOtherNum;
+    private Integer raceOtherDen;
     private int organizationId;
     private int measureId;
     private String userId;
@@ -43,179 +59,151 @@ public class OrganizationMeasureDTO implements Serializable{
     public OrganizationMeasureDTO() {
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) { this.id = id; }
 
-    public int getNumeratorValue() {
-        return numeratorValue;
-    }
+    public Integer getNumeratorValue() { return numeratorValue; }
 
-    public void setNumeratorValue(int numeratorValue) {
-        this.numeratorValue = numeratorValue;
-    }
+    public void setNumeratorValue(Integer numeratorValue) { this.numeratorValue = numeratorValue; }
 
-    public int getDenominatorValue() {
-        return denominatorValue;
-    }
+    public Integer getDenominatorValue() { return denominatorValue; }
 
-    public void setDenominatorValue(int denominatorValue) {
-        this.denominatorValue = denominatorValue;
-    }
+    public void setDenominatorValue(Integer denominatorValue) { this.denominatorValue = denominatorValue; }
 
-    public Date getRpDate() {
-        return rpDate;
-    }
+    public Date getRpDate() { return rpDate; }
 
-    public void setRpDate(Date rpDate) {
-        this.rpDate = rpDate;
-    }
+    public void setRpDate(Date rpDate) { this.rpDate = rpDate; }
 
-    public int getGenderMale() {
-        return genderMale;
-    }
+    public Integer getGenderMaleNum() { return genderMaleNum; }
 
-    public void setGenderMale(int genderMale) {
-        this.genderMale = genderMale;
-    }
+    public void setGenderMaleNum(Integer genderMaleNum) { this.genderMaleNum = genderMaleNum; }
 
-    public int getGenderFemale() {
-        return genderFemale;
-    }
+    public Integer getGenderMaleDen() { return genderMaleDen; }
 
-    public void setGenderFemale(int genderFemale) {
-        this.genderFemale = genderFemale;
-    }
+    public void setGenderMaleDen(Integer genderMaleDen) { this.genderMaleDen = genderMaleDen; }
 
-    public int getGenderOther() {
-        return genderOther;
-    }
+    public Integer getGenderFemaleNum() { return genderFemaleNum; }
 
-    public void setGenderOther(int genderOther) {
-        this.genderOther = genderOther;
-    }
+    public void setGenderFemaleNum(Integer genderFemaleNum) { this.genderFemaleNum = genderFemaleNum; }
 
-    public int getAgeUnder17() {
-        return ageUnder17;
-    }
+    public Integer getGenderFemaleDen() { return genderFemaleDen; }
 
-    public void setAgeUnder17(int ageUnder17) {
-        this.ageUnder17 = ageUnder17;
-    }
+    public void setGenderFemaleDen(Integer genderFemaleDen) { this.genderFemaleDen = genderFemaleDen; }
 
-    public int getAge1844() {
-        return age1844;
-    }
+    public Integer getGenderOtherNum() { return genderOtherNum; }
 
-    public void setAge1844(int age1844) {
-        this.age1844 = age1844;
-    }
+    public void setGenderOtherNum(Integer genderOtherNum) { this.genderOtherNum = genderOtherNum;  }
 
-    public int getAge4564() {
-        return age4564;
-    }
+    public Integer getGenderOtherDen() { return genderOtherDen; }
 
-    public void setAge4564(int age4564) {
-        this.age4564 = age4564;
-    }
+    public void setGenderOtherDen(Integer genderOtherDen) { this.genderOtherDen = genderOtherDen; }
 
-    public int getAgeOver65() {
-        return ageOver65;
-    }
+    public Integer getAgeUnder17Num() { return ageUnder17Num; }
 
-    public void setAgeOver65(int ageOver65) {
-        this.ageOver65 = ageOver65;
-    }
+    public void setAgeUnder17Num(Integer ageUnder17Num) { this.ageUnder17Num = ageUnder17Num; }
 
-    public int getEthnicityHispanicLatino() {
-        return ethnicityHispanicLatino;
-    }
+    public Integer getAgeUnder17Den() { return ageUnder17Den; }
 
-    public void setEthnicityHispanicLatino(int ethnicityHispanicLatino) {
-        this.ethnicityHispanicLatino = ethnicityHispanicLatino;
-    }
+    public void setAgeUnder17Den(Integer ageUnder17Den) { this.ageUnder17Den = ageUnder17Den; }
 
-    public int getEthnicityNotHispanicLatino() {
-        return ethnicityNotHispanicLatino;
-    }
+    public Integer getAge1844Num() { return age1844Num; }
 
-    public void setEthnicityNotHispanicLatino(int ethnicityNotHispanicLatino) {
-        this.ethnicityNotHispanicLatino = ethnicityNotHispanicLatino;
-    }
+    public void setAge1844Num(Integer age1844Num) { this.age1844Num = age1844Num; }
 
-    public int getRaceAfricanAmerican() {
-        return raceAfricanAmerican;
-    }
+    public Integer getAge1844Den() { return age1844Den; }
 
-    public void setRaceAfricanAmerican(int raceAfricanAmerican) {
-        this.raceAfricanAmerican = raceAfricanAmerican;
-    }
+    public void setAge1844Den(Integer age1844Den) { this.age1844Den = age1844Den; }
 
-    public int getRaceAmericanIndian() {
-        return raceAmericanIndian;
-    }
+    public Integer getAge4564Num() { return age4564Num; }
 
-    public void setRaceAmericanIndian(int raceAmericanIndian) {
-        this.raceAmericanIndian = raceAmericanIndian;
-    }
+    public void setAge4564Num(Integer age4564Num) { this.age4564Num = age4564Num; }
 
-    public int getRaceAsian() {
-        return raceAsian;
-    }
+    public Integer getAge4564Den() { return age4564Den; }
 
-    public void setRaceAsian(int raceAsian) {
-        this.raceAsian = raceAsian;
-    }
+    public void setAge4564Den(Integer age4564Den) { this.age4564Den = age4564Den; }
 
-    public int getRaceNativeHawaiian() {
-        return raceNativeHawaiian;
-    }
+    public Integer getAgeOver65Num() { return ageOver65Num; }
 
-    public void setRaceNativeHawaiian(int raceNativeHawaiian) {
-        this.raceNativeHawaiian = raceNativeHawaiian;
-    }
+    public void setAgeOver65Num(Integer ageOver65Num) { this.ageOver65Num = ageOver65Num; }
 
-    public int getRaceWhite() {
-        return raceWhite;
-    }
+    public Integer getAgeOver65Den() { return ageOver65Den; }
 
-    public void setRaceWhite(int raceWhite) {
-        this.raceWhite = raceWhite;
-    }
+    public void setAgeOver65Den(Integer ageOver65Den) { this.ageOver65Den = ageOver65Den; }
 
-    public int getRaceOther() {
-        return raceOther;
-    }
+    public Integer getEthnicityHispanicLatinoNum() { return ethnicityHispanicLatinoNum; }
 
-    public void setRaceOther(int raceOther) {
-        this.raceOther = raceOther;
-    }
+    public void setEthnicityHispanicLatinoNum(Integer ethnicityHispanicLatinoNum) { this.ethnicityHispanicLatinoNum = ethnicityHispanicLatinoNum; }
 
-    public int getOrganizationId() {
-        return organizationId;
-    }
+    public Integer getEthnicityHispanicLatinoDen() { return ethnicityHispanicLatinoDen; }
 
-    public void setOrganizationId(int organizationId) {
-        this.organizationId = organizationId;
-    }
+    public void setEthnicityHispanicLatinoDen(Integer ethnicityHispanicLatinoDen) { this.ethnicityHispanicLatinoDen = ethnicityHispanicLatinoDen; }
 
-    public int getMeasureId() {
-        return measureId;
-    }
+    public Integer getEthnicityNotHispanicLatinoNum() { return ethnicityNotHispanicLatinoNum; }
 
-    public void setMeasureId(int measureId) {
-        this.measureId = measureId;
-    }
+    public void setEthnicityNotHispanicLatinoNum(Integer ethnicityNotHispanicLatinoNum) { this.ethnicityNotHispanicLatinoNum = ethnicityNotHispanicLatinoNum; }
 
-    public String getUserId() {
-        return userId;
-    }
+    public Integer getEthnicityNotHispanicLatinoDen() { return ethnicityNotHispanicLatinoDen; }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
+    public void setEthnicityNotHispanicLatinoDen(Integer ethnicityNotHispanicLatinoDen) { this.ethnicityNotHispanicLatinoDen = ethnicityNotHispanicLatinoDen; }
+
+    public Integer getRaceAfricanAmericanNum() { return raceAfricanAmericanNum; }
+
+    public void setRaceAfricanAmericanNum(Integer raceAfricanAmericanNum) { this.raceAfricanAmericanNum = raceAfricanAmericanNum; }
+
+    public Integer getRaceAfricanAmericanDen() { return raceAfricanAmericanDen; }
+
+    public void setRaceAfricanAmericanDen(Integer raceAfricanAmericanDen) { this.raceAfricanAmericanDen = raceAfricanAmericanDen; }
+
+    public Integer getRaceAmericanIndianNum() { return raceAmericanIndianNum; }
+
+    public void setRaceAmericanIndianNum(Integer raceAmericanIndianNum) { this.raceAmericanIndianNum = raceAmericanIndianNum; }
+
+    public Integer getRaceAmericanIndianDen() { return raceAmericanIndianDen; }
+
+    public void setRaceAmericanIndianDen(Integer raceAmericanIndianDen) { this.raceAmericanIndianDen = raceAmericanIndianDen; }
+
+    public Integer getRaceAsianNum() { return raceAsianNum; }
+
+    public void setRaceAsianNum(Integer raceAsianNum) { this.raceAsianNum = raceAsianNum; }
+
+    public Integer getRaceAsianDen() { return raceAsianDen; }
+
+    public void setRaceAsianDen(Integer raceAsianDen) { this.raceAsianDen = raceAsianDen; }
+
+    public Integer getRaceNativeHawaiianNum() { return raceNativeHawaiianNum; }
+
+    public void setRaceNativeHawaiianNum(Integer raceNativeHawaiianNum) { this.raceNativeHawaiianNum = raceNativeHawaiianNum; }
+
+    public Integer getRaceNativeHawaiianDen() { return raceNativeHawaiianDen; }
+
+    public void setRaceNativeHawaiianDen(Integer raceNativeHawaiianDen) { this.raceNativeHawaiianDen = raceNativeHawaiianDen; }
+
+    public Integer getRaceWhiteNum() { return raceWhiteNum; }
+
+    public void setRaceWhiteNum(Integer raceWhiteNum) { this.raceWhiteNum = raceWhiteNum; }
+
+    public Integer getRaceWhiteDen() { return raceWhiteDen; }
+
+    public void setRaceWhiteDen(Integer raceWhiteDen) { this.raceWhiteDen = raceWhiteDen; }
+
+    public Integer getRaceOtherNum() { return raceOtherNum; }
+
+    public void setRaceOtherNum(Integer raceOtherNum) { this.raceOtherNum = raceOtherNum; }
+
+    public Integer getRaceOtherDen() { return raceOtherDen; }
+
+    public void setRaceOtherDen(Integer raceOtherDen) { this.raceOtherDen = raceOtherDen; }
+
+    public int getOrganizationId() { return organizationId; }
+
+    public void setOrganizationId(int organizationId) { this.organizationId = organizationId; }
+
+    public int getMeasureId() { return measureId; }
+
+    public void setMeasureId(int measureId) { this.measureId = measureId; }
+
+    public String getUserId() { return userId; }
+
+    public void setUserId(String userId) { this.userId = userId; }
 }
