@@ -238,11 +238,17 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
             // Make sure use is valid
             UserEntity ue = em.find(UserEntity.class, key);
 
+            OrganizationEntity oe = em.find(OrganizationEntity.class, dto.getOrganizationId());
+
             if (ue != null) {
                 ue.setActive(dto.isActive());
                 ue.setCreateDt(dto.getCreateDt());
                 ue.setRole(dto.getRole());
                 ue.setResetPwd(dto.isResetPwd());
+                ue.setFirstName(dto.getFirstName());
+                ue.setLastName(dto.getLastName());
+                ue.setId(dto.getId());
+                ue.setOrganizationById(oe);
                 ue = em.merge(ue);
                 return this.mapEntityToDTO(ue);
             } else {
@@ -340,9 +346,7 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
      * @return
      */
     @Override
-    protected UserEntity mapDtoToEntity(UserEntity et, UserDTO dto) {
-        return null;
-    }
+    protected UserEntity mapDtoToEntity(UserEntity et, UserDTO dto) { return null; }
 
     @Override
     public BooleanValueDTO setResetPwd(String userId) throws DataAccessException {
