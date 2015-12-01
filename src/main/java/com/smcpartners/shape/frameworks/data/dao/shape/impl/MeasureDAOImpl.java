@@ -105,4 +105,5 @@ public class MeasureDAOImpl extends AbstractCrudDAO<MeasureDTO, MeasureEntity, I
         List<ProviderMeasureResponseDTO> pmLst = new ArrayList<>();
         return dto;
     }
+
 }
