@@ -60,6 +60,8 @@ public class OrganizationMeasureEntity {
     private Integer raceWhiteDen;
     private Integer raceOtherNum;
     private Integer raceOtherDen;
+    private Integer reportPeriodQuarter;
+    private Integer reportPeriodYear;
     private OrganizationEntity organizationByOrganizationId;
     private MeasureEntity measureByMeasureId;
     private UserEntity userByUserId;
@@ -366,6 +368,24 @@ public class OrganizationMeasureEntity {
         this.raceOtherDen = raceOtherDen;
     }
 
+    @Basic
+    @javax.persistence.Column(name = "rep_per_qtr", nullable = true, insertable = true, updatable = true)
+    public Integer getReportPeriodQuarter() {
+        return reportPeriodQuarter;
+    }
+
+    public void setReportPeriodQuarter(Integer reportPeriodQuarter) { this.reportPeriodQuarter = reportPeriodQuarter; }
+
+    @Basic
+    @javax.persistence.Column(name = "rep_per_year", nullable = true, insertable = true, updatable = true)
+    public Integer getReportPeriodYear() {
+        return reportPeriodYear;
+    }
+
+    public void setReportPeriodYear(Integer reportPeriodYear) {
+        this.reportPeriodYear = reportPeriodYear;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -419,6 +439,9 @@ public class OrganizationMeasureEntity {
         if (raceWhiteDen != null ? !raceWhiteDen.equals(that.raceWhiteDen) : that.raceWhiteDen != null) return false;
         if (raceOtherNum != null ? !raceOtherNum.equals(that.raceOtherNum) : that.raceOtherNum != null) return false;
         if (raceOtherDen != null ? !raceOtherDen.equals(that.raceOtherDen) : that.raceOtherDen != null) return false;
+        if (reportPeriodQuarter != null ? !reportPeriodQuarter.equals(that.reportPeriodQuarter) : that.reportPeriodQuarter != null) return false;
+        if (reportPeriodYear != null ? !reportPeriodYear.equals(that.reportPeriodYear) : that.reportPeriodYear != null) return false;
+
 
         return true;
     }
@@ -459,6 +482,8 @@ public class OrganizationMeasureEntity {
         result = 31 * result + (raceWhiteDen != null ? raceWhiteDen.hashCode() : 0);
         result = 31 * result + (raceOtherNum != null ? raceOtherNum.hashCode() : 0);
         result = 31 * result + (raceOtherDen != null ? raceOtherDen.hashCode() : 0);
+        result = 31 * result + (reportPeriodQuarter != null ? reportPeriodQuarter.hashCode() : 0);
+        result = 31 * result + (reportPeriodYear != null ? reportPeriodYear.hashCode() : 0);
         return result;
     }
 

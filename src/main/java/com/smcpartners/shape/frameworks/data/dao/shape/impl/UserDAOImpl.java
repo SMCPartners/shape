@@ -242,13 +242,13 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
 
             if (ue != null) {
                 ue.setActive(dto.isActive());
-                ue.setCreateDt(dto.getCreateDt());
                 ue.setRole(dto.getRole());
                 ue.setResetPwd(dto.isResetPwd());
                 ue.setFirstName(dto.getFirstName());
                 ue.setLastName(dto.getLastName());
                 ue.setId(dto.getId());
                 ue.setOrganizationById(oe);
+                ue.setEmail(dto.getEmail());
                 ue = em.merge(ue);
                 return this.mapEntityToDTO(ue);
             } else {
@@ -306,8 +306,8 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
         UserDTO dto = new UserDTO();
         dto.setActive(entity.isActive());
         dto.setAdmin(entity.isAdmin());
-        dto.setCreateDt(entity.getCreateDt());
         dto.setId(entity.getId());
+        dto.setOrganizationId(entity.getOrganizationById().getId());
         dto.setOrganizationName(entity.getOrganizationById().getName());
         dto.setRole(entity.getRole());
         dto.setResetPwd(entity.isResetPwd());

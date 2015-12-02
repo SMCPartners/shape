@@ -7,16 +7,12 @@ import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.shape.MeasureDTO;
 import com.smcpartners.shape.shared.dto.shape.OrganizationMeasureDTO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.usecases.UseCaseException;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -51,23 +47,22 @@ public class FindMeasureByIdServiceAdapter implements FindMeasureByIdService {
     public List<MeasureDTO> findMeasureById(List<OrganizationMeasureDTO> orgM) throws UseCaseException {
         try {
 
-            // create list
-            List<MeasureDTO> newList = new ArrayList<>();
+            // create LinkedHashSet
+            LinkedHashSet<MeasureDTO> newSet = new LinkedHashSet<>();
             //make sure list isn't empty
             if (orgM != null && orgM.size() > 0) {
                 //loop through HashSet and find the Measure by Id, add to Measure List
                 for (OrganizationMeasureDTO omd : orgM) {
-                    newList.add(measureDAO.findById(omd.getMeasureId()));
+                    //add to HashSet, which will not allow duplicates
+                    newSet.add(measureDAO.findById(omd.getMeasureId()));
                 }
-                //convert ArrayList to HashSet to remove duplicates
-                Set<MeasureDTO> mSet = new HashSet<>(newList);
-                List<MeasureDTO> mList = new ArrayList<>(mSet);
-                return mList;
+                //convert HashSet to ArrayList to return (may not be necessary)
+                return new ArrayList<>(newSet);
             } else {
                 throw new Exception("List has no data");
             }
         } catch (Exception e) {
-            log.logp(Level.SEVERE, this.getClass().getName(), "findAllOrganizationMeasuresByOrg", e.getMessage(), e);
+            log.logp(Level.SEVERE, this.getClass().getName(), "findMeasuresById", e.getMessage(), e);
             throw new UseCaseException(e.getMessage());
         }
     }

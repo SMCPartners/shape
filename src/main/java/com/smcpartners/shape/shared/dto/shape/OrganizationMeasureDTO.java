@@ -52,6 +52,8 @@ public class OrganizationMeasureDTO implements Serializable {
     private Integer raceWhiteDen;
     private Integer raceOtherNum;
     private Integer raceOtherDen;
+    private Integer reportPeriodQuarter;
+    private Integer reportPeriodYear;
     private int organizationId;
     private int measureId;
     private String userId;
@@ -206,4 +208,12 @@ public class OrganizationMeasureDTO implements Serializable {
     public String getUserId() { return userId; }
 
     public void setUserId(String userId) { this.userId = userId; }
+
+    public Integer getReportPeriodQuarter() { return reportPeriodQuarter; }
+
+    public void setReportPeriodQuarter(Integer reportPeriodQuarter) { this.reportPeriodQuarter = reportPeriodQuarter; }
+
+    public Integer getReportPeriodYear() { return reportPeriodYear; }
+
+    public void setReportPeriodYear(Integer reportPeriodYear) { this.reportPeriodYear = reportPeriodYear; }
 }
