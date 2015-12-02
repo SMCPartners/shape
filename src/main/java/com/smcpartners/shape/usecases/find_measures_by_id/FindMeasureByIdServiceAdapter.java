@@ -51,24 +51,21 @@ public class FindMeasureByIdServiceAdapter implements FindMeasureByIdService {
     public List<MeasureDTO> findMeasureById(List<OrganizationMeasureDTO> orgM) throws UseCaseException {
         try {
 
-            // Get user and find security role
-            UserDTO user = userDAO.findById(requestScopedUserId.getRequestUserId());
-            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(user.getRole());
-
             // create list
-            List<MeasureDTO> mList = new ArrayList<>();
+            List<MeasureDTO> newList = new ArrayList<>();
             //make sure list isn't empty
-            if (orgM != null && orgM.size() > 0){
-                //convert ArrayList to HashSet to remove duplicates
-                Set<OrganizationMeasureDTO> mSet = new HashSet<>(orgM);
+            if (orgM != null && orgM.size() > 0) {
                 //loop through HashSet and find the Measure by Id, add to Measure List
-                for (OrganizationMeasureDTO omd : mSet){
-                    mList.add(measureDAO.findById(omd.getMeasureId()));
+                for (OrganizationMeasureDTO omd : orgM) {
+                    newList.add(measureDAO.findById(omd.getMeasureId()));
                 }
+                //convert ArrayList to HashSet to remove duplicates
+                Set<MeasureDTO> mSet = new HashSet<>(newList);
+                List<MeasureDTO> mList = new ArrayList<>(mSet);
+                return mList;
+            } else {
+                throw new Exception("List has no data");
             }
-
-            return mList;
-
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "findAllOrganizationMeasuresByOrg", e.getMessage(), e);
             throw new UseCaseException(e.getMessage());
