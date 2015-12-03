@@ -38,6 +38,10 @@ public class UserEntity {
     private String passwordDigest;
     private boolean active;
     private boolean resetPwd;
+    private String questionOne;
+    private String questionTwo;
+    private String answerOne;
+    private String answerTwo;
     private Collection<UserProviderEntity> userProvidersById;
     private OrganizationEntity organizationById;
 
@@ -150,6 +154,44 @@ public class UserEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Basic
+    @Column(name = "question_1", nullable = true, insertable = true, updatable = true, length = 45)
+    public String getQuestionOne() { return questionOne; }
+
+    public void setQuestionOne (String questionOne) {
+        this.questionOne = questionOne;
+    }
+
+    @Basic
+    @Column(name = "question_2", nullable = true, insertable = true, updatable = true, length = 45)
+    public String getQuestionTwo() {
+        return questionTwo;
+    }
+
+    public void setQuestionTwo (String questionTwo) {
+        this.questionTwo = questionTwo;
+    }
+
+    @Basic
+    @Column(name = "answer_1", nullable = true, insertable = true, updatable = true, length = 45)
+    public String getAnswerOne() {
+        return answerOne;
+    }
+
+    public void setAnswerOne (String answerOne) {
+        this.answerOne = answerOne;
+    }
+
+    @Basic
+    @Column(name = "answer_2", nullable = true, insertable = true, updatable = true, length = 45)
+    public String getAnswerTwo() {
+        return answerTwo;
+    }
+
+    public void setAnswerTwo(String answerTwo) {
+        this.answerTwo = answerTwo;
     }
 
     @Override

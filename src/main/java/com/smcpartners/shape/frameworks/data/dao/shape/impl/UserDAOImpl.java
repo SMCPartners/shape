@@ -98,6 +98,28 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
         }
     }
 
+    public void addUserSecurityQuestions(String userId, String question1, String question2,
+                                         String answer1, String answer2) throws DataAccessException {
+        try {
+            // Find user
+                UserEntity ue = em.find(UserEntity.class, userId);
+            if (ue != null) {
+                ue.setQuestionOne(question1);
+                ue.setQuestionTwo(question2);
+                ue.setAnswerOne(answer1);
+                ue.setAnswerTwo(answer2);
+                em.merge(ue);
+            } else {
+                throw new DataAccessException("The user does not exist");
+            }
+        } catch (Exception e) {
+            log.logp(Level.SEVERE, this.getClass().getName(), "addUserSecurityQuestions", e.getMessage(), e);
+            throw new DataAccessException(e);
+        }
+
+    }
+
+
     @Override
     public UserDTO changePassword(String userId, String oldpassword, String newpassword) throws
             DataAccessException {
@@ -246,9 +268,12 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
                 ue.setResetPwd(dto.isResetPwd());
                 ue.setFirstName(dto.getFirstName());
                 ue.setLastName(dto.getLastName());
-                ue.setId(dto.getId());
                 ue.setOrganizationById(oe);
                 ue.setEmail(dto.getEmail());
+                ue.setQuestionOne(dto.getQuestionOne());
+                ue.setQuestionTwo(dto.getQuestionTwo());
+                ue.setAnswerOne(dto.getAnswerOne());
+                ue.setAnswerTwo(dto.getAnswerTwo());
                 ue = em.merge(ue);
                 return this.mapEntityToDTO(ue);
             } else {
@@ -314,6 +339,10 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
         dto.setEmail(entity.getEmail());
+        dto.setQuestionOne(entity.getQuestionOne());
+        dto.setQuestionTwo(entity.getQuestionTwo());
+        dto.setAnswerOne(entity.getAnswerOne());
+        dto.setAnswerTwo(entity.getAnswerTwo());
         return dto;
     }
 

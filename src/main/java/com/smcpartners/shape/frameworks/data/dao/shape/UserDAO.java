@@ -6,6 +6,7 @@ import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 
+import javax.xml.crypto.Data;
 import java.util.List;
 
 /**
@@ -123,4 +124,17 @@ public interface UserDAO extends CrudDAO<UserDTO, String> {
      */
 
     void resetPasswordToggle(String userId, boolean b) throws DataAccessException;
+
+    /**
+     *
+     * @param userId
+     * @param question1
+     * @param question2
+     * @param answer1
+     * @param answer2
+     * @throws DataAccessException
+     */
+
+    void addUserSecurityQuestions(String userId, String question1, String question2,
+                                  String answer1, String answer2) throws DataAccessException;
 }

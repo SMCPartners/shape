@@ -1,9 +1,7 @@
-package com.smcpartners.shape.usecases.change_password;
+package com.smcpartners.shape.usecases.edit_user_account;
 
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
-import com.smcpartners.shape.shared.dto.shape.request.CreateUserRequestDTO;
-import com.smcpartners.shape.shared.dto.shape.response.CreateUserResponseDTO;
 import com.smcpartners.shape.usecases.UseCaseException;
 
 import javax.ws.rs.Consumes;
@@ -14,13 +12,12 @@ import javax.ws.rs.Produces;
 /**
  * Created by bhokanson on 12/3/2015.
  */
-@Path("/common")
-public interface ChangePasswordService {
+@Path("common")
+public interface EditUserAccountService {
 
     @POST
-    @Path("/changepassword")
+    @Path("/account/edit")
     @Produces("application/json")
     @Consumes("application/json")
-    BooleanValueDTO changeUserPassword(CreateUserRequestDTO user) throws UseCaseException;
-
+    BooleanValueDTO editUserAccount(UserDTO user) throws UseCaseException;
 }

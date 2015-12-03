@@ -14,10 +14,15 @@ public class CreateUserRequestDTO implements Serializable {
     private String id;
     private String role;
     private String password;
+    private String newPassword;
     private int organizationId;
     private String firstName;
     private String lastName;
     private String email;
+    private String questionOne;
+    private String questionTwo;
+    private String answerOne;
+    private String answerTwo;
 
     public CreateUserRequestDTO() {
     }
@@ -77,4 +82,24 @@ public class CreateUserRequestDTO implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String getNewPassword() { return newPassword; }
+
+    public void setNewPassword(String newPassword) { this.newPassword = newPassword; }
+
+    public String getQuestionOne() { return questionOne; }
+
+    public void setQuestionOne(String questionOne) { this.questionOne = questionOne; }
+
+    public String getQuestionTwo() { return questionTwo; }
+
+    public void setQuestionTwo(String questionTwo) { this.questionTwo = questionTwo; }
+
+    public String getAnswerOne() { return answerOne; }
+
+    public void setAnswerOne(String answerOne) { this.answerOne = answerOne; }
+
+    public String getAnswerTwo() { return answerTwo; }
+
+    public void setAnswerTwo(String answerTwo) { this.answerTwo = answerTwo; }
 }

@@ -24,6 +24,10 @@ public class UserDTO implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
+    private String questionOne;
+    private String questionTwo;
+    private String answerOne;
+    private String answerTwo;
 
     /**
      * Constructor
@@ -122,4 +126,20 @@ public class UserDTO implements Serializable {
     public String getOrganizationName() { return organizationName; }
 
     public void setOrganizationName(String organizationName) { this.organizationName = organizationName; }
+
+    public String getQuestionOne() { return questionOne; }
+
+    public void setQuestionOne(String questionOne) { this.questionOne = questionOne; }
+
+    public String getQuestionTwo() { return questionTwo; }
+
+    public void setQuestionTwo(String questionTwo) { this.questionTwo = questionTwo; }
+
+    public String getAnswerOne() { return answerOne; }
+
+    public void setAnswerOne(String answerOne) { this.answerOne = answerOne; }
+
+    public String getAnswerTwo() { return answerTwo; }
+
+    public void setAnswerTwo(String answerTwo) { this.answerTwo = answerTwo; }
 }

@@ -1,4 +1,4 @@
-package com.smcpartners.shape.usecases.edit_user;
+package com.smcpartners.shape.usecases.edit_user_account;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
@@ -8,7 +8,6 @@ import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.usecases.UseCaseException;
 
-
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -16,10 +15,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by bhokanson on 11/30/2015.
+ * Created by bhokanson on 12/3/2015.
  */
 @RequestScoped
-public class EditUserServiceAdapter implements EditUserService {
+public class EditUserAccountServiceAdapter implements EditUserAccountService {
 
     @Inject
     private Logger log;
@@ -31,22 +30,14 @@ public class EditUserServiceAdapter implements EditUserService {
     private RequestScopedUserId requestScopedUserId;
 
 
-    public EditUserServiceAdapter() {
+    public EditUserAccountServiceAdapter() {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN})
-    public BooleanValueDTO editUser(UserDTO user) throws UseCaseException {
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
+    public BooleanValueDTO editUserAccount(UserDTO user) throws UseCaseException {
         try {
-            // Only ADMIN can edit user
-            UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
-            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
-            if (reqRole == SecurityRoleEnum.ADMIN) {
-                userDAO.update(user, user.getId());
-            } else {
-                throw new Exception("You are not authorized to perform this function.");
-            }
-
+            userDAO.update(user, user.getId());
             // Return value
             return new BooleanValueDTO(true);
         } catch (Exception e) {

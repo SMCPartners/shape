@@ -4,6 +4,7 @@ import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
+import com.smcpartners.shape.shared.dto.shape.request.CreateUserRequestDTO;
 import com.smcpartners.shape.shared.dto.shape.response.CreateUserResponseDTO;
 import com.smcpartners.shape.shared.utils.SecurityUtils;
 import com.smcpartners.shape.usecases.UseCaseException;
@@ -35,7 +36,7 @@ public class ChangePasswordServiceAdapter implements ChangePasswordService {
     }
 
     @Override
-    public BooleanValueDTO changeUserPassword(CreateUserResponseDTO user) throws UseCaseException {
+    public BooleanValueDTO changeUserPassword(CreateUserRequestDTO user) throws UseCaseException {
         try {
 
             String userId = user.getId();
@@ -50,6 +51,8 @@ public class ChangePasswordServiceAdapter implements ChangePasswordService {
                 if (validPassword) {
                     dao.changePassword(userId, userPwd, newPwd);
                     dao.resetPasswordToggle(userId, false);
+                    dao.addUserSecurityQuestions(userId, user.getQuestionOne(),
+                            user.getQuestionTwo(), user.getAnswerOne(), user.getAnswerTwo());
                 }else{
                     throw new UseCaseException("Did not meet regex");
                 }
