@@ -114,4 +114,13 @@ public interface UserDAO extends CrudDAO<UserDTO, String> {
      * @throws DataAccessException
      */
     List<UserDTO> findByOrg(int orgId) throws DataAccessException;
+
+    /**
+     *
+     * @param userId
+     * @param b
+     * @throws DataAccessException
+     */
+
+    void resetPasswordToggle(String userId, boolean b) throws DataAccessException;
 }

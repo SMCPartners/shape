@@ -360,4 +360,16 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
             throw new DataAccessException(e);
         }
     }
+
+    @Override
+    public void resetPasswordToggle(String userId, boolean b) throws DataAccessException {
+        try {
+            UserEntity ue = em.find(UserEntity.class, userId);
+            ue.setResetPwd(b);
+            em.merge(ue);
+        } catch (Exception e) {
+            log.logp(Level.SEVERE, this.getClass().getName(), "resetPasswordToggle", e.getMessage(), e);
+            throw new DataAccessException(e);
+        }
+    }
 }
