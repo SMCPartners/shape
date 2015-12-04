@@ -186,6 +186,7 @@ public class OrganizationMeasureDAOImpl extends AbstractCrudDAO<OrganizationMeas
         d.setUserId(e.getUserByUserId().getId());
         d.setReportPeriodQuarter(e.getReportPeriodQuarter());
         d.setReportPeriodYear(e.getReportPeriodYear());
+        d.setRpDate(e.getRpDate());
         return d;
     }
 }
