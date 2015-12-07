@@ -55,7 +55,7 @@ public class MeasureEntity {
     }
 
     @Basic
-    @Column(name = "Description", nullable = true, insertable = true, updatable = true, length = 255)
+    @Column(name = "Description", nullable = true, insertable = true, updatable = true, length = 1024)
     public String getDescription() {
         return description;
     }
@@ -75,7 +75,7 @@ public class MeasureEntity {
     }
 
     @Basic
-    @Column(name = "numerator_description", nullable = true, insertable = true, updatable = true, length = 100)
+    @Column(name = "numerator_description", nullable = true, insertable = true, updatable = true, length = 1024)
     public String getNumeratorDescription() {
         return numeratorDescription;
     }
@@ -85,7 +85,7 @@ public class MeasureEntity {
     }
 
     @Basic
-    @Column(name = "denominator_description", nullable = true, insertable = true, updatable = true, length = 100)
+    @Column(name = "denominator_description", nullable = true, insertable = true, updatable = true, length = 1024)
     public String getDenominatorDescription() {
         return denominatorDescription;
     }
@@ -95,7 +95,7 @@ public class MeasureEntity {
     }
 
     @Basic
-    @Column(name = "exclusions_description", nullable = true, insertable = true, updatable = true, length = 255)
+    @Column(name = "exclusions_description", nullable = true, insertable = true, updatable = true, length = 1024)
     public String getExclusionsDescription() {
         return exclusionsDescription;
     }
