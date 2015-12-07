@@ -82,20 +82,25 @@ public class SendMailService {
      * @param mailDTO
      * @throws Exception
      */
-    public void sendPwdResetMailFromApp(MailDTO mailDTO) throws Exception {
+    public void sendEmailMsg(MailDTO mailDTO) throws Exception {
+        Email email = this.createEmail();
+        email.setSubject(mailDTO.getSubject());
+        email.setMsg(mailDTO.getMessage());
+        email.addTo(mailDTO.getToEmail());
+        email.send();
+    }
+
+    private Email createEmail() throws Exception {
         Email email = new SimpleEmail();
         email.setSmtpPort(Integer.parseInt(smtpPort));
         email.setAuthenticator(new DefaultAuthenticator(fromAddress, fromPwd));
         email.setDebug(Boolean.parseBoolean(debugEnabled));
         email.setHostName(smtpSever);
         email.setFrom(fromAddress);
-        email.setSubject(mailDTO.getSubject());
-        email.setMsg(mailDTO.getMessage());
-        email.addTo(mailDTO.getToEmail());
         email.setTLS(Boolean.parseBoolean(tlsEnabled));
         email.setSocketTimeout(10000);
         email.setSocketConnectionTimeout(12000);
-        email.send();
+        return email;
     }
 
 }
