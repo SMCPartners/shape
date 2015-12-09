@@ -21,5 +21,9 @@ public abstract class AbstractUsecase<S extends UsecaseAdapter> {
         this.serviceAdapter = serviceAdapter;
     }
 
+    public void setServiceAdapter(S serviceAdapter) {
+        this.serviceAdapter = serviceAdapter;
+    }
+
     public abstract UsecaseResponse processRequest(UsecaseRequest request) throws UseCaseException;
 }
