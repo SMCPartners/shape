@@ -3,11 +3,9 @@ package com.smcpartners.shape.usecases.change_password;
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.dto.shape.request.CreateUserRequestDTO;
-import com.smcpartners.shape.shared.dto.shape.response.CreateUserResponseDTO;
 import com.smcpartners.shape.shared.utils.SecurityUtils;
-import com.smcpartners.shape.usecases.UseCaseException;
+import com.smcpartners.shape.usecases.common.UseCaseException;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;

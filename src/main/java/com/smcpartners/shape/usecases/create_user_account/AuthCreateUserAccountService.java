@@ -2,7 +2,7 @@ package com.smcpartners.shape.usecases.create_user_account;
 
 import com.smcpartners.shape.shared.dto.shape.request.CreateUserRequestDTO;
 import com.smcpartners.shape.shared.dto.shape.response.CreateUserResponseDTO;
-import com.smcpartners.shape.usecases.UseCaseException;
+import com.smcpartners.shape.usecases.common.UseCaseException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

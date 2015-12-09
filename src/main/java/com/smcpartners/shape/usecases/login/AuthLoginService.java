@@ -2,7 +2,7 @@ package com.smcpartners.shape.usecases.login;
 
 
 import com.smcpartners.shape.shared.dto.shape.request.LoginRequestDTO;
-import com.smcpartners.shape.usecases.UseCaseException;
+import com.smcpartners.shape.usecases.common.UseCaseException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

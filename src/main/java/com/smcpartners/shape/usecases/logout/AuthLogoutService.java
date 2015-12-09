@@ -1,7 +1,7 @@
 package com.smcpartners.shape.usecases.logout;
 
 
-import com.smcpartners.shape.usecases.UseCaseException;
+import com.smcpartners.shape.usecases.common.UseCaseException;
 
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;

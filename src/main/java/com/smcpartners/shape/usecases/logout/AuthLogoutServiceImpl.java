@@ -2,7 +2,7 @@ package com.smcpartners.shape.usecases.logout;
 
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
-import com.smcpartners.shape.usecases.UseCaseException;
+import com.smcpartners.shape.usecases.common.UseCaseException;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

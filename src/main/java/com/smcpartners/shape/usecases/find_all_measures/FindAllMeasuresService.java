@@ -1,8 +1,7 @@
 package com.smcpartners.shape.usecases.find_all_measures;
 
 import com.smcpartners.shape.shared.dto.shape.MeasureDTO;
-import com.smcpartners.shape.shared.dto.shape.response.OrganizationNameResponseDTO;
-import com.smcpartners.shape.usecases.UseCaseException;
+import com.smcpartners.shape.usecases.common.UseCaseException;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import javax.ws.rs.GET;

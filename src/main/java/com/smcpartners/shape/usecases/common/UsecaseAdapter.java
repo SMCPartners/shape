@@ -1,4 +1,4 @@
-package com.smcpartners.shape.usecases;
+package com.smcpartners.shape.usecases.common;
 
 /**
  * Responsible:<br/>

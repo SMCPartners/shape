@@ -2,13 +2,12 @@ package com.smcpartners.shape.usecases.activate_organization;
 
 
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
-import com.smcpartners.shape.shared.constants.UseCaseConstants;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.common.UsecaseRequest;
 import com.smcpartners.shape.shared.dto.common.UsecaseResponse;
 import com.smcpartners.shape.shared.utils.UCHelpers;
-import com.smcpartners.shape.usecases.AbstractUsecase;
-import com.smcpartners.shape.usecases.UseCaseException;
+import com.smcpartners.shape.usecases.common.AbstractUsecase;
+import com.smcpartners.shape.usecases.common.UseCaseException;
 
 /**
  * Responsible:<br/>

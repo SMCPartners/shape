@@ -2,8 +2,7 @@ package com.smcpartners.shape.usecases.edit_measure;
 
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.MeasureDTO;
-import com.smcpartners.shape.shared.dto.shape.OrganizationDTO;
-import com.smcpartners.shape.usecases.UseCaseException;
+import com.smcpartners.shape.usecases.common.UseCaseException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

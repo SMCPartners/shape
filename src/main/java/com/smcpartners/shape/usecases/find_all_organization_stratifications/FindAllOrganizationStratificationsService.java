@@ -1,8 +1,7 @@
 package com.smcpartners.shape.usecases.find_all_organization_stratifications;
 
-import com.smcpartners.shape.shared.dto.shape.OrganizationMeasureDTO;
 import com.smcpartners.shape.shared.dto.shape.OrganizationStratificationDTO;
-import com.smcpartners.shape.usecases.UseCaseException;
+import com.smcpartners.shape.usecases.common.UseCaseException;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import javax.ws.rs.GET;

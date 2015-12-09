@@ -2,7 +2,7 @@ package com.smcpartners.shape.usecases.add_provider;
 
 import com.smcpartners.shape.shared.dto.shape.ProviderDTO;
 import com.smcpartners.shape.shared.dto.shape.response.IntEntityResponseDTO;
-import com.smcpartners.shape.usecases.UseCaseException;
+import com.smcpartners.shape.usecases.common.UseCaseException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

@@ -11,8 +11,7 @@ import com.smcpartners.shape.shared.dto.common.UsecaseResponse;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.dto.shape.request.IntEntityIdRequestDTO;
 import com.smcpartners.shape.shared.utils.UCHelpers;
-import com.smcpartners.shape.usecases.UseCaseException;
-import com.smcpartners.shape.usecases.activate_user.ActivateUserUC;
+import com.smcpartners.shape.usecases.common.UseCaseException;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;

@@ -2,7 +2,7 @@ package com.smcpartners.shape.usecases.find_measures_by_id;
 
 import com.smcpartners.shape.shared.dto.shape.MeasureDTO;
 import com.smcpartners.shape.shared.dto.shape.OrganizationMeasureDTO;
-import com.smcpartners.shape.usecases.UseCaseException;
+import com.smcpartners.shape.usecases.common.UseCaseException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;

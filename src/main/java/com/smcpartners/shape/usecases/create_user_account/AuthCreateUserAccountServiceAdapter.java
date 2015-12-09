@@ -9,7 +9,7 @@ import com.smcpartners.shape.shared.dto.shape.request.CreateUserRequestDTO;
 import com.smcpartners.shape.shared.dto.shape.response.CreateUserResponseDTO;
 import com.smcpartners.shape.shared.utils.RandomPasswordGenerator;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
-import com.smcpartners.shape.usecases.UseCaseException;
+import com.smcpartners.shape.usecases.common.UseCaseException;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
