@@ -21,7 +21,7 @@ import javax.ws.rs.Produces;
 public interface InactivateProviderService {
 
     @POST
-    @Path("/organization/inactivate")
+    @Path("/provider/inactivate")
     @Produces("application/json")
     @Consumes("application/json")
     BooleanValueDTO inactivateProvider(IntEntityIdRequestDTO id) throws UseCaseException;
