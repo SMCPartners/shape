@@ -1,7 +1,7 @@
 package com.smcpartners.shape.usecases.find_all_providers;
 
 import com.smcpartners.shape.shared.dto.shape.ProviderDTO;
-import com.smcpartners.shape.usecases.common.UseCaseException;
+import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import javax.ws.rs.GET;
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by bhokanson on 12/4/2015.
  */
-@Path("/common")
+@Path("/usecasecommon")
 public interface FindAllProvidersService {
 
     @GET

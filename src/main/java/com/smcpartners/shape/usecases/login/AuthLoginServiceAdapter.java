@@ -7,7 +7,7 @@ import com.smcpartners.shape.shared.dto.common.ErrorMsgResponse;
 import com.smcpartners.shape.shared.dto.shape.request.LoginRequestDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.utils.JWTUtils;
-import com.smcpartners.shape.usecases.common.UseCaseException;
+import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;

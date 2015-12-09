@@ -1,7 +1,7 @@
 package com.smcpartners.shape.usecases.login;
 
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
-import com.smcpartners.shape.usecases.common.UsecaseAdapter;
+import com.smcpartners.shape.shared.usecasecommon.UsecaseAdapter;
 
 /**
  * Responsible:<br/>

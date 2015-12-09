@@ -4,8 +4,8 @@ import com.smcpartners.shape.shared.dto.common.UsecaseRequest;
 import com.smcpartners.shape.shared.dto.common.UsecaseResponse;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.utils.UCHelpers;
-import com.smcpartners.shape.usecases.common.AbstractUsecase;
-import com.smcpartners.shape.usecases.common.UseCaseException;
+import com.smcpartners.shape.shared.usecasecommon.AbstractUsecase;
+import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 /**
  * Responsible:<br/>

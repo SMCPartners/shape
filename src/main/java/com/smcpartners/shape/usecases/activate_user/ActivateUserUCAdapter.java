@@ -1,8 +1,8 @@
 package com.smcpartners.shape.usecases.activate_user;
 
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
-import com.smcpartners.shape.usecases.common.UsecaseAdapter;
-import com.smcpartners.shape.usecases.common.UseCaseException;
+import com.smcpartners.shape.shared.usecasecommon.UsecaseAdapter;
+import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 /**
  * Responsible:<br/>

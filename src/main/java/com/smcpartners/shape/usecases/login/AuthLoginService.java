@@ -2,7 +2,7 @@ package com.smcpartners.shape.usecases.login;
 
 
 import com.smcpartners.shape.shared.dto.shape.request.LoginRequestDTO;
-import com.smcpartners.shape.usecases.common.UseCaseException;
+import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 /**
  * Created by johndestefano on 9/14/15.
  */
-@Path("/common")
+@Path("/usecasecommon")
 public interface AuthLoginService {
 
     @POST

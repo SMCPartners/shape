@@ -6,7 +6,7 @@ import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
-import com.smcpartners.shape.usecases.common.UseCaseException;
+import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 
 import javax.ejb.EJB;

@@ -1,7 +1,7 @@
 package com.smcpartners.shape.usecases.find_all_organization_measures_by_organization;
 
 import com.smcpartners.shape.shared.dto.shape.OrganizationMeasureDTO;
-import com.smcpartners.shape.usecases.common.UseCaseException;
+import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import javax.ws.rs.GET;
@@ -18,7 +18,7 @@ import java.util.List;
  * <p>
  * Changes:<b/>
  */
-@Path("/common")
+@Path("/usecasecommon")
 public interface FindAllOrganizationMeasuresByOrganizationService {
 
     @GET

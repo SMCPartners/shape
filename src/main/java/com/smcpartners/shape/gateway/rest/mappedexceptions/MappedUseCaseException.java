@@ -1,7 +1,7 @@
 package com.smcpartners.shape.gateway.rest.mappedexceptions;
 
 import com.smcpartners.shape.shared.dto.common.ErrorMsgResponse;
-import com.smcpartners.shape.usecases.common.UseCaseException;
+import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;

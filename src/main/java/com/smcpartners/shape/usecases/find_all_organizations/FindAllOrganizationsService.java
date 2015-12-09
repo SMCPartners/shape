@@ -1,7 +1,7 @@
 package com.smcpartners.shape.usecases.find_all_organizations;
 
 import com.smcpartners.shape.shared.dto.shape.OrganizationDTO;
-import com.smcpartners.shape.usecases.common.UseCaseException;
+import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import javax.ws.rs.GET;

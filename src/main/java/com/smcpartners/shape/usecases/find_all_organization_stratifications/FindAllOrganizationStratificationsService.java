@@ -1,7 +1,7 @@
 package com.smcpartners.shape.usecases.find_all_organization_stratifications;
 
 import com.smcpartners.shape.shared.dto.shape.OrganizationStratificationDTO;
-import com.smcpartners.shape.usecases.common.UseCaseException;
+import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
 import javax.ws.rs.GET;
@@ -17,7 +17,7 @@ import java.util.List;
  * <p>
  * Changes:<b/>
  */
-@Path("/common")
+@Path("/usecasecommon")
 public interface FindAllOrganizationStratificationsService {
 
     @GET

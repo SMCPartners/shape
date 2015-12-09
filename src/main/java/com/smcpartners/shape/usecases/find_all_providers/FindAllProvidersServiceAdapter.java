@@ -5,7 +5,7 @@ import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActi
 import com.smcpartners.shape.frameworks.data.dao.shape.ProviderDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.shape.ProviderDTO;
-import com.smcpartners.shape.usecases.common.UseCaseException;
+import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;

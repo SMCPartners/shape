@@ -1,4 +1,4 @@
-package com.smcpartners.shape.usecases.common;
+package com.smcpartners.shape.shared.usecasecommon;
 
 import javax.inject.Qualifier;
 import java.lang.annotation.ElementType;

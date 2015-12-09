@@ -1,7 +1,7 @@
 package com.smcpartners.shape.usecases.logout;
 
 
-import com.smcpartners.shape.usecases.common.UseCaseException;
+import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -22,7 +22,7 @@ import javax.ws.rs.core.Response;
  * 1. </br>
  * </p>
  */
-@Path("/common")
+@Path("/usecasecommon")
 public interface AuthLogoutService {
 
     @PUT
