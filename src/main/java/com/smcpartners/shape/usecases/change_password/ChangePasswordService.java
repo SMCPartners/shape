@@ -12,7 +12,7 @@ import javax.ws.rs.Produces;
 /**
  * Created by bhokanson on 12/3/2015.
  */
-@Path("/usecasecommon")
+@Path("/common")
 public interface ChangePasswordService {
 
     @POST

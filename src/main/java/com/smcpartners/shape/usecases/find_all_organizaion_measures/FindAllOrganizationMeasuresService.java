@@ -17,7 +17,7 @@ import java.util.List;
  * <p>
  * Changes:<b/>
  */
-@Path("/usecasecommon")
+@Path("/common")
 public interface FindAllOrganizationMeasuresService {
 
     @GET

@@ -17,7 +17,7 @@ import javax.ws.rs.Produces;
  * <p>
  * Changes:<b/>
  */
-@Path("admin")
+@Path("/admin")
 public interface AddProviderService {
 
     @POST

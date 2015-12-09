@@ -22,7 +22,7 @@ import javax.ws.rs.core.Response;
  * 1. </br>
  * </p>
  */
-@Path("/usecasecommon")
+@Path("/common")
 public interface AuthLogoutService {
 
     @PUT

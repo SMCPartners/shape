@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Created by bhokanson on 12/4/2015.
  */
-@Path("/usecasecommon")
+@Path("/common")
 public interface FindAllProvidersService {
 
     @GET

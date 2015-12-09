@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 /**
  * Created by johndestefano on 9/14/15.
  */
-@Path("/usecasecommon")
+@Path("/common")
 public interface AuthLoginService {
 
     @POST

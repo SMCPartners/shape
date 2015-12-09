@@ -18,7 +18,7 @@ import java.util.List;
  * <p>
  * Changes:<b/>
  */
-@Path("admin")
+@Path("/admin")
 public interface FindMeasureByIdService {
 
     @POST

@@ -17,7 +17,7 @@ import javax.ws.rs.Produces;
  * <p>
  * Changes:<b/>
  */
-@Path("usecasecommon")
+@Path("/common")
 public interface EditOrganizationStratificationService {
 
     @POST
