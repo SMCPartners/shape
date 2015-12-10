@@ -1,7 +1,6 @@
 package com.smcpartners.shape.usecases.activate_user;
 
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
-import com.smcpartners.shape.shared.usecasecommon.UsecaseAdapter;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 /**
@@ -12,7 +11,7 @@ import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
  * <p>
  * Changes:<b/>
  */
-public interface ActivateUserUCAdapter extends UsecaseAdapter {
+public interface ActivateUserUCAdapter {
     public static final String TARGET_USER_ID = "REQUESTING_USER_ID";
 
     SecurityRoleEnum getRequestingUsersRole() throws UseCaseException;

@@ -6,6 +6,7 @@ import com.smcpartners.shape.gateway.rest.mappedexceptions.ErrorMessagesEnum;
 import com.smcpartners.shape.shared.dto.common.ErrorMsgResponse;
 import com.smcpartners.shape.shared.dto.shape.request.LoginRequestDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
+import com.smcpartners.shape.shared.usecasecommon.Usecase;
 import com.smcpartners.shape.shared.utils.JWTUtils;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 

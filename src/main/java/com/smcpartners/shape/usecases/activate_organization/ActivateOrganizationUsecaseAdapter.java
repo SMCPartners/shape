@@ -2,7 +2,6 @@ package com.smcpartners.shape.usecases.activate_organization;
 
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
-import com.smcpartners.shape.shared.usecasecommon.UsecaseAdapter;
 
 /**
  * Responsible:<br/>
@@ -12,7 +11,7 @@ import com.smcpartners.shape.shared.usecasecommon.UsecaseAdapter;
  * <p>
  * Changes:<b/>
  */
-public interface ActivateOrganizationUsecaseAdapter extends UsecaseAdapter {
+public interface ActivateOrganizationUsecaseAdapter {
 
     public static final String ORGANIZATION_ID = "organization_id";
 

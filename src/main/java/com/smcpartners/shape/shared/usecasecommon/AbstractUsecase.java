@@ -13,15 +13,11 @@ import com.smcpartners.shape.shared.dto.common.UsecaseResponse;
  * <p>
  * Changes:<b/>
  */
-public abstract class AbstractUsecase<S extends UsecaseAdapter> {
+public abstract class AbstractUsecase<S> {
 
     protected S serviceAdapter;
 
     public AbstractUsecase(S serviceAdapter) {
-        this.serviceAdapter = serviceAdapter;
-    }
-
-    public void setServiceAdapter(S serviceAdapter) {
         this.serviceAdapter = serviceAdapter;
     }
 
