@@ -34,6 +34,9 @@ public class UserEntity {
     private String email;
     private boolean admin;
     private Date createDt;
+    private String createdBy;
+    private Date modifiedDt;
+    private String modifiedBy;
     private String passwordSalt;
     private String passwordDigest;
     private boolean active;
@@ -124,6 +127,37 @@ public class UserEntity {
 
     public void setCreateDt(Date createDt) {
         this.createDt = createDt;
+    }
+
+    @Basic
+    @Column(name = "createdBy", nullable = true, insertable = true, updatable = true, length = 45)
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    @Basic
+    @Column(name = "modifiedDt", nullable = false, insertable = true, updatable = true)
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getModifiedDt() {
+        return modifiedDt;
+    }
+
+    public void setModifiedDt(Date modifiedDt) {
+        this.modifiedDt = modifiedDt;
+    }
+
+    @Basic
+    @Column(name = "modifiedBy", nullable = true, insertable = true, updatable = true, length = 45)
+    public String getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public void setModifiedBy(String modifiedBy) {
+        this.modifiedBy = modifiedBy;
     }
 
     @Basic

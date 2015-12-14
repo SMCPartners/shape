@@ -57,7 +57,7 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
         }
     }
 
-    public UserEntity addUser(String userId, String password, String role, boolean active, Date createDt, int organizationId, String firstName,
+    public UserEntity addUser(String userId, String password, String createdBy, String role, boolean active, Date createDt, int organizationId, String firstName,
                               String lastName, String email, boolean resetPwd) throws DataAccessException {
         try {
             // Check that userId is unique
@@ -77,6 +77,7 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
                 ue.setActive(active);
                 ue.setAdmin(false);
                 ue.setCreateDt(createDt);
+                ue.setCreatedBy(createdBy);
                 ue.setId(userId);
                 ue.setPasswordDigest(sp.getPwdDigest());
                 ue.setPasswordSalt(sp.getSalt());
@@ -237,7 +238,7 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
     @Override
     public UserDTO create(UserDTO dto) throws DataAccessException {
         try {
-            UserEntity ue = this.addUser(dto.getId(), dto.getPassword(), dto.getRole(), dto.isActive(),
+            UserEntity ue = this.addUser(dto.getId(), dto.getPassword(), dto.getCreatedBy(), dto.getRole(), dto.isActive(),
                     dto.getCreateDt(), dto.getOrganizationId(), dto.getFirstName(), dto.getLastName(), dto.getEmail(), dto.isResetPwd());
 
             return this.mapEntityToDTO(ue);
@@ -269,6 +270,8 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
                 ue.setFirstName(dto.getFirstName());
                 ue.setLastName(dto.getLastName());
                 ue.setOrganizationById(oe);
+                ue.setModifiedBy(dto.getModifiedBy());
+                ue.setModifiedBy(dto.getModifiedBy());
                 ue.setEmail(dto.getEmail());
                 ue.setQuestionOne(dto.getQuestionOne());
                 ue.setQuestionTwo(dto.getQuestionTwo());

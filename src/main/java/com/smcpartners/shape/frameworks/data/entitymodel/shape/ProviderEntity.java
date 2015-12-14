@@ -1,6 +1,7 @@
 package com.smcpartners.shape.frameworks.data.entitymodel.shape;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Responsible:</br>
@@ -29,6 +30,9 @@ public class ProviderEntity {
     private boolean active;
     private String name;
     private Integer npi;
+    private String createdBy;
+    private Date modifiedDt;
+    private String modifiedBy;
     private OrganizationEntity organizationById;
 
     @Id
@@ -70,6 +74,37 @@ public class ProviderEntity {
 
     public void setNpi(Integer npi) {
         this.npi = npi;
+    }
+
+    @Basic
+    @Column(name = "createdBy", nullable = true, insertable = true, updatable = true, length = 45)
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    @Basic
+    @Column(name = "modifiedDt", nullable = false, insertable = true, updatable = true)
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getModifiedDt() {
+        return modifiedDt;
+    }
+
+    public void setModifiedDt(Date modifiedDt) {
+        this.modifiedDt = modifiedDt;
+    }
+
+    @Basic
+    @Column(name = "modifiedBy", nullable = true, insertable = true, updatable = true, length = 45)
+    public String getModifiedBy() {
+        return modifiedBy;
+    }
+
+    public void setModifiedBy(String modifiedBy) {
+        this.modifiedBy = modifiedBy;
     }
 
     @Override

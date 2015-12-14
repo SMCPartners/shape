@@ -16,6 +16,9 @@ public class UserDTO implements Serializable {
     private String role;
     private boolean admin;
     private Date createDt;
+    private String createdBy;
+    private Date modifiedDt;
+    private String modifiedBy;
     private String password;
     private boolean active;
     private boolean resetPwd;
@@ -142,4 +145,16 @@ public class UserDTO implements Serializable {
     public String getAnswerTwo() { return answerTwo; }
 
     public void setAnswerTwo(String answerTwo) { this.answerTwo = answerTwo; }
+
+    public String getCreatedBy() { return createdBy; }
+
+    public void setCreatedBy(String createdBy) { this.createdBy = createdBy; }
+
+    public Date getModifiedDt() { return modifiedDt; }
+
+    public void setModifiedDt(Date modifiedDt) { this.modifiedDt = modifiedDt; }
+
+    public String getModifiedBy() { return modifiedBy; }
+
+    public void setModifiedBy(String modifiedBy) { this.modifiedBy = modifiedBy; }
 }

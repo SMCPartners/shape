@@ -94,6 +94,9 @@ public class ProviderDAOImpl extends AbstractCrudDAO<ProviderDTO, ProviderEntity
         et.setName(dto.getName());
         et.setNpi(dto.getNpi());
         et.setActive(dto.isActive());
+        et.setCreatedBy(dto.getCreatedBy());
+        et.setModifiedBy(dto.getModifiedBy());
+        et.setModifiedDt(dto.getModifiedDt());
 
         if (dto.getOrganizationId() != 0) {
             OrganizationEntity oe = em.find(OrganizationEntity.class, dto.getOrganizationId());
@@ -116,6 +119,9 @@ public class ProviderDAOImpl extends AbstractCrudDAO<ProviderDTO, ProviderEntity
         dto.setName(entity.getName());
         dto.setNpi(entity.getNpi());
         dto.setActive(entity.isActive());
+        dto.setCreatedBy(entity.getCreatedBy());
+        dto.setModifiedBy(entity.getModifiedBy());
+        dto.setModifiedDt(entity.getModifiedDt());
 
         if (entity.getOrganizationById() != null) {
             dto.setOrganizationId(entity.getOrganizationById().getId());

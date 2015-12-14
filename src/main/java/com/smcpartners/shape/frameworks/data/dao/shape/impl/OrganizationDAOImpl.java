@@ -90,6 +90,9 @@ public class OrganizationDAOImpl extends AbstractCrudDAO<OrganizationDTO, Organi
         oe.setPrimaryContactName(dto.getPrimaryContactName());
         oe.setPrimaryContactPhone(dto.getPrimaryContactPhone());
         oe.setPrimaryContactRole(dto.getPrimaryContactRole());
+        oe.setCreatedBy(dto.getCreatedBy());
+        oe.setModifiedBy(dto.getModifiedBy());
+        oe.setModifiedDt(dto.getModifiedDt());
         return oe;
     }
 
@@ -113,6 +116,9 @@ public class OrganizationDAOImpl extends AbstractCrudDAO<OrganizationDTO, Organi
         dto.setPrimaryContactName(e.getPrimaryContactName());
         dto.setPrimaryContactPhone(e.getPrimaryContactPhone());
         dto.setPrimaryContactRole(e.getPrimaryContactRole());
+        dto.setCreatedBy(e.getCreatedBy());
+        dto.setModifiedBy(e.getModifiedBy());
+        dto.setModifiedDt(e.getModifiedDt());
         return dto;
     }
 }

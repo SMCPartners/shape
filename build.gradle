@@ -7,7 +7,7 @@ apply plugin: 'war'
 sourceCompatibility = 1.8
 
 //def deployDir = 'C:\\Users\\bhokanson\\Documents\\Server\\Wildfly\\standalone\\deployments'
-def deployDir = '/Users/johndestefano/javastuff/jboss/servers/wildfly-9.0.1.Final/standalone/deployments'
+def deployDir = '/Users/bryanhokanson/Server/wildfly-9.0.2.Final/standalone/deployments'
 
 
 

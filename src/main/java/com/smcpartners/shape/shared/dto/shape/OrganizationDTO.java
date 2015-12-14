@@ -4,6 +4,7 @@ import com.smcpartners.shape.frameworks.data.entitymodel.shape.OrganizationStrat
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 
 /**
  * Responsible:</br>
@@ -32,6 +33,9 @@ public class OrganizationDTO implements Serializable {
     private String primaryContactEmail;
     private String primaryContactRole;
     private String primaryContactPhone;
+    private String createdBy;
+    private Date modifiedDt;
+    private String modifiedBy;
 
     public OrganizationDTO() {
     }
@@ -131,4 +135,16 @@ public class OrganizationDTO implements Serializable {
     public void setActive(boolean active) {
         this.active = active;
     }
+
+    public String getCreatedBy() { return createdBy; }
+
+    public void setCreatedBy(String createdBy) { this.createdBy = createdBy; }
+
+    public Date getModifiedDt() { return modifiedDt; }
+
+    public void setModifiedDt(Date modifiedDt) { this.modifiedDt = modifiedDt; }
+
+    public String getModifiedBy() { return modifiedBy; }
+
+    public void setModifiedBy(String modifiedBy) { this.modifiedBy = modifiedBy; }
 }
