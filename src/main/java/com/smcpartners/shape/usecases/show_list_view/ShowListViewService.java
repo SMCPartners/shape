@@ -1,5 +1,5 @@
 
-package com.smcpartners.shape.usecases.showlistview;
+package com.smcpartners.shape.usecases.show_list_view;
 
 import com.smcpartners.shape.shared.dto.shape.response.ListViewDTO;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;

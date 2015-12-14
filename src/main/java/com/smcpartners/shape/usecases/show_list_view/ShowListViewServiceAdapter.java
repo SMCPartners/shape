@@ -1,4 +1,4 @@
-package com.smcpartners.shape.usecases.showlistview;
+package com.smcpartners.shape.usecases.show_list_view;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
