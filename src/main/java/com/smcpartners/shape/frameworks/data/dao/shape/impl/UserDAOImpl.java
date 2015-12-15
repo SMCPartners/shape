@@ -76,8 +76,9 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
 
                 ue.setActive(active);
                 ue.setAdmin(false);
-                ue.setCreateDt(createDt);
+                ue.setCreateDt(new Date());
                 ue.setCreatedBy(createdBy);
+                ue.setModifiedDt(new Date());
                 ue.setId(userId);
                 ue.setPasswordDigest(sp.getPwdDigest());
                 ue.setPasswordSalt(sp.getSalt());

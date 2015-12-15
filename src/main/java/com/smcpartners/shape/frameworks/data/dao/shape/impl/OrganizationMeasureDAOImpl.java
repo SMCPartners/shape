@@ -61,6 +61,7 @@ public class OrganizationMeasureDAOImpl extends AbstractCrudDAO<OrganizationMeas
         }
     }
 
+
     @Override
     public List<OrganizationMeasureDTO> findAllOrganizationMeasureByOrgId(int orgId) throws DataAccessException {
         try {
