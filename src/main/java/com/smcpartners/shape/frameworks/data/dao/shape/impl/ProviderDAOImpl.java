@@ -14,6 +14,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -96,7 +97,7 @@ public class ProviderDAOImpl extends AbstractCrudDAO<ProviderDTO, ProviderEntity
         et.setActive(dto.isActive());
         et.setCreatedBy(dto.getCreatedBy());
         et.setModifiedBy(dto.getModifiedBy());
-        et.setModifiedDt(dto.getModifiedDt());
+        et.setModifiedDt(new Date());
 
         if (dto.getOrganizationId() != 0) {
             OrganizationEntity oe = em.find(OrganizationEntity.class, dto.getOrganizationId());

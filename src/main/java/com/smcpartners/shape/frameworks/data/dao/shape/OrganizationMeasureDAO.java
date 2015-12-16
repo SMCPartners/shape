@@ -35,4 +35,14 @@ public interface OrganizationMeasureDAO extends CrudDAO<OrganizationMeasureDTO, 
      */
     List<OrganizationMeasureDTO> findAllOrganizationMeasureByOrgId(int orgId) throws DataAccessException;
 
+    /**
+     *
+     * @param measureId
+     * @param year
+     * @return
+     * @throws DataAccessException
+     */
+
+    List<OrganizationMeasureDTO> findOrgMeasureByMeasureIdAndYear(int measureId, int year) throws DataAccessException;
+
 }

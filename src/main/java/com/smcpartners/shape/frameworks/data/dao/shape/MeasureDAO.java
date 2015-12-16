@@ -38,4 +38,12 @@ public interface MeasureDAO extends CrudDAO<MeasureDTO, Integer> {
      * @throws DataAccessException
      */
     List<MeasureDTO> findAllMeasures() throws DataAccessException;
+
+    /**
+     *
+     * @return
+     * @throws DataAccessException
+     */
+
+    List<MeasureDTO> findAllMeasuresById(int measureId) throws DataAccessException;
 }

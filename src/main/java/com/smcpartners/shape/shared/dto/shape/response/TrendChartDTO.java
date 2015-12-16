@@ -10,7 +10,7 @@ public class TrendChartDTO {
     private String description;
     private String numeratorDescription;
     private String denominatorDescription;
-    private List<List<String>> trendChart;
+    private List<List<Object>> trendChart;
 
     public String getName() {
         return name;
@@ -44,11 +44,11 @@ public class TrendChartDTO {
         this.denominatorDescription = denominatorDescription;
     }
 
-    public List<List<String>> getTrendChart() {
+    public List<List<Object>> getTrendChart() {
         return trendChart;
     }
 
-    public void setTrendChart(List<List<String>> trendChart) {
+    public void setTrendChart(List<List<Object>> trendChart) {
         this.trendChart = trendChart;
     }
 }

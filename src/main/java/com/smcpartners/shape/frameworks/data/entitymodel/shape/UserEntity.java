@@ -140,8 +140,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "modifiedDt", nullable = false, insertable = true, updatable = true,
-        columnDefinition = "default '2015-25-09 12:12:12'")
+    @Column(name = "modifiedDt", nullable = false, insertable = true, updatable = true)
     @Temporal(TemporalType.TIMESTAMP)
     public Date getModifiedDt() {
         return modifiedDt;
@@ -157,9 +156,7 @@ public class UserEntity {
         return modifiedBy;
     }
 
-    public void setModifiedBy(String modifiedBy) {
-        this.modifiedBy = modifiedBy;
-    }
+    public void setModifiedBy(String modifiedBy) { this.modifiedBy = modifiedBy; }
 
     @Basic
     @Column(name = "firstName", nullable = true, insertable = true, updatable = true, length = 45)

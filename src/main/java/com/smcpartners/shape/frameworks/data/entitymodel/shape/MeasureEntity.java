@@ -19,7 +19,9 @@ import javax.persistence.*;
 @Table(name = "measure", schema = "", catalog = "shape")
 @NamedQueries({
         @NamedQuery(name = "Measure.findAll",
-                query = "SELECT OBJECT(m) FROM MeasureEntity m")
+                query = "SELECT OBJECT(m) FROM MeasureEntity m"),
+        @NamedQuery(name = "Measure.findAllById",
+                query = "SELECT OBJECT(m) FROM MeasureEntity m WHERE m.id = :id")
 })
 public class MeasureEntity {
     private int id;

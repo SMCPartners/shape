@@ -272,7 +272,7 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
                 ue.setLastName(dto.getLastName());
                 ue.setOrganizationById(oe);
                 ue.setModifiedBy(dto.getModifiedBy());
-                ue.setModifiedBy(dto.getModifiedBy());
+                ue.setModifiedDt(new Date());
                 ue.setEmail(dto.getEmail());
                 ue.setQuestionOne(dto.getQuestionOne());
                 ue.setQuestionTwo(dto.getQuestionTwo());

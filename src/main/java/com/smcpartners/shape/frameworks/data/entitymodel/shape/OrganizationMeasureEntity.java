@@ -23,7 +23,10 @@ import java.util.Date;
                 query = "SELECT OBJECT(o) FROM OrganizationMeasureEntity o"),
         @NamedQuery(name = "OrganizationMeasure.findAllByOrgId",
                 query = "SELECT OBJECT(o) FROM OrganizationMeasureEntity o " +
-                        "WHERE o.organizationByOrganizationId = :org")
+                        "WHERE o.organizationByOrganizationId = :org"),
+        @NamedQuery(name = "OrganizationMeasure.findByMeasAndYear",
+                query = "SElECT OBJECT(o) FROM OrganizationMeasureEntity o " +
+                        "WHERE o.reportPeriodYear = :year AND o.measureByMeasureId = :meas")
 })
 public class OrganizationMeasureEntity {
     private int id;

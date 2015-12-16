@@ -86,9 +86,9 @@ public class ShowListViewServiceAdapter implements ShowListViewService {
                     lvDTO.setDenominatorValue(om.getDenominatorValue());
 
                     //make arrayLists for chartData and chartOptions
-                    List<String> dateList = new ArrayList<>();
-                    List<String> wcList = new ArrayList<>();
-                    List<String> pcList = new ArrayList<>();
+                    List<Object> dateList = new ArrayList<>();
+                    List<Object> wcList = new ArrayList<>();
+                    List<Object> pcList = new ArrayList<>();
 
                     //add month and day to dateList
                     dateList.add(month);
@@ -99,16 +99,16 @@ public class ShowListViewServiceAdapter implements ShowListViewService {
 
                     //add the well controlled array list data
                     wcList.add(wellControlled);
-                    if (wc) wcList.add(String.valueOf(om.getNumeratorValue()));
-                    else wcList.add(String.valueOf(om.getDenominatorValue() - om.getNumeratorValue()));
+                    if (wc) wcList.add(om.getNumeratorValue());
+                    else wcList.add(om.getDenominatorValue() - om.getNumeratorValue());
 
                     //add the poorly controlled array list data
                     pcList.add(poorlyControlled);
-                    if (wc) pcList.add(String.valueOf(om.getDenominatorValue() - om.getNumeratorValue()));
-                    else pcList.add(String.valueOf(om.getNumeratorValue()));
+                    if (wc) pcList.add(om.getDenominatorValue() - om.getNumeratorValue());
+                    else pcList.add(om.getNumeratorValue());
 
                     //add all to an embedded ArrayList for formatting
-                    List<List<String>> newList = new ArrayList<>();
+                    List<List<Object>> newList = new ArrayList<>();
                     newList.add(dateList);
                     newList.add(wcList);
                     newList.add(pcList);
@@ -124,9 +124,6 @@ public class ShowListViewServiceAdapter implements ShowListViewService {
 
                     //add dto to list
                     retLst.add(lvDTO);
-
-                } else {
-                    throw new Exception ("Null value for date");
                 }
             }
 

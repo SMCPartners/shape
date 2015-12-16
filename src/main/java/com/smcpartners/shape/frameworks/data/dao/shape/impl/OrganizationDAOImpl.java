@@ -11,6 +11,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -92,7 +93,7 @@ public class OrganizationDAOImpl extends AbstractCrudDAO<OrganizationDTO, Organi
         oe.setPrimaryContactRole(dto.getPrimaryContactRole());
         oe.setCreatedBy(dto.getCreatedBy());
         oe.setModifiedBy(dto.getModifiedBy());
-        oe.setModifiedDt(dto.getModifiedDt());
+        oe.setModifiedDt(new Date());
         return oe;
     }
 

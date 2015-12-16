@@ -86,6 +86,30 @@ public class OrganizationMeasureDAOImpl extends AbstractCrudDAO<OrganizationMeas
     }
 
     @Override
+    public List<OrganizationMeasureDTO> findOrgMeasureByMeasureIdAndYear(int measureId, int year) throws DataAccessException {
+        try {
+            MeasureEntity me = em.find(MeasureEntity.class, measureId);
+            List<OrganizationMeasureEntity> omLst = em.createNamedQuery("OrganizationMeasure.findByMeasAndYear")
+                    .setParameter("meas", me)
+                    .setParameter("year", year)
+                    .getResultList();
+
+            List<OrganizationMeasureDTO> retLst = new ArrayList<>();
+            if (omLst != null && omLst.size() > 0) {
+                omLst.forEach(Errors.rethrow().wrap(om -> {
+                    OrganizationMeasureDTO dto = this.mapEntityToDTO(om);
+                    retLst.add(dto);
+                }));
+            }
+
+            return retLst;
+        } catch (Exception e) {
+            log.logp(Level.SEVERE, this.getClass().getName(), "findOrgMeasureByOrgIdAndMeasureId", e.getMessage(), e);
+            throw new DataAccessException(e);
+        }
+    }
+
+    @Override
     protected OrganizationMeasureEntity mapDtoToEntity(OrganizationMeasureEntity et, OrganizationMeasureDTO dto) {
         et.setAge1844Num(dto.getAge1844Num());
         et.setAge1844Den(dto.getAge1844Den());

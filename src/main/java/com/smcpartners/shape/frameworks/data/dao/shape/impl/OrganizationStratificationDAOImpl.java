@@ -13,6 +13,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 
@@ -98,7 +99,7 @@ public class OrganizationStratificationDAOImpl extends AbstractCrudDAO<Organizat
         et.setRaceNativeHawaiian(dto.getRaceNativeHawaiian());
         et.setRaceOther(dto.getRaceOther());
         et.setRaceWhite(dto.getRaceWhite());
-        et.setRpDate(dto.getRpDate());
+        et.setRpDate(new Date());
 
         // Look up organization
         OrganizationEntity oe = em.find(OrganizationEntity.class, dto.getOrganizationId());
