@@ -150,14 +150,35 @@ public class ShowTrendChartServiceAdapter implements ShowTrendChartService {
 
             }
 
+
             doubleList.add(q1List);
             doubleList.add(q2List);
             doubleList.add(q3List);
             doubleList.add(q4List);
 
-            tcDTO.setTrendChart(doubleList);
+
+            int highestSize = 0;
+
+            for (List<Object> dl: doubleList) {
+                if (highestSize < dl.size()) {
+                    highestSize = dl.size();
+                }
+            }
+
+
+            for (int i = 0; i < doubleList.size(); i++) {
+                if (doubleList.get(i).size() < highestSize) {
+                    for (int j = 0; j < highestSize; j++) {
+                        if (j >= doubleList.get(i).size() && j <= highestSize) {
+                            doubleList.get(i).add(0);
+                        }
+                    }
+                }
+            }
 
             doubleList.add(0, headerList);
+
+            tcDTO.setTrendChart(doubleList);
 
             retList.add(tcDTO);
 
@@ -180,10 +201,9 @@ public class ShowTrendChartServiceAdapter implements ShowTrendChartService {
         decimal = Double.valueOf(df.format(decimal));
         String noZero = String.valueOf(decimal);
         noZero = noZero.substring(1 , noZero.length()- 1);
-        if (noZero.equals(".")){
-            noZero = "1.00";
+        if (noZero.equals(".")) {
+            decimal = 1.00;
         }
-        decimal = Double.parseDouble(noZero);
 
         return decimal;
     }
@@ -225,6 +245,12 @@ public class ShowTrendChartServiceAdapter implements ShowTrendChartService {
             totals[1] = sumOfQ2Num / sumOfQ2Den;
             totals[2] = sumOfQ3Num / sumOfQ3Den;
             totals[3] = sumOfQ4Num / sumOfQ4Den;
+
+            for (int i = 0; i < totals.length; i++) {
+                if (Double.isNaN(totals[i])){
+                    totals[i] = 0.00;
+                }
+            }
 
             return totals;
 
