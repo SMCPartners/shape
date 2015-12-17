@@ -81,8 +81,6 @@ public class ShowTrendChartServiceAdapter implements ShowTrendChartService {
                         }
                     }
 
-
-
             Collections.sort(orgMList, new Sort());
 
             TrendChartDTO tcDTO = new TrendChartDTO();
@@ -183,7 +181,7 @@ public class ShowTrendChartServiceAdapter implements ShowTrendChartService {
         String noZero = String.valueOf(decimal);
         noZero = noZero.substring(1 , noZero.length()- 1);
         if (noZero.equals(".")){
-            noZero = ".00";
+            noZero = "1.00";
         }
         decimal = Double.parseDouble(noZero);
 
