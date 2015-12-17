@@ -185,8 +185,8 @@ public class OrganizationMeasureDAOImpl extends AbstractCrudDAO<OrganizationMeas
         d.setEthnicityHispanicLatinoDen(e.getEthnicityHispanicLatinoDen());
         d.setEthnicityNotHispanicLatinoNum(e.getEthnicityNotHispanicLatinoNum());
         d.setEthnicityNotHispanicLatinoDen(e.getEthnicityNotHispanicLatinoDen());
-        d.setGenderFemaleNum(d.getGenderFemaleNum());
-        d.setGenderFemaleDen(d.getGenderFemaleDen());
+        d.setGenderFemaleNum(e.getGenderFemaleNum());
+        d.setGenderFemaleDen(e.getGenderFemaleDen());
         d.setGenderMaleNum(e.getGenderMaleNum());
         d.setGenderMaleDen(e.getGenderMaleDen());
         d.setGenderOtherNum(e.getGenderOtherNum());
