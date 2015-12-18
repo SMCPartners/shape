@@ -81,7 +81,6 @@ public class ShowListViewServiceAdapter implements ShowListViewService {
                     lvDTO.setNqfId(mdto.getNqfId());
                     lvDTO.setName(mdto.getName());
                     lvDTO.setDesciption(mdto.getDescription());
-                    lvDTO.setReportPeriodQuarter(om.getReportPeriodQuarter());
                     lvDTO.setNumeratorValue(om.getNumeratorValue());
                     lvDTO.setDenominatorValue(om.getDenominatorValue());
 

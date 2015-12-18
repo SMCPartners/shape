@@ -20,6 +20,6 @@ public interface ShowTrendChartQuarterlyService {
     @NoCache
     @Path("/show/trendChartQuarterly/{measureId}/{year}")
     @Produces("application/json")
-    List<TrendChartDTO> showTrendChart(@PathParam("measureId") int measureId,
+    List<TrendChartDTO> showTrendChartQuarterly(@PathParam("measureId") int measureId,
                                        @PathParam("year") int year) throws UseCaseException;
 }

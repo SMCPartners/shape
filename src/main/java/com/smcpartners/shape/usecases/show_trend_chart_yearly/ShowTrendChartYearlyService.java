@@ -1,6 +1,6 @@
 package com.smcpartners.shape.usecases.show_trend_chart_yearly;
 
-import com.smcpartners.shape.shared.dto.shape.response.TrendChartDTO;
+import com.smcpartners.shape.shared.dto.shape.response.TrendChartYearlyDTO;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 import org.jboss.resteasy.annotations.cache.NoCache;
 
@@ -20,6 +20,6 @@ public interface ShowTrendChartYearlyService {
     @NoCache
     @Path("/show/trendChartYearly/{measureId}/{year}")
     @Produces("application/json")
-    List<TrendChartYearlyDTO> showTrendChart(@PathParam("measureId") int measureId,
-                                       @PathParam("year") int year) throws UseCaseException;
+    List<TrendChartYearlyDTO> showTrendChartYearly(@PathParam("measureId") int measureId,
+                                             @PathParam("year") int year) throws UseCaseException;
 }

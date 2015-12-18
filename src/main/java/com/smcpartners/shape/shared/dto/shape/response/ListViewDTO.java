@@ -10,7 +10,6 @@ public class ListViewDTO {
     private String nqfId;
     private String name;
     private String desciption;
-    private int reportPeriodQuarter;
     private int numeratorValue;
     private int denominatorValue;
     private List<List<Object>> chartData;
@@ -40,17 +39,7 @@ public class ListViewDTO {
         this.desciption = desciption;
     }
 
-    public int getReportPeriodQuarter() {
-        return reportPeriodQuarter;
-    }
-
-    public void setReportPeriodQuarter(int reportPeriodQuarter) {
-        this.reportPeriodQuarter = reportPeriodQuarter;
-    }
-
-    public int getNumeratorValue() {
-        return numeratorValue;
-    }
+    public int getNumeratorValue() { return numeratorValue; }
 
     public void setNumeratorValue(int numeratorValue) {
         this.numeratorValue = numeratorValue;

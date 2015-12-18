@@ -67,7 +67,6 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
                 ahdDTO.setNqfId(mdto.getNqfId());
                 ahdDTO.setName(mdto.getName());
                 ahdDTO.setDescription(mdto.getDescription());
-                ahdDTO.setReportPeriodQuarter(om.getReportPeriodQuarter());
                 ahdDTO.setReportPeriodYear(om.getReportPeriodYear());
 
 

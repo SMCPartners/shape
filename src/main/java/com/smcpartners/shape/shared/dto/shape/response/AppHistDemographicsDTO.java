@@ -10,7 +10,6 @@ public class AppHistDemographicsDTO {
     private String nqfId;
     private String name;
     private String description;
-    private int reportPeriodQuarter;
     private int reportPeriodYear;
     private List<List<Object>> raceData;
     private List<List<Object>> ageData;
@@ -39,14 +38,6 @@ public class AppHistDemographicsDTO {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public int getReportPeriodQuarter() {
-        return reportPeriodQuarter;
-    }
-
-    public void setReportPeriodQuarter(int reportPeriodQuarter) {
-        this.reportPeriodQuarter = reportPeriodQuarter;
     }
 
     public int getReportPeriodYear() {
