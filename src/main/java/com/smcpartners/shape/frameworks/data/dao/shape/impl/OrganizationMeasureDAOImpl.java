@@ -144,7 +144,6 @@ public class OrganizationMeasureDAOImpl extends AbstractCrudDAO<OrganizationMeas
         et.setRaceOtherDen(dto.getRaceOtherDen());
         et.setRaceWhiteNum(dto.getRaceWhiteNum());
         et.setRaceWhiteDen(dto.getRaceWhiteDen());
-        et.setReportPeriodQuarter(dto.getReportPeriodQuarter());
         et.setReportPeriodYear(dto.getReportPeriodYear());
         et.setRpDate(dto.getRpDate());
 
@@ -209,7 +208,6 @@ public class OrganizationMeasureDAOImpl extends AbstractCrudDAO<OrganizationMeas
         d.setMeasureId(e.getMeasureByMeasureId().getId());
         d.setOrganizationId(e.getOrganizationByOrganizationId().getId());
         d.setUserId(e.getUserByUserId().getId());
-        d.setReportPeriodQuarter(e.getReportPeriodQuarter());
         d.setReportPeriodYear(e.getReportPeriodYear());
         d.setRpDate(e.getRpDate());
         return d;
