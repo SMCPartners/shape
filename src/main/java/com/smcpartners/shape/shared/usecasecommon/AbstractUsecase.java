@@ -13,7 +13,7 @@ import com.smcpartners.shape.shared.dto.common.UsecaseResponse;
  * <p>
  * Changes:<b/>
  */
-public abstract class AbstractUsecase<S> {
+public abstract class AbstractUsecase<S extends FrameworkUsecaseAdapter> {
 
     protected S serviceAdapter;
 

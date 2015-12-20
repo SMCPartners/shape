@@ -1,6 +1,7 @@
 package com.smcpartners.shape.usecases.login;
 
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
+import com.smcpartners.shape.shared.usecasecommon.FrameworkUsecaseAdapter;
 
 /**
  * Responsible:<br/>
@@ -10,7 +11,7 @@ import com.smcpartners.shape.shared.dto.shape.UserDTO;
  * <p>
  * Changes:<b/>
  */
-public interface AuthLoginUsecaseAdapter {
+public interface AuthLoginUsecaseAdapter extends FrameworkUsecaseAdapter {
 
     public static final String USER_ID = "userId";
     public static final String PASSWORD = "password";
