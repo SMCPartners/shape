@@ -17,8 +17,8 @@ public interface ShowAggregateComparisonService {
 
     @GET
     @NoCache
-    @Path("/show/trendChartYearly/{measureId}/{year}")
+    @Path("/show/aggregateComparison/{measureId}/{year}")
     @Produces("application/json")
-    List<List<Object>> showTrendChartYearly(@PathParam("measureId") int measureId,
+    List<List<Object>> showAggregateComparison(@PathParam("measureId") int measureId,
                                              @PathParam("year") int year) throws UseCaseException;
 }

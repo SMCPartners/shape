@@ -60,7 +60,7 @@ public class ShowAggregateComparisonServiceAdapter implements ShowAggregateCompa
 
     @Override
     @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
-    public List<List<Object>> showTrendChartYearly(@PathParam("measureId") int measureId,
+    public List<List<Object>> showAggregateComparison(@PathParam("measureId") int measureId,
                                                           @PathParam("year") int year) throws UseCaseException {
         try {
 
@@ -102,7 +102,7 @@ public class ShowAggregateComparisonServiceAdapter implements ShowAggregateCompa
             return retList;
 
         } catch (Exception e) {
-            log.logp(Level.SEVERE, this.getClass().getName(), "showTrendChartYearly", e.getMessage(), e);
+            log.logp(Level.SEVERE, this.getClass().getName(), "showAggregateComparison", e.getMessage(), e);
             throw new UseCaseException(e.getMessage());
         }
     }

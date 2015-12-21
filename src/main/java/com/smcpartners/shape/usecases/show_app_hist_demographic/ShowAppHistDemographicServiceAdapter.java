@@ -91,7 +91,7 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
                     //add to the race lists
                     africanAmericanList.add("African American");
                     africanAmericanList.add(convertToDoubles(om.getRaceAfricanAmericanNum(),
-                            om.getRaceAmericanIndianDen()));
+                            om.getRaceAfricanAmericanDen()));
 
                     nativeAmericanList.add("Native American");
                     nativeAmericanList.add(convertToDoubles(om.getRaceAmericanIndianNum(),
