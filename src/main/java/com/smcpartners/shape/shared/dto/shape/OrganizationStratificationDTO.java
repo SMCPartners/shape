@@ -34,6 +34,12 @@ public class OrganizationStratificationDTO implements Serializable {
     private int raceWhite;
     private int raceOther;
     private int organizationId;
+    private int totalPatients;
+    private int totalVisits;
+    private int patientsHypertension;
+    private int patientsDiabetes;
+    private int patientsPreDiabetes;
+    private int patientsHighBp;
     private String userId;
     private Date rpDate;
 
@@ -191,4 +197,28 @@ public class OrganizationStratificationDTO implements Serializable {
     public void setRpDate(Date rpDate) {
         this.rpDate = rpDate;
     }
+
+    public int getTotalPatients() {return totalPatients;}
+
+    public void setTotalPatients(int totalPatients) {this.totalPatients = totalPatients;}
+
+    public int getTotalVisits() {return totalVisits;}
+
+    public void setTotalVisits(int totalVisits) {this.totalVisits = totalVisits;}
+
+    public int getPatientsHypertension() {return patientsHypertension;}
+
+    public void setPatientsHypertension(int patientsHypertension) {this.patientsHypertension = patientsHypertension;}
+
+    public int getPatientsDiabetes() {return patientsDiabetes;}
+
+    public void setPatientsDiabetes(int patientsDiabetes) {this.patientsDiabetes = patientsDiabetes;}
+
+    public int getPatientsPreDiabetes() {return patientsPreDiabetes;}
+
+    public void setPatientsPreDiabetes(int patientsPreDiabetes) {this.patientsPreDiabetes = patientsPreDiabetes;}
+
+    public int getPatientsHighBp() {return patientsHighBp;}
+
+    public void setPatientsHighBp(int patientsHighBp) {this.patientsHighBp = patientsHighBp;}
 }

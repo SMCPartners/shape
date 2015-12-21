@@ -99,6 +99,12 @@ public class OrganizationStratificationDAOImpl extends AbstractCrudDAO<Organizat
         et.setRaceNativeHawaiian(dto.getRaceNativeHawaiian());
         et.setRaceOther(dto.getRaceOther());
         et.setRaceWhite(dto.getRaceWhite());
+        et.setTotalPatients(dto.getTotalPatients());
+        et.setTotalVisits(dto.getTotalVisits());
+        et.setPatientsHypertension(dto.getPatientsHypertension());
+        et.setPatientsDiabetes(dto.getPatientsDiabetes());
+        et.setPatientsPreDiabetes(dto.getPatientsPreDiabetes());
+        et.setPatientsHighBp(dto.getPatientsHighBp());
         et.setRpDate(new Date());
 
         // Look up organization
@@ -140,6 +146,12 @@ public class OrganizationStratificationDAOImpl extends AbstractCrudDAO<Organizat
         dto.setOrganizationId(entity.getOrganizationByOrganizationId().getId());
         dto.setUserId(entity.getUserByUserId().getId());
         dto.setRpDate(entity.getRpDate());
+        dto.setTotalPatients(entity.getTotalPatients());
+        dto.setTotalVisits(entity.getTotalVisits());
+        dto.setPatientsHypertension(entity.getPatientsHypertension());
+        dto.setPatientsDiabetes(entity.getPatientsDiabetes());
+        dto.setPatientsPreDiabetes(entity.getPatientsPreDiabetes());
+        dto.setPatientsHighBp(entity.getPatientsHighBp());
         return dto;
     }
 }

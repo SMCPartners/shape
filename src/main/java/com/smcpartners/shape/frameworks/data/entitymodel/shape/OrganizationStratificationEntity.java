@@ -42,6 +42,12 @@ public class OrganizationStratificationEntity {
     private Integer raceNativeHawaiian;
     private Integer raceWhite;
     private Integer raceOther;
+    private Integer totalPatients;
+    private Integer totalVisits;
+    private Integer patientsHypertension;
+    private Integer patientsDiabetes;
+    private Integer patientsPreDiabetes;
+    private Integer patientsHighBp;
     private OrganizationEntity organizationByOrganizationId;
     private UserEntity userByUserId;
     private Date rpDate;
@@ -208,6 +214,64 @@ public class OrganizationStratificationEntity {
     }
 
     @Basic
+    @Column(name = "total_patients", nullable = true, insertable = true, updatable = true)
+    public Integer getTotalPatients() {
+        return totalPatients;
+    }
+
+    public void setTotalPatients(Integer totalPatients) {
+        this.totalPatients = totalPatients;
+    }
+
+    @Basic
+    @Column(name = "total_visits", nullable = true, insertable = true, updatable = true)
+    public Integer getTotalVisits() {
+        return totalVisits;
+    }
+
+    public void setTotalVisits(Integer totalVisits) {
+        this.totalVisits = totalVisits;
+    }
+
+    @Basic
+    @Column(name = "patients_hypertension", nullable = true, insertable = true, updatable = true)
+    public Integer getPatientsHypertension() { return patientsHypertension; }
+
+    public void setPatientsHypertension(Integer patientsHypertension) {
+        this.patientsHypertension = patientsHypertension;
+    }
+
+    @Basic
+    @Column(name = "patients_diabetes", nullable = true, insertable = true, updatable = true)
+    public Integer getPatientsDiabetes() {
+        return patientsDiabetes;
+    }
+
+    public void setPatientsDiabetes(Integer patientsDiabetes) {
+        this.patientsDiabetes = patientsDiabetes;
+    }
+
+    @Basic
+    @Column(name = "patients_pre_diabetes", nullable = true, insertable = true, updatable = true)
+    public Integer getPatientsPreDiabetes() {
+        return patientsPreDiabetes;
+    }
+
+    public void setPatientsPreDiabetes(Integer patientsPreDiabetes) {
+        this.patientsPreDiabetes = patientsPreDiabetes;
+    }
+
+    @Basic
+    @Column(name = "patients_highBp", nullable = true, insertable = true, updatable = true)
+    public Integer getPatientsHighBp() {
+        return patientsHighBp;
+    }
+
+    public void setPatientsHighBp(Integer patientsHighBp) {
+        this.patientsHighBp = patientsHighBp;
+    }
+
+    @Basic
     @Temporal(TemporalType.TIMESTAMP)
     @javax.persistence.Column(name = "rpDate", nullable = false, insertable = true, updatable = true)
     public Date getRpDate() {
@@ -246,6 +310,15 @@ public class OrganizationStratificationEntity {
             return false;
         if (raceWhite != null ? !raceWhite.equals(that.raceWhite) : that.raceWhite != null) return false;
         if (raceOther != null ? !raceOther.equals(that.raceOther) : that.raceOther != null) return false;
+        if (totalPatients != null ? !totalPatients.equals(that.totalPatients) : that.totalPatients != null) return false;
+        if (totalVisits != null ? !totalVisits.equals(that.totalVisits) : that.totalVisits != null) return false;
+        if (patientsHypertension != null ? !patientsHypertension.equals(that.patientsHypertension) : that.patientsHypertension != null) return false;
+        if (patientsDiabetes != null ? !patientsDiabetes.equals(that.patientsDiabetes) : that.patientsDiabetes != null) return false;
+        if (patientsPreDiabetes != null ? !patientsPreDiabetes.equals(that.patientsPreDiabetes) : that.patientsPreDiabetes != null) return false;
+        if (patientsHighBp != null ? !patientsHighBp.equals(that.patientsHighBp) : that.patientsHighBp != null) return false;
+
+
+
 
         return true;
     }
@@ -268,6 +341,12 @@ public class OrganizationStratificationEntity {
         result = 31 * result + (raceNativeHawaiian != null ? raceNativeHawaiian.hashCode() : 0);
         result = 31 * result + (raceWhite != null ? raceWhite.hashCode() : 0);
         result = 31 * result + (raceOther != null ? raceOther.hashCode() : 0);
+        result = 31 * result + (totalPatients != null ? totalPatients.hashCode() : 0);
+        result = 31 * result + (totalVisits != null ? totalVisits.hashCode() : 0);
+        result = 31 * result + (patientsHypertension != null ? patientsHypertension.hashCode() : 0);
+        result = 31 * result + (patientsDiabetes != null ? patientsDiabetes.hashCode() : 0);
+        result = 31 * result + (patientsHighBp != null ? patientsHighBp.hashCode() : 0);
+        result = 31 * result + (patientsPreDiabetes != null ? patientsPreDiabetes.hashCode() : 0);
         return result;
     }
 
