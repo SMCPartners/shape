@@ -3,10 +3,12 @@ package com.smcpartners.shape.usecases.show_app_hist_demographic;
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.MeasureDAO;
+import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationMeasureDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.shape.MeasureDTO;
+import com.smcpartners.shape.shared.dto.shape.OrganizationDTO;
 import com.smcpartners.shape.shared.dto.shape.OrganizationMeasureDTO;
 import com.smcpartners.shape.shared.dto.shape.response.AppHistDemographicsDTO;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
@@ -41,6 +43,9 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
     @EJB
     private OrganizationMeasureDAO orgMDAO;
 
+    @EJB
+    private OrganizationDAO oDAO;
+
     @Inject
     private RequestScopedUserId requestScopedUserId;
 
@@ -61,141 +66,162 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
             List<OrganizationMeasureDTO> orgMList = orgMDAO.findOrgMeasureByMeasureIdAndYear(measureId, year);
 
             for (OrganizationMeasureDTO om : orgMList) {
-                AppHistDemographicsDTO ahdDTO = new AppHistDemographicsDTO();
+                OrganizationDTO org = oDAO.findById(orgId);
 
-                //add measure info to dto
-                ahdDTO.setNqfId(mdto.getNqfId());
-                ahdDTO.setName(mdto.getName());
-                ahdDTO.setDescription(mdto.getDescription());
-                ahdDTO.setReportPeriodYear(om.getReportPeriodYear());
+                if (om.getOrganizationId() == org.getId()) {
 
+                    AppHistDemographicsDTO ahdDTO = new AppHistDemographicsDTO();
 
-                List<Object> africanAmericanList = new ArrayList<>();
-                List<Object> nativeAmericanList = new ArrayList<>();
-                List<Object> asianList = new ArrayList<>();
-                List<Object> nativeHawaiianList = new ArrayList<>();
-                List<Object> whiteList = new ArrayList<>();
-                List<Object> otherRaceList = new ArrayList<>();
-                List<Object> under17List = new ArrayList<>();
-                List<Object> age18to44List = new ArrayList<>();
-                List<Object> age45to64List = new ArrayList<>();
-                List<Object> age65PlusList = new ArrayList<>();
-                List<Object> hispanicList = new ArrayList<>();
-                List<Object> notHispanicList = new ArrayList<>();
-                List<Object> femaleList = new ArrayList<>();
-                List<Object> maleList = new ArrayList<>();
-                List<Object> otherGenderList = new ArrayList<>();
+                    //add measure info to dto
+                    ahdDTO.setNqfId(mdto.getNqfId());
+                    ahdDTO.setName(mdto.getName());
+                    ahdDTO.setDescription(mdto.getDescription());
+                    ahdDTO.setReportPeriodYear(om.getReportPeriodYear());
 
 
-                try {
-                    //add to the race lists
-                    africanAmericanList.add("African American");
-                    africanAmericanList.add(convertToDoubles(om.getRaceAfricanAmericanNum(),
-                            om.getRaceAfricanAmericanDen()));
-
-                    nativeAmericanList.add("Native American");
-                    nativeAmericanList.add(convertToDoubles(om.getRaceAmericanIndianNum(),
-                            om.getRaceAmericanIndianDen()));
-
-                    asianList.add("Asian");
-                    asianList.add(convertToDoubles(om.getRaceAsianNum(), om.getRaceAsianDen()));
-
-                    nativeHawaiianList.add("Native Hawaiian");
-                    nativeHawaiianList.add(convertToDoubles(om.getRaceNativeHawaiianNum(),
-                            om.getRaceNativeHawaiianDen()));
-
-                    whiteList.add("White");
-                    whiteList.add(convertToDoubles(om.getRaceWhiteNum(), om.getRaceWhiteDen()));
-
-                    otherRaceList.add("Other");
-                    otherRaceList.add(convertToDoubles(om.getRaceOtherNum(), om.getRaceOtherDen()));
-
-                    //add arrays to raceData double array
-                    List<List<Object>> rdList = new ArrayList<>();
-                    rdList.add(africanAmericanList);
-                    rdList.add(nativeAmericanList);
-                    rdList.add(asianList);
-                    rdList.add(nativeHawaiianList);
-                    rdList.add(whiteList);
-                    rdList.add(otherRaceList);
-                    //set gender data on dto
-                    ahdDTO.setRaceData(rdList);
-                } catch (Exception e) {
-                    List<List<Object>> rdList = new ArrayList<>();
-                    List<Object> errorList = new ArrayList<>();
-                    errorList.add(false);
-                    rdList.add(errorList);
-                    ahdDTO.setRaceData(rdList);
-                }
-
-                try {
-
-                    //add to age lists
-                    under17List.add("Under 17");
-                    under17List.add(convertToDoubles(om.getAgeUnder17Num(), om.getAgeUnder17Den()));
-
-                    age18to44List.add("18-44");
-                    age18to44List.add(convertToDoubles(om.getAge1844Num(), om.getAge1844Den()));
-
-                    age45to64List.add("45-64");
-                    age45to64List.add(convertToDoubles(om.getAge4564Num(), om.getAge4564Den()));
-
-                    age65PlusList.add("65+");
-                    age65PlusList.add(convertToDoubles(om.getAgeOver65Num(), om.getAgeOver65Den()));
-
-                    //add arrays to ageData double array
-                    List<List<Object>> adList = new ArrayList<>();
-                    adList.add(under17List);
-                    adList.add(age18to44List);
-                    adList.add(age45to64List);
-                    adList.add(age65PlusList);
-                    //set age data on dto
-                    ahdDTO.setAgeData(adList);
-
-                } catch (Exception e) {
-                    List<List<Object>> rdList = new ArrayList<>();
-                    List<Object> errorList = new ArrayList<>();
-                    errorList.add(false);
-                    rdList.add(errorList);
-                    ahdDTO.setAgeData(rdList);
-                }
+                    List<Object> africanAmericanList = new ArrayList<>();
+                    List<Object> nativeAmericanList = new ArrayList<>();
+                    List<Object> asianList = new ArrayList<>();
+                    List<Object> nativeHawaiianList = new ArrayList<>();
+                    List<Object> whiteList = new ArrayList<>();
+                    List<Object> otherRaceList = new ArrayList<>();
+                    List<Object> under17List = new ArrayList<>();
+                    List<Object> age18to44List = new ArrayList<>();
+                    List<Object> age45to64List = new ArrayList<>();
+                    List<Object> age65PlusList = new ArrayList<>();
+                    List<Object> hispanicList = new ArrayList<>();
+                    List<Object> notHispanicList = new ArrayList<>();
+                    List<Object> femaleList = new ArrayList<>();
+                    List<Object> maleList = new ArrayList<>();
+                    List<Object> otherGenderList = new ArrayList<>();
 
 
-                try {
-                    //add to ethnicity data lists
-                    hispanicList.add("Hispanic");
-                    hispanicList.add(convertToDoubles(om.getEthnicityHispanicLatinoNum(),
-                            om.getEthnicityHispanicLatinoDen()));
+                    try {
+                        //add to the race lists
+                        africanAmericanList.add("African American");
+                        africanAmericanList.add(convertToDoubles(om.getRaceAfricanAmericanNum(),
+                                om.getRaceAfricanAmericanDen()));
+
+                        nativeAmericanList.add("Native American");
+                        nativeAmericanList.add(convertToDoubles(om.getRaceAmericanIndianNum(),
+                                om.getRaceAmericanIndianDen()));
+
+                        asianList.add("Asian");
+                        asianList.add(convertToDoubles(om.getRaceAsianNum(), om.getRaceAsianDen()));
+
+                        nativeHawaiianList.add("Native Hawaiian");
+                        nativeHawaiianList.add(convertToDoubles(om.getRaceNativeHawaiianNum(),
+                                om.getRaceNativeHawaiianDen()));
+
+                        whiteList.add("White");
+                        whiteList.add(convertToDoubles(om.getRaceWhiteNum(), om.getRaceWhiteDen()));
+
+                        otherRaceList.add("Other");
+                        otherRaceList.add(convertToDoubles(om.getRaceOtherNum(), om.getRaceOtherDen()));
+
+                        //add arrays to raceData double array
+                        List<List<Object>> rdList = new ArrayList<>();
+                        rdList.add(africanAmericanList);
+                        rdList.add(nativeAmericanList);
+                        rdList.add(asianList);
+                        rdList.add(nativeHawaiianList);
+                        rdList.add(whiteList);
+                        rdList.add(otherRaceList);
+                        //set gender data on dto
+                        ahdDTO.setRaceData(rdList);
+                    } catch (Exception e) {
+                        List<List<Object>> rdList = new ArrayList<>();
+                        List<Object> errorList = new ArrayList<>();
+                        errorList.add(false);
+                        rdList.add(errorList);
+                        ahdDTO.setRaceData(rdList);
+                    }
+
+                    try {
+
+                        //add to age lists
+                        under17List.add("Under 17");
+                        under17List.add(convertToDoubles(om.getAgeUnder17Num(), om.getAgeUnder17Den()));
+
+                        age18to44List.add("18-44");
+                        age18to44List.add(convertToDoubles(om.getAge1844Num(), om.getAge1844Den()));
+
+                        age45to64List.add("45-64");
+                        age45to64List.add(convertToDoubles(om.getAge4564Num(), om.getAge4564Den()));
+
+                        age65PlusList.add("65+");
+                        age65PlusList.add(convertToDoubles(om.getAgeOver65Num(), om.getAgeOver65Den()));
+
+                        //add arrays to ageData double array
+                        List<List<Object>> adList = new ArrayList<>();
+                        adList.add(under17List);
+                        adList.add(age18to44List);
+                        adList.add(age45to64List);
+                        adList.add(age65PlusList);
+                        //set age data on dto
+                        ahdDTO.setAgeData(adList);
+
+                    } catch (Exception e) {
+                        List<List<Object>> rdList = new ArrayList<>();
+                        List<Object> errorList = new ArrayList<>();
+                        errorList.add(false);
+                        rdList.add(errorList);
+                        ahdDTO.setAgeData(rdList);
+                    }
 
 
-                    notHispanicList.add("Not Hispanic");
-                    notHispanicList.add(convertToDoubles(om.getEthnicityNotHispanicLatinoNum(),
-                            om.getEthnicityNotHispanicLatinoDen()));
+                    try {
+                        //add to ethnicity data lists
+                        hispanicList.add("Hispanic");
+                        hispanicList.add(convertToDoubles(om.getEthnicityHispanicLatinoNum(),
+                                om.getEthnicityHispanicLatinoDen()));
 
-                    //add arrays to ethnicityData double array
-                    List<List<Object>> ethList = new ArrayList<>();
-                    ethList.add(hispanicList);
-                    ethList.add(notHispanicList);
-                    //set ethnicity data on dto
-                    ahdDTO.setEthnicityData(ethList);
-                } catch (Exception e) {
-                    List<List<Object>> rdList = new ArrayList<>();
-                    List<Object> errorList = new ArrayList<>();
-                    errorList.add(false);
-                    rdList.add(errorList);
-                    ahdDTO.setEthnicityData(rdList);
-                }
 
-                try {
-                    //add to gender list
-                    femaleList.add("Female");
-                    femaleList.add(convertToDoubles(om.getGenderFemaleNum(), om.getGenderFemaleDen()));
+                        notHispanicList.add("Not Hispanic");
+                        notHispanicList.add(convertToDoubles(om.getEthnicityNotHispanicLatinoNum(),
+                                om.getEthnicityNotHispanicLatinoDen()));
 
-                    maleList.add("Male");
-                    maleList.add(convertToDoubles(om.getGenderMaleNum(), om.getGenderMaleDen()));
+                        //add arrays to ethnicityData double array
+                        List<List<Object>> ethList = new ArrayList<>();
+                        ethList.add(hispanicList);
+                        ethList.add(notHispanicList);
+                        //set ethnicity data on dto
+                        ahdDTO.setEthnicityData(ethList);
+                    } catch (Exception e) {
+                        List<List<Object>> rdList = new ArrayList<>();
+                        List<Object> errorList = new ArrayList<>();
+                        errorList.add(false);
+                        rdList.add(errorList);
+                        ahdDTO.setEthnicityData(rdList);
+                    }
 
-                    otherGenderList.add("Other");
-                    otherGenderList.add(convertToDoubles(om.getGenderOtherNum(), om.getGenderOtherDen()));
+                    try {
+                        //add to gender list
+                        femaleList.add("Female");
+                        femaleList.add(convertToDoubles(om.getGenderFemaleNum(), om.getGenderFemaleDen()));
+
+                        maleList.add("Male");
+                        maleList.add(convertToDoubles(om.getGenderMaleNum(), om.getGenderMaleDen()));
+
+                        otherGenderList.add("Other");
+                        otherGenderList.add(convertToDoubles(om.getGenderOtherNum(), om.getGenderOtherDen()));
+
+                        //add arrays to genderData double Array
+                        List<List<Object>> gList = new ArrayList<>();
+                        gList.add(femaleList);
+                        gList.add(maleList);
+                        gList.add(otherGenderList);
+                        //set gender data on dto
+                        ahdDTO.setGenderData(gList);
+                    } catch (Exception e) {
+                        List<List<Object>> rdList = new ArrayList<>();
+                        List<Object> errorList = new ArrayList<>();
+                        errorList.add(false);
+                        rdList.add(errorList);
+                        ahdDTO.setGenderData(rdList);
+
+                    }
+
 
                     //add arrays to genderData double Array
                     List<List<Object>> gList = new ArrayList<>();
@@ -204,25 +230,11 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
                     gList.add(otherGenderList);
                     //set gender data on dto
                     ahdDTO.setGenderData(gList);
-                } catch (Exception e) {
-                    List<List<Object>> rdList = new ArrayList<>();
-                    List<Object> errorList = new ArrayList<>();
-                    errorList.add(false);
-                    rdList.add(errorList);
-                    ahdDTO.setGenderData(rdList);
 
+                    retLst.add(ahdDTO);
+                } else {
+                    throw new Exception ("No organizations for that org id");
                 }
-
-
-                //add arrays to genderData double Array
-                List<List<Object>> gList = new ArrayList<>();
-                gList.add(femaleList);
-                gList.add(maleList);
-                gList.add(otherGenderList);
-                //set gender data on dto
-                ahdDTO.setGenderData(gList);
-
-                retLst.add(ahdDTO);
 
             }
 
