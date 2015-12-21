@@ -5,11 +5,16 @@ import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActi
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
+import com.smcpartners.shape.shared.dto.common.UsecaseRequest;
+import com.smcpartners.shape.shared.dto.common.UsecaseResponse;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.dto.shape.request.PasswordUpdateRequestDTO;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 import com.smcpartners.shape.shared.utils.SecurityUtils;
+import com.smcpartners.shape.shared.utils.UCHelpers;
+import com.smcpartners.shape.usecases.activate_organization.ActivateOrganizationUsecaseAdapter;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -17,10 +22,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by bhokanson on 11/30/2015.
+ * Responsible:<br/>
+ * 1. Adapter for framework services
+ * <p>
+ * Created by jjdestef3 on 12/21/15.
+ * <p>
+ * Changes:<b/>
  */
 @RequestScoped
-public class ResetPasswordServiceAdapter implements ResetPasswordService {
+public class ResetPasswordServiceAdapter implements ResetPasswordService, ResetPasswordUCAdapter {
 
     @Inject
     private Logger log;
@@ -31,48 +41,62 @@ public class ResetPasswordServiceAdapter implements ResetPasswordService {
     @Inject
     private RequestScopedUserId requestScopedUserId;
 
+    private ResetPasswordUC resetPasswordUC;
+
 
     public ResetPasswordServiceAdapter() {
+    }
+
+    @PostConstruct
+    protected void postConstruct() {
+        this.resetPasswordUC = new ResetPasswordUC(this);
     }
 
     @Override
     @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.REGISTERED, SecurityRoleEnum.ORG_ADMIN})
     public BooleanValueDTO resetPassword(PasswordUpdateRequestDTO userReq) throws UseCaseException {
         try {
-            String userId = userReq.getUserId();
-            String password = userReq.getPassword();
-            String question = userReq.getQuestion();
-            String answer = userReq.getAnswer();
-
-            // Look up user
-            UserDTO user = userDAO.findById(userId);
-
-            // Check password for compliance
-            boolean validPassword = SecurityUtils.checkPasswordCompliance(password);
-            if (!validPassword) {
-                throw new Exception("Password is not valid.");
-            }
-
-            // Find matching question and check answer
-            if (question.equalsIgnoreCase(user.getQuestionOne())) {
-                if (!answer.equalsIgnoreCase(user.getAnswerOne())) {
-                    throw new Exception("Answer not valid.");
-                }
-            } else if (question.equalsIgnoreCase(user.getQuestionTwo())) {
-                if (!answer.equalsIgnoreCase(user.getAnswerTwo())) {
-                    throw new Exception("Answer not valid.");
-                }
-            } else {
-                throw new Exception("Question is not valid");
-            }
-
-            // Update user
-            userDAO.forcePasswordChange(userId, password);
-
-            // Return value
-            return new BooleanValueDTO(true);
+            // Request needs the organization id
+            UsecaseRequest request = UCHelpers.createRequest(
+                    UCHelpers.makeStringArray(ResetPasswordUCAdapter.USER_REQUEST), userReq);
+            UsecaseResponse resp = this.resetPasswordUC.processRequest(request);
+            return UCHelpers.processResponse(resp, BooleanValueDTO.class);
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "resetPassword", e.getMessage(), e);
+            throw new UseCaseException(e.getMessage());
+        }
+    }
+
+    /**
+     * Rest the users password
+     *
+     * @param userId
+     * @param newPassword
+     * @throws Exception
+     */
+    @Override
+    public void resetPassword(String userId, String newPassword) throws Exception {
+        try {
+            userDAO.forcePasswordChange(userId, newPassword);
+        } catch (Exception e) {
+            log.logp(Level.SEVERE, this.getClass().getName(), "resetPassword", e.getMessage(), e);
+            throw new UseCaseException(e.getMessage());
+        }
+    }
+
+    /**
+     * Get the user record for the given id
+     *
+     * @param userId
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public UserDTO getUserData(String userId) throws Exception {
+        try {
+            return userDAO.findById(userId);
+        } catch (Exception e) {
+            log.logp(Level.SEVERE, this.getClass().getName(), "getUserData", e.getMessage(), e);
             throw new UseCaseException(e.getMessage());
         }
     }
