@@ -17,6 +17,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.PathParam;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -255,6 +256,8 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
         if (Double.isNaN(sum)){
             sum = 0.00;
         }
+        String df = new DecimalFormat("#.##").format(sum);
+        sum = Double.parseDouble(df);
         return sum;
     }
 
