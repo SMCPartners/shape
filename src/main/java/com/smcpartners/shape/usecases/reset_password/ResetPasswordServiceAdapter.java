@@ -22,7 +22,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by bhokanson on 11/30/2015.
+ * Responsible:<br/>
+ * 1. Adapter for framework services
+ * <p>
+ * Created by jjdestef3 on 12/21/15.
+ * <p>
+ * Changes:<b/>
  */
 @RequestScoped
 public class ResetPasswordServiceAdapter implements ResetPasswordService, ResetPasswordUCAdapter {
@@ -62,16 +67,13 @@ public class ResetPasswordServiceAdapter implements ResetPasswordService, ResetP
         }
     }
 
-    @Override
-    public PasswordUpdateRequestDTO getUserRequest() throws Exception {
-        try {
-            return null;
-        } catch (Exception e) {
-            log.logp(Level.SEVERE, this.getClass().getName(), "getUserRequest", e.getMessage(), e);
-            throw new UseCaseException(e.getMessage());
-        }
-    }
-
+    /**
+     * Rest the users password
+     *
+     * @param userId
+     * @param newPassword
+     * @throws Exception
+     */
     @Override
     public void resetPassword(String userId, String newPassword) throws Exception {
         try {
@@ -82,6 +84,13 @@ public class ResetPasswordServiceAdapter implements ResetPasswordService, ResetP
         }
     }
 
+    /**
+     * Get the user record for the given id
+     *
+     * @param userId
+     * @return
+     * @throws Exception
+     */
     @Override
     public UserDTO getUserData(String userId) throws Exception {
         try {

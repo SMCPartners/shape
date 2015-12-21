@@ -20,14 +20,6 @@ public interface ResetPasswordUCAdapter extends FrameworkUsecaseAdapter {
     public static final String USER_REQUEST = "user_request";
 
     /**
-     * Get the user request
-     *
-     * @return
-     * @throws Exception
-     */
-    PasswordUpdateRequestDTO getUserRequest() throws Exception;
-
-    /**
      * Reset the user password to the new one
      *
      * @param userId

@@ -12,7 +12,11 @@ import com.smcpartners.shape.shared.utils.UCHelpers;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Processes a request to reset a users password</br>
+ * - Checks the new password for validity</br>
+ * - Checks that the question submitted matches the answer on file</br>
+ * - Update the password</br>
+ *
  * <p>
  * Created by johndestefano on 12/21/15.
  * <p>
