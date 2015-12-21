@@ -232,14 +232,14 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
                     ahdDTO.setGenderData(gList);
 
                     retLst.add(ahdDTO);
-                } else {
-                    throw new Exception ("No organizations for that org id");
                 }
-
             }
 
-
-            return retLst;
+            if (retLst != null) {
+                return retLst;
+            } else {
+                throw new Exception ("No matching organizations");
+            }
 
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "showAppHistDemographic", e.getMessage(), e);
