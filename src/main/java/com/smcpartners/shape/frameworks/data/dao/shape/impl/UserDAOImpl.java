@@ -152,6 +152,28 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
     }
 
     @Override
+    public void forcePasswordChange(String userId, String newPassword) throws DataAccessException {
+        try {
+            UserEntity ue = em.find(UserEntity.class, userId);
+            if (ue != null) {
+
+                // Get the salt and digest
+                SaltedPassword sp = SecurityUtils.genSaltedPasswordAndSalt(newPassword);
+
+                // Update and save
+                ue.setPasswordSalt(sp.getSalt());
+                ue.setPasswordDigest(sp.getPwdDigest());
+                ue = em.merge(ue);
+            } else {
+                throw new DataAccessException("User does not exist!");
+            }
+        } catch (Exception e) {
+            log.logp(Level.SEVERE, this.getClass().getName(), "forcePasswordChane", e.getMessage(), e);
+            throw new DataAccessException(e);
+        }
+    }
+
+    @Override
     public BooleanValueDTO checkUserId(String userId) throws DataAccessException {
         try {
             UserEntity ue = em.find(UserEntity.class, userId);

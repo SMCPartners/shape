@@ -50,6 +50,15 @@ public interface UserDAO extends CrudDAO<UserDTO, String> {
     UserDTO changePassword(String userId, String oldpassword, String newpassword) throws DataAccessException;
 
     /**
+     * Changes the users password to the given new password
+     *
+     * @param userId
+     * @param newPassword
+     * @throws DataAccessException
+     */
+    void forcePasswordChange(String userId, String newPassword) throws DataAccessException;
+
+    /**
      * Find all users
      *
      * @return
