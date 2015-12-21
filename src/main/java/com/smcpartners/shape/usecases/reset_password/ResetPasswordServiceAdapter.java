@@ -53,7 +53,7 @@ public class ResetPasswordServiceAdapter implements ResetPasswordService, ResetP
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.REGISTERED, SecurityRoleEnum.ORG_ADMIN})
+   // @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.REGISTERED, SecurityRoleEnum.ORG_ADMIN})
     public BooleanValueDTO resetPassword(PasswordUpdateRequestDTO userReq) throws UseCaseException {
         try {
             // Request needs the organization id
