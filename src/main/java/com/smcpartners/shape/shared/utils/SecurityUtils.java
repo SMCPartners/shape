@@ -169,6 +169,10 @@ public class SecurityUtils {
             // Test that it works
             boolean valid = validatePassword(pwd, sPwd.getPwdDigest(), sPwd.getSalt(), false);
             System.out.println("Password check Ok: " + valid);
+
+            // Test pwd
+            String password = "Q1w2e3r4!";
+            System.out.println(checkPasswordCompliance(password));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -16,7 +16,7 @@ import com.smcpartners.shape.shared.utils.UCHelpers;
  * - Checks the new password for validity</br>
  * - Checks that the question submitted matches the answer on file</br>
  * - Update the password</br>
- *
+ * <p>
  * <p>
  * Created by johndestefano on 12/21/15.
  * <p>
@@ -47,28 +47,29 @@ public class ResetPasswordUC extends AbstractUsecase<ResetPasswordUCAdapter> {
             boolean validPassword = SecurityUtils.checkPasswordCompliance(password);
             if (!validPassword) {
                 UCHelpers.setErrorResponse(response, "Password not valid");
+                return response;
             }
 
             // Find matching question and check answer
             if (question.equalsIgnoreCase(user.getQuestionOne())) {
                 if (!answer.equalsIgnoreCase(user.getAnswerOne())) {
                     UCHelpers.setErrorResponse(response, "Answer not valid.");
+                    return response;
                 }
             } else if (question.equalsIgnoreCase(user.getQuestionTwo())) {
                 if (!answer.equalsIgnoreCase(user.getAnswerTwo())) {
                     UCHelpers.setErrorResponse(response, "Answer not valid.");
+                    return response;
                 }
             } else {
                 UCHelpers.setErrorResponse(response, "Question not valid.");
+                return response;
             }
 
-            // Update user
-            if (!response.isErr()) {
-                serviceAdapter.resetPassword(userId, password);
+            serviceAdapter.resetPassword(userId, password);
 
-                // Return value
-                UCHelpers.setPositiveResponse(response, new BooleanValueDTO(true));
-            }
+            // Return value
+            UCHelpers.setPositiveResponse(response, new BooleanValueDTO(true));
 
         } catch (Exception e) {
             UCHelpers.setExceptionResponse(response, e);
