@@ -63,7 +63,7 @@ public class EditOrganizationStratificationServiceAdapter implements EditOrganiz
                     (orgId == org.getId() && (reqRole == SecurityRoleEnum.ORG_ADMIN || reqRole == SecurityRoleEnum.REGISTERED))) {
                 Date now = new Date();
                 org.setRpDate(now);
-                OrganizationStratificationDTO orgDTO = organizationStratificationDAO.update(org, orgId);
+                OrganizationStratificationDTO orgDTO = organizationStratificationDAO.update(org, org.getId());
                 return IntEntityResponseDTO.makeNew(orgDTO.getId());
             } else {
                 throw new Exception("You are not authorized to perform this function.");
