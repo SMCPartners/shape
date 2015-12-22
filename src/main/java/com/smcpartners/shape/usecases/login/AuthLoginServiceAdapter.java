@@ -58,8 +58,9 @@ public class AuthLoginServiceAdapter implements AuthLoginService, AuthLoginUseca
             // If the user is valid and active return a token
             if (ue != null) {
                 if (ue.isActive() == true) {
+                    String var = ue.isResetPwd() ? "true" : "false";
                     String token = jwtUtils.generateToken(ue.getId().toUpperCase(), ue.getRole(), true);
-                    return Response.status(Response.Status.OK).entity("{\"token\":\"" + token + "\"}").header("Authorization", "Bearer " + token).build();
+                    return Response.status(Response.Status.OK).entity("{\"token\":\"" + token + "\", \"resetRequired\":" + var + "}").header("Authorization", "Bearer " + token).build();
                 } else {
                     throw new InactiveUserException("Inactive user.");
                 }

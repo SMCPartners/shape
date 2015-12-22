@@ -1,5 +1,8 @@
 package com.smcpartners.shape.usecases.reset_password;
 
+import com.smcpartners.shape.crosscutting.email.MailDTO;
+import com.smcpartners.shape.crosscutting.email.SendMailService;
+import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.common.UsecaseRequest;
 import com.smcpartners.shape.shared.dto.common.UsecaseResponse;
@@ -7,8 +10,12 @@ import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.dto.shape.request.PasswordUpdateRequestDTO;
 import com.smcpartners.shape.shared.usecasecommon.AbstractUsecase;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
+import com.smcpartners.shape.shared.utils.RandomPasswordGenerator;
 import com.smcpartners.shape.shared.utils.SecurityUtils;
 import com.smcpartners.shape.shared.utils.UCHelpers;
+
+import javax.ejb.EJB;
+import java.util.Random;
 
 /**
  * Responsible:<br/>
@@ -27,6 +34,13 @@ public class ResetPasswordUC extends AbstractUsecase<ResetPasswordUCAdapter> {
     public ResetPasswordUC(ResetPasswordUCAdapter serviceAdapter) {
         super(serviceAdapter);
     }
+
+    @EJB
+    private UserDAO userDAO;
+
+    @EJB
+    private SendMailService sms;
+
 
     @Override
     public UsecaseResponse processRequest(UsecaseRequest request) throws UseCaseException {
@@ -67,6 +81,17 @@ public class ResetPasswordUC extends AbstractUsecase<ResetPasswordUCAdapter> {
             }
 
             serviceAdapter.resetPassword(userId, password);
+
+            String newPassword = RandomPasswordGenerator.generateApplicationDefaultPwd();
+            userDAO.changePassword(userId, password, newPassword);
+            userDAO.resetPasswordToggle(userId, false);
+            MailDTO mail = new MailDTO();
+            mail.setToEmail(user.getEmail());
+            mail.setSubject("Your password has been reset");
+            mail.setMessage("Your password has been reset and changed to the temporary password: + " + newPassword + "/n" +
+            "Please log in using your temporary password. You will be prompted to change this password after a successful login");
+            sms.sendEmailMsg(mail);
+
 
             // Return value
             UCHelpers.setPositiveResponse(response, new BooleanValueDTO(true));
