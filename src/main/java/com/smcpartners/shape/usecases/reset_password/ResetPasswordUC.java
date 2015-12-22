@@ -15,6 +15,7 @@ import com.smcpartners.shape.shared.utils.SecurityUtils;
 import com.smcpartners.shape.shared.utils.UCHelpers;
 
 import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import java.util.Random;
 
 /**
@@ -29,17 +30,12 @@ import java.util.Random;
  * <p>
  * Changes:<b/>
  */
+
 public class ResetPasswordUC extends AbstractUsecase<ResetPasswordUCAdapter> {
 
     public ResetPasswordUC(ResetPasswordUCAdapter serviceAdapter) {
         super(serviceAdapter);
     }
-
-    @EJB
-    private UserDAO userDAO;
-
-    @EJB
-    private SendMailService sms;
 
 
     @Override
@@ -80,17 +76,8 @@ public class ResetPasswordUC extends AbstractUsecase<ResetPasswordUCAdapter> {
                 return response;
             }
 
-            serviceAdapter.resetPassword(userId, password);
-
             String newPassword = RandomPasswordGenerator.generateApplicationDefaultPwd();
-            userDAO.changePassword(userId, password, newPassword);
-            userDAO.resetPasswordToggle(userId, false);
-            MailDTO mail = new MailDTO();
-            mail.setToEmail(user.getEmail());
-            mail.setSubject("Your password has been reset");
-            mail.setMessage("Your password has been reset and changed to the temporary password: + " + newPassword + "/n" +
-            "Please log in using your temporary password. You will be prompted to change this password after a successful login");
-            sms.sendEmailMsg(mail);
+            serviceAdapter.resetPassword(userId, newPassword);
 
 
             // Return value
