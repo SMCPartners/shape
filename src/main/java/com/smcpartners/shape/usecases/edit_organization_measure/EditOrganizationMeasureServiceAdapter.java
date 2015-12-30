@@ -44,7 +44,7 @@ public class EditOrganizationMeasureServiceAdapter implements EditOrganizationMe
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public BooleanValueDTO editOrganizationMeasure(OrganizationMeasureDTO org) throws UseCaseException {
         try {
             // Only ADMIN or ORG_ADMIN can edit organization measures
@@ -52,7 +52,7 @@ public class EditOrganizationMeasureServiceAdapter implements EditOrganizationMe
             UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
             SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
             if (reqRole == SecurityRoleEnum.ADMIN ||
-                    (reqRole == SecurityRoleEnum.ORG_ADMIN && reqUser.getOrganizationId() == org.getId())) {
+                    reqRole == SecurityRoleEnum.ORG_ADMIN || reqRole == SecurityRoleEnum.REGISTERED) {
                 organizationMeasureDAO.update(org, org.getId());
             } else {
                 throw new Exception("You are not authorized to perform this function.");

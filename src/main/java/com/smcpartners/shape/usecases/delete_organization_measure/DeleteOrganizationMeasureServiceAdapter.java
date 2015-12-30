@@ -47,7 +47,7 @@ public class DeleteOrganizationMeasureServiceAdapter implements DeleteOrganizati
             UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
             SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
             if (reqRole == SecurityRoleEnum.ADMIN ||
-                    (reqRole == SecurityRoleEnum.ORG_ADMIN && reqUser.getOrganizationId() == org.getId())) {
+                    reqRole == SecurityRoleEnum.ORG_ADMIN) {
                 organizationMeasureDAO.delete(org.getId());
             } else {
                 throw new Exception("You are not authorized to perform this function.");

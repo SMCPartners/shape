@@ -44,13 +44,14 @@ public class AddProviderServiceAdapter implements AddProviderService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN})
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
     public IntEntityResponseDTO addProvider(ProviderDTO prov) throws UseCaseException {
         try {
             // Only ADMIN can add organizations
             UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
 
-            if (SecurityRoleEnum.valueOf(reqUser.getRole()) == SecurityRoleEnum.ADMIN) {
+            if (SecurityRoleEnum.valueOf(reqUser.getRole()) == SecurityRoleEnum.ADMIN ||
+                   SecurityRoleEnum.valueOf(reqUser.getRole()) == SecurityRoleEnum.ORG_ADMIN) {
                 ProviderDTO provDTO = providerDAO.create(prov);
                 return IntEntityResponseDTO.makeNew(provDTO.getId());
             } else {

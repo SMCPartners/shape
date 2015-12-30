@@ -35,13 +35,13 @@ public class EditUserServiceAdapter implements EditUserService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN})
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
     public BooleanValueDTO editUser(UserDTO user) throws UseCaseException {
         try {
             // Only ADMIN can edit user
             UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
             SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
-            if (reqRole == SecurityRoleEnum.ADMIN) {
+            if (reqRole == SecurityRoleEnum.ADMIN || reqRole == SecurityRoleEnum.ORG_ADMIN) {
                 userDAO.update(user, user.getId());
             } else {
                 throw new Exception("You are not authorized to perform this function.");

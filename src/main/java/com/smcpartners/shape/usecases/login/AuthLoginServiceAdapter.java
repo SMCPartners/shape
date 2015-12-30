@@ -57,12 +57,11 @@ public class AuthLoginServiceAdapter implements AuthLoginService, AuthLoginUseca
         try {
             UserDTO ue = this.getUser(loginRequest.getUserId(), loginRequest.getPassword());
 
-            boolean isGenPwd = userDAO.isGeneratedPwd(ue.getId());
-            boolean isExpired = userDAO.isExpired(ue.getId());
-
 
             // If the user is valid and active return a token
             if (ue != null) {
+                boolean isGenPwd = userDAO.isGeneratedPwd(ue.getId());
+                boolean isExpired = userDAO.isExpired(ue.getId());
                 if (ue.isActive()) {
                     if (isGenPwd && isExpired) {
                         throw new Exception ("Password has expired, please use Forgot Password to generate a new one");

@@ -44,17 +44,10 @@ public class EditMeasureServiceAdapter implements EditMeasureService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN})
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public BooleanValueDTO editMeasure(MeasureDTO org) throws UseCaseException {
         try {
-            // Only ADMIN can edit measure
-            UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
-            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
-            if (reqRole == SecurityRoleEnum.ADMIN) {
-                measureDAO.update(org, org.getId());
-            } else {
-                throw new Exception("You are not authorized to perform this function.");
-            }
+            measureDAO.update(org, org.getId());
 
             // Return value
             return new BooleanValueDTO(true);

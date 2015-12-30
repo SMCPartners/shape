@@ -45,7 +45,7 @@ public class FindUserByIdServiceAdapter implements FindUserByIdService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public UserDTO findUser(String targetUserId) throws UseCaseException {
         try {
             // The ADMIN can see anyone

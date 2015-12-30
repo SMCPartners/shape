@@ -44,13 +44,13 @@ public class ActivateProviderServiceAdapter implements ActivateProviderService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN})
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
     public BooleanValueDTO activateProvider(IntEntityIdRequestDTO id) throws UseCaseException {
         try {
             // Only ADMIN can activate an organization
             UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
             SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
-            if (reqRole == SecurityRoleEnum.ADMIN) {
+            if (reqRole == SecurityRoleEnum.ADMIN || reqRole == SecurityRoleEnum.ORG_ADMIN) {
                 providerDAO.changeProviderActiveStatus(id.getEntId(), true);
             } else {
                 throw new Exception("You are not authorized to perform this function.");

@@ -44,18 +44,12 @@ public class AddMeasureServiceAdapter implements AddMeasureService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN})
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public IntEntityResponseDTO addMeasure(MeasureDTO org) throws UseCaseException {
         try {
-            // Only ADMIN can add measure for any organization
-            UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
+            MeasureDTO orgDTO = measureDAO.create(org);
+            return IntEntityResponseDTO.makeNew(orgDTO.getId());
 
-            if (SecurityRoleEnum.valueOf(reqUser.getRole()) == SecurityRoleEnum.ADMIN) {
-                MeasureDTO orgDTO = measureDAO.create(org);
-                return IntEntityResponseDTO.makeNew(orgDTO.getId());
-            } else {
-                throw new Exception("You are not authorized to perform this function.");
-            }
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "addMeasure", e.getMessage(), e);
             throw new UseCaseException(e.getMessage());

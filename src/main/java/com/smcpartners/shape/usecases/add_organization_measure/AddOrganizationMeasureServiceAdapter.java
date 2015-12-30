@@ -60,7 +60,7 @@ public class AddOrganizationMeasureServiceAdapter implements AddOrganizationMeas
             SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
 
             if (reqRole == SecurityRoleEnum.ADMIN ||
-                    (orgId == org.getId() && (reqRole == SecurityRoleEnum.ORG_ADMIN || reqRole == SecurityRoleEnum.REGISTERED))) {
+                    ((reqRole == SecurityRoleEnum.ORG_ADMIN || reqRole == SecurityRoleEnum.REGISTERED))) {
                 Date now = new Date();
                 org.setRpDate(now);
                 OrganizationMeasureDTO orgDTO = organizationMeasureDAO.create(org);

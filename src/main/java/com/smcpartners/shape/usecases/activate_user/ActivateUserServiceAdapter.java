@@ -73,7 +73,7 @@ public class ActivateUserServiceAdapter implements ActivateUserService, Activate
             // If its ORG_ADMIN find the requesting users organization
             // Make sure the requesting users organization matches the target users organization
             // Make the change
-            if (reqUserRoleEnum == SecurityRoleEnum.ADMIN) {
+            if (reqUserRoleEnum == SecurityRoleEnum.ADMIN || reqUserRoleEnum == SecurityRoleEnum.ORG_ADMIN) {
                 userDAO.activateUser(targetUserId);
             } else {
                 int reqUserOrgId = reqUser.getOrganizationId();
