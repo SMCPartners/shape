@@ -51,7 +51,7 @@ public class InactivateProviderServiceAdapter implements InactivateProviderServi
             // ORG_ADMIN can inactivate org provider
             UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
             SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
-            if (reqRole == SecurityRoleEnum.ADMIN) {
+            if (reqRole == SecurityRoleEnum.ADMIN || reqRole == SecurityRoleEnum.ORG_ADMIN) {
                 providerDAO.changeProviderActiveStatus(id.getEntId(), false);
             } else {
                 throw new Exception("You are not authorized to perform this function.");
