@@ -107,6 +107,24 @@ public interface UserDAO extends CrudDAO<UserDTO, String> {
     BooleanValueDTO isActive(String userId) throws DataAccessException;
 
     /**
+     *
+     * @param userId
+     * @return
+     * @throws DataAccessException
+     */
+
+    boolean isGeneratedPwd(String userId) throws DataAccessException;
+
+    /**
+     *
+     * @param userId
+     * @return
+     * @throws DataAccessException
+     */
+
+    boolean isExpired(String userId) throws DataAccessException;
+
+    /**
      * Sets the rest password flag on the user account
      *
      *

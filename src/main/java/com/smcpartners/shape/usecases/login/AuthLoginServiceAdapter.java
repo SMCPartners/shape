@@ -2,7 +2,9 @@ package com.smcpartners.shape.usecases.login;
 
 import com.smcpartners.shape.crosscutting.security.exceptions.InactiveUserException;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
+import com.smcpartners.shape.frameworks.data.entitymodel.shape.UserEntity;
 import com.smcpartners.shape.gateway.rest.mappedexceptions.ErrorMessagesEnum;
+import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.common.ErrorMsgResponse;
 import com.smcpartners.shape.shared.dto.shape.request.LoginRequestDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
@@ -55,14 +57,21 @@ public class AuthLoginServiceAdapter implements AuthLoginService, AuthLoginUseca
         try {
             UserDTO ue = this.getUser(loginRequest.getUserId(), loginRequest.getPassword());
 
+            boolean isGenPwd = userDAO.isGeneratedPwd(ue.getId());
+            boolean isExpired = userDAO.isExpired(ue.getId());
+
+
             // If the user is valid and active return a token
             if (ue != null) {
-                if (ue.isActive() == true) {
+                if (ue.isActive()) {
+                    if (isGenPwd && isExpired) {
+                        throw new Exception ("Password has expired, please use Forgot Password to generate a new one");
+                    }
                     String var = ue.isResetPwd() ? "true" : "false";
                     String token = jwtUtils.generateToken(ue.getId().toUpperCase(), ue.getRole(), true);
                     return Response.status(Response.Status.OK).entity("{\"token\":\"" + token + "\", \"resetRequired\":"
                             + var + "}").header("Authorization", "Bearer " + token).build();
-                } else {
+                }else{
                     throw new InactiveUserException("Inactive user.");
                 }
             } else {

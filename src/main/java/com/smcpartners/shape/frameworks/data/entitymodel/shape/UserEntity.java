@@ -41,6 +41,8 @@ public class UserEntity {
     private String passwordDigest;
     private boolean active;
     private boolean resetPwd;
+    private boolean generatedPwd;
+    private Date generatedPwdDt;
     private String questionOne;
     private String questionTwo;
     private String answerOne;
@@ -97,6 +99,28 @@ public class UserEntity {
     public void setResetPwd(boolean resetPwd) {
         this.resetPwd = resetPwd;
     }
+
+    @Basic
+    @Column(name = "generatedPwd", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isGeneratedPwd() {
+        return generatedPwd;
+    }
+
+    public void setGeneratedPwd(boolean generatedPwd) {
+        this.generatedPwd = generatedPwd;
+    }
+
+    @Basic
+    @Column(name = "generatedPwdDt", nullable = false, insertable = true, updatable = true)
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date getGeneratedPwdDt() {
+        return generatedPwdDt;
+    }
+
+    public void setGeneratedPwdDt(Date generatedPwdDt) {
+        this.generatedPwdDt = generatedPwdDt;
+    }
+
 
     @Basic
     @Column(name = "passwordSalt", nullable = false, insertable = true, updatable = true, length = 100)

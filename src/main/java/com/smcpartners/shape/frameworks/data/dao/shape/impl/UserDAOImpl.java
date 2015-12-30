@@ -393,6 +393,40 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
         }
     }
 
+    @Override
+    public boolean isGeneratedPwd(String userId) throws DataAccessException {
+        try {
+            UserEntity ue = em.find(UserEntity.class, userId);
+
+            if (ue != null && ue.isGeneratedPwd()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            log.logp(Level.SEVERE, this.getClass().getName(), "isGeneratedPwd", e.getMessage(), e);
+            throw new DataAccessException(e);
+        }
+    }
+
+    public boolean isExpired(String userId) throws DataAccessException {
+        try {
+            UserEntity ue = em.find(UserEntity.class, userId);
+
+            Date now = new Date();
+            long nowTime = now.getTime();
+            long generatedTime = ue.getGeneratedPwdDt().getTime();
+            long sum = nowTime - generatedTime;
+            boolean expired = (sum > 86400000);
+
+            if (ue != null && expired) return true;
+            else return false;
+
+        } catch (Exception e) {
+            log.logp(Level.SEVERE, this.getClass().getName(), "isExpired", e.getMessage(), e);
+            throw new DataAccessException(e);
+        }
+    }
     /**
      * Not used in this implementation
      *
