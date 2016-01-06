@@ -63,8 +63,8 @@ public class ShowListViewServiceAdapter implements ShowListViewService {
             String day = "Day";
             String pieHole = ".6";
             String pieSliceText = "none";
-            String wellControlled = "Well Controlled";
-            String poorlyControlled = "Poorly Controlled";
+            String numerator = "Numerator";
+            String remOfPatients = "Remainder of Patients";
 
             //get the org measures that match the orgId, put them in a list
             List<OrganizationMeasureDTO> orgMList = orgMDAO.findAllOrganizationMeasureByOrgId(orgId);
@@ -93,18 +93,13 @@ public class ShowListViewServiceAdapter implements ShowListViewService {
                     dateList.add(month);
                     dateList.add(day);
 
-                    //set boolean for if is well controlled measure
-                    boolean wc = mdto.isWellControlledNumerator();
-
                     //add the well controlled array list data
-                    wcList.add(wellControlled);
-                    if (wc) wcList.add(om.getNumeratorValue());
-                    else wcList.add(om.getDenominatorValue() - om.getNumeratorValue());
+                    wcList.add(numerator);
+                    wcList.add(om.getNumeratorValue());
 
                     //add the poorly controlled array list data
-                    pcList.add(poorlyControlled);
-                    if (wc) pcList.add(om.getDenominatorValue() - om.getNumeratorValue());
-                    else pcList.add(om.getNumeratorValue());
+                    pcList.add(remOfPatients);
+                    pcList.add(om.getDenominatorValue() - om.getNumeratorValue());
 
                     //add all to an embedded ArrayList for formatting
                     List<List<Object>> newList = new ArrayList<>();
