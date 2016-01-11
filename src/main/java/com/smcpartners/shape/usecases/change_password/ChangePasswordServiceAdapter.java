@@ -49,8 +49,10 @@ public class ChangePasswordServiceAdapter implements ChangePasswordService {
                 if (validPassword) {
                     dao.changePassword(userId, userPwd, newPwd);
                     dao.resetPasswordToggle(userId, false);
-                    dao.addUserSecurityQuestions(userId, user.getQuestionOne(),
-                            user.getQuestionTwo(), user.getAnswerOne(), user.getAnswerTwo());
+                    if (user.getQuestionOne() != null && user.getQuestionTwo() != null) {
+                        dao.addUserSecurityQuestions(userId, user.getQuestionOne(),
+                                user.getQuestionTwo(), user.getAnswerOne(), user.getAnswerTwo());
+                    }
                 }else{
                     throw new UseCaseException("Did not meet regex");
                 }

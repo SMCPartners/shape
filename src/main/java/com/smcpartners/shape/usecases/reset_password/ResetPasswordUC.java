@@ -46,33 +46,31 @@ public class ResetPasswordUC extends AbstractUsecase<ResetPasswordUCAdapter> {
             PasswordUpdateRequestDTO userReq = UCHelpers.getValue(request,
                     ResetPasswordUCAdapter.USER_REQUEST, PasswordUpdateRequestDTO.class);
             String userId = userReq.getUserId();
-            String password = userReq.getPassword();
             String question = userReq.getQuestion();
             String answer = userReq.getAnswer();
+            UserDTO user = new UserDTO();
+            String errorMsg = "Fields are not filled out or entered incorrectly";
 
-            // Get user data
-            UserDTO user = serviceAdapter.getUserData(userId);
-
-            // Check password for compliance
-            boolean validPassword = SecurityUtils.checkPasswordCompliance(password);
-            if (!validPassword) {
-                UCHelpers.setErrorResponse(response, "Password not valid");
-                return response;
+            if (!userId.equals("")) {
+                user = serviceAdapter.getUserData(userId);
+            } else {
+                UCHelpers.setErrorResponse(response, errorMsg);
             }
+            // Get user data
 
             // Find matching question and check answer
             if (question.equalsIgnoreCase(user.getQuestionOne())) {
                 if (!answer.equalsIgnoreCase(user.getAnswerOne())) {
-                    UCHelpers.setErrorResponse(response, "Answer not valid.");
+                    UCHelpers.setErrorResponse(response, errorMsg);
                     return response;
                 }
             } else if (question.equalsIgnoreCase(user.getQuestionTwo())) {
                 if (!answer.equalsIgnoreCase(user.getAnswerTwo())) {
-                    UCHelpers.setErrorResponse(response, "Answer not valid.");
+                    UCHelpers.setErrorResponse(response, errorMsg);
                     return response;
                 }
             } else {
-                UCHelpers.setErrorResponse(response, "Question not valid.");
+                UCHelpers.setErrorResponse(response, errorMsg);
                 return response;
             }
 

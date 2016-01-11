@@ -99,18 +99,18 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
 
                     try {
                         //add to the race lists
-                        africanAmericanList.add("African American");
+                        africanAmericanList.add("African American/Black");
                         africanAmericanList.add(convertToDoubles(om.getRaceAfricanAmericanNum(),
                                 om.getRaceAfricanAmericanDen()));
 
-                        nativeAmericanList.add("Native American");
+                        nativeAmericanList.add("American Indian or Alaskan Native");
                         nativeAmericanList.add(convertToDoubles(om.getRaceAmericanIndianNum(),
                                 om.getRaceAmericanIndianDen()));
 
                         asianList.add("Asian");
                         asianList.add(convertToDoubles(om.getRaceAsianNum(), om.getRaceAsianDen()));
 
-                        nativeHawaiianList.add("Native Hawaiian");
+                        nativeHawaiianList.add("Native Hawaiian or Pacific Islander");
                         nativeHawaiianList.add(convertToDoubles(om.getRaceNativeHawaiianNum(),
                                 om.getRaceNativeHawaiianDen()));
 
@@ -173,12 +173,12 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
 
                     try {
                         //add to ethnicity data lists
-                        hispanicList.add("Hispanic");
+                        hispanicList.add("Hispanic/Latino");
                         hispanicList.add(convertToDoubles(om.getEthnicityHispanicLatinoNum(),
                                 om.getEthnicityHispanicLatinoDen()));
 
 
-                        notHispanicList.add("Not Hispanic");
+                        notHispanicList.add("Not Hispanic/Latino");
                         notHispanicList.add(convertToDoubles(om.getEthnicityNotHispanicLatinoNum(),
                                 om.getEthnicityNotHispanicLatinoDen()));
 
