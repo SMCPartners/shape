@@ -1,5 +1,7 @@
 package com.smcpartners.shape.usecases.create_user_account;
 
+import com.smcpartners.shape.crosscutting.email.MailDTO;
+import com.smcpartners.shape.crosscutting.email.SendMailService;
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
@@ -37,6 +39,9 @@ public class AuthCreateUserAccountServiceAdapter implements AuthCreateUserAccoun
 
     @Inject
     private RequestScopedUserId requestScopedUserId;
+
+    @EJB
+    private SendMailService sms;
 
 
     public AuthCreateUserAccountServiceAdapter() {
@@ -92,6 +97,15 @@ public class AuthCreateUserAccountServiceAdapter implements AuthCreateUserAccoun
                 nDTO.setId(dto.getId());
                 nDTO.setPassword(pWd);
                 UserDTO respDTO = userDAO.create(nDTO);
+
+
+                MailDTO mail = new MailDTO();
+                mail.setToEmail(nDTO.getEmail());
+                mail.setSubject("Welcome to SHAPE Dashboard");
+                mail.setMessage("Please use the following temporary password to log in" + pWd + "\n" +
+                        "Please log in using your temporary password. You will be prompted to change this " +
+                        "password after a successful login");
+                sms.sendEmailMsg(mail);
 
                 // Generate return
                 CreateUserResponseDTO createUserRespDTO = new CreateUserResponseDTO();
