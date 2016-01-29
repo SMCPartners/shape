@@ -102,9 +102,11 @@ public class AuthCreateUserAccountServiceAdapter implements AuthCreateUserAccoun
                 MailDTO mail = new MailDTO();
                 mail.setToEmail(nDTO.getEmail());
                 mail.setSubject("Welcome to SHAPE Dashboard");
-                mail.setMessage("Please use the following temporary password to log in" + pWd + "\n" +
+                mail.setMessage("Hello!" + "\n" + "\n" +
+                        "Welcome to the SHAPE Dashboard!" + "\n" +
                         "Please log in using your temporary password. You will be prompted to change this " +
-                        "password after a successful login");
+                        "password after a successful login." + "\n" + "\n" +
+                        "Password: " + pWd);
                 sms.sendEmailMsg(mail);
 
                 // Generate return
