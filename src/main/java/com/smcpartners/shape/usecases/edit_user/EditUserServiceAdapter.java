@@ -41,7 +41,12 @@ public class EditUserServiceAdapter implements EditUserService {
             // Only ADMIN can edit user
             UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
             SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
-            if (reqRole == SecurityRoleEnum.ADMIN || reqRole == SecurityRoleEnum.ORG_ADMIN) {
+            if (reqRole == SecurityRoleEnum.ADMIN) {
+                userDAO.update(user, user.getId());
+            } else if (reqRole == SecurityRoleEnum.ORG_ADMIN) {
+                if (reqUser.getRole().equals("ADMIN")){
+                    throw new Exception("You cannot change a users role to be higher than yours");
+                }
                 userDAO.update(user, user.getId());
             } else {
                 throw new Exception("You are not authorized to perform this function.");

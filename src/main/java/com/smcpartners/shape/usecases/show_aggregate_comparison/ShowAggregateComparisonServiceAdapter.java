@@ -4,7 +4,9 @@ package com.smcpartners.shape.usecases.show_aggregate_comparison;
  * Created by bryanhokanson on 12/18/15.
  */
 
+import com.smcpartners.shape.frameworks.data.entitymodel.shape.UserEntity;
 import com.smcpartners.shape.shared.dto.shape.OrganizationDTO;
+import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 
@@ -66,6 +68,12 @@ public class ShowAggregateComparisonServiceAdapter implements ShowAggregateCompa
 
             List<List<Object>> retList = new ArrayList<>();
 
+            SecurityRoleEnum reqUserRole = SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole());
+
+            UserDTO user = userDAO.findById(requestScopedUserId.getRequestUserId());
+
+            OrganizationDTO orgDTO = oDAO.findById(user.getOrganizationId());
+
             List<OrganizationMeasureDTO> orgMList = orgMDAO.findOrgMeasureByMeasureIdAndYear(measureId, year);
 
             List<Object> headerList = new ArrayList<>();
@@ -85,19 +93,30 @@ public class ShowAggregateComparisonServiceAdapter implements ShowAggregateCompa
             retList.add(aggregateList);
 
 
+            if (SecurityRoleEnum.ORG_ADMIN == reqUserRole || SecurityRoleEnum.REGISTERED == reqUserRole) {
 
-            for (OrganizationMeasureDTO om: orgMList) {
-                OrganizationDTO oDTO = oDAO.findById(om.getOrganizationId());
                 List<Object> orgList = new ArrayList<>();
 
-                orgList.add(oDTO.getName());
-                orgList.add(om.getDenominatorValue());
-                orgList.add(om.getNumeratorValue());
+                orgList.add(orgDTO.getName());
+                orgList.add(orgMList.get(0).getDenominatorValue());
+                orgList.add(orgMList.get(0).getNumeratorValue());
 
                 retList.add(orgList);
 
-            }
+            } else {
 
+                for (OrganizationMeasureDTO om : orgMList) {
+                    OrganizationDTO oDTO = oDAO.findById(om.getOrganizationId());
+                    List<Object> orgList = new ArrayList<>();
+
+                    orgList.add(oDTO.getName());
+                    orgList.add(om.getDenominatorValue());
+                    orgList.add(om.getNumeratorValue());
+
+                    retList.add(orgList);
+                }
+
+            }
 
             return retList;
 

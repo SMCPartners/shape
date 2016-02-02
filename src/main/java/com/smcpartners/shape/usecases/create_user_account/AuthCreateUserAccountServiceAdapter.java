@@ -91,23 +91,29 @@ public class AuthCreateUserAccountServiceAdapter implements AuthCreateUserAccoun
                 nDTO.setActive(true);
                 nDTO.setCreateDt(new Date());
                 nDTO.setEmail(dto.getEmail());
-                nDTO.setFirstName(nDTO.getFirstName());
+                nDTO.setFirstName(dto.getFirstName());
                 nDTO.setLastName(dto.getLastName());
                 nDTO.setOrganizationId(dto.getOrganizationId());
                 nDTO.setId(dto.getId());
                 nDTO.setPassword(pWd);
-                UserDTO respDTO = userDAO.create(nDTO);
-
 
                 MailDTO mail = new MailDTO();
                 mail.setToEmail(nDTO.getEmail());
                 mail.setSubject("Welcome to SHAPE Dashboard");
-                mail.setMessage("Hello!" + "\n" + "\n" +
-                        "Welcome to the SHAPE Dashboard!" + "\n" +
-                        "Please log in using your temporary password. You will be prompted to change this " +
-                        "password after a successful login." + "\n" + "\n" +
-                        "Password: " + pWd);
+                mail.setMessage("Hello " + nDTO.getFirstName() + "," + "\n" + "\n" +
+                        "You have been added as a registered user to the eHealthConnecticut SHAPE dashboard. " +
+                        "To access the dashboard please use the following credentials:" + "\n" + "\n" +
+                        "Dashboard Website Address: https://shape.ehealthconnecticut.org" + "\n" +
+                        "Temporary Password: " + pWd + "\n" + "\n" +
+                        "You will be prompted to update your password on a successful login." + "\n" + "\n" +
+                        "If you experience issues with logging in or have any questions please contact Julia Moore" +
+                        " at jmoore@smcpartners.com." + "\n" + "\n" +
+                        "Thank you, " + "\n" + "\n" +
+                        "eHealthConnecticut");
                 sms.sendEmailMsg(mail);
+
+                UserDTO respDTO = userDAO.create(nDTO);
+
 
                 // Generate return
                 CreateUserResponseDTO createUserRespDTO = new CreateUserResponseDTO();

@@ -51,8 +51,10 @@ public class EditProviderServiceAdapter implements EditProviderService {
             // ORG_ADMIN can only edit there organization
             UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
             SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
+            ProviderDTO pDTO = providerDAO.findById(prov.getId());
+
             if (reqRole == SecurityRoleEnum.ADMIN ||
-                    (reqRole == SecurityRoleEnum.ORG_ADMIN && reqUser.getOrganizationId() == prov.getId())) {
+                    (reqRole == SecurityRoleEnum.ORG_ADMIN && reqUser.getOrganizationId() == pDTO.getId())) {
                 providerDAO.update(prov, prov.getId());
             } else {
                 throw new Exception("You are not authorized to perform this function.");
