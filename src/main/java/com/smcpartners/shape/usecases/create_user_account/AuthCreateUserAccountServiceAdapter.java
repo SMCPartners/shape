@@ -105,7 +105,7 @@ public class AuthCreateUserAccountServiceAdapter implements AuthCreateUserAccoun
                         "To access the dashboard please use the following credentials:" + "\n" + "\n" +
                         "Dashboard Website Address: https://shape.ehealthconnecticut.org" + "\n" +
                         "Temporary Password: " + pWd + "\n" + "\n" +
-                        "You will be prompted to update your password on a successful login." + "\n" + "\n" +
+                        "You will be prompted to update your password upon login." + "\n" + "\n" +
                         "If you experience issues with logging in or have any questions please contact Julia Moore" +
                         " at jmoore@smcpartners.com." + "\n" + "\n" +
                         "Thank you, " + "\n" + "\n" +

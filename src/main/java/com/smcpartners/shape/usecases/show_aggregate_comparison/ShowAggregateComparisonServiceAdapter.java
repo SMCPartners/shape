@@ -105,19 +105,19 @@ public class ShowAggregateComparisonServiceAdapter implements ShowAggregateCompa
 
             } else {
 
-                for (OrganizationMeasureDTO om : orgMList) {
-                    OrganizationDTO oDTO = oDAO.findById(om.getOrganizationId());
-                    List<Object> orgList = new ArrayList<>();
+                if (orgMList != null) {
+                    for (OrganizationMeasureDTO om : orgMList) {
+                        OrganizationDTO oDTO = oDAO.findById(om.getOrganizationId());
+                        List<Object> orgList = new ArrayList<>();
 
-                    orgList.add(oDTO.getName());
-                    orgList.add(om.getDenominatorValue());
-                    orgList.add(om.getNumeratorValue());
+                        orgList.add(oDTO.getName());
+                        orgList.add(om.getDenominatorValue());
+                        orgList.add(om.getNumeratorValue());
 
-                    retList.add(orgList);
+                        retList.add(orgList);
+                    }
                 }
-
             }
-
             return retList;
 
         } catch (Exception e) {

@@ -49,14 +49,7 @@ public class EditOrganizationMeasureServiceAdapter implements EditOrganizationMe
         try {
             // Only ADMIN or ORG_ADMIN can edit organization measures
             // ORG_ADMIN can only edit there organization
-            UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
-            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
-            if (reqRole == SecurityRoleEnum.ADMIN ||
-                    reqRole == SecurityRoleEnum.ORG_ADMIN || reqRole == SecurityRoleEnum.REGISTERED) {
-                organizationMeasureDAO.update(org, org.getId());
-            } else {
-                throw new Exception("You are not authorized to perform this function.");
-            }
+            organizationMeasureDAO.update(org, org.getId());
 
             // Return value
             return new BooleanValueDTO(true);
