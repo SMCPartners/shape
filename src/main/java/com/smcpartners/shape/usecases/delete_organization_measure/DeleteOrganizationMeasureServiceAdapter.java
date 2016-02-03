@@ -39,14 +39,10 @@ public class DeleteOrganizationMeasureServiceAdapter implements DeleteOrganizati
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public BooleanValueDTO deleteOrganizationMeasure(OrganizationMeasureDTO org) throws UseCaseException {
         try {
-            // Only ADMIN or ORG_ADMIN can edit organization measures
-            // ORG_ADMIN can only edit there organization
                 organizationMeasureDAO.delete(org.getId());
-
-            // Return value
             return new BooleanValueDTO(true);
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "editOrganizationMeasure", e.getMessage(), e);
