@@ -49,7 +49,7 @@ public class ShowListViewServiceAdapter implements ShowListViewService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public List<ListViewDTO> showListView(@PathParam("orgId") int orgId,
                                           @PathParam("measureId") int measureId,
                                           @PathParam("year") int year) throws UseCaseException {

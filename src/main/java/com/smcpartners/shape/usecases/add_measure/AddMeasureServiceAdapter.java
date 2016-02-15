@@ -44,7 +44,8 @@ public class AddMeasureServiceAdapter implements AddMeasureService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN,
+            SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public IntEntityResponseDTO addMeasure(MeasureDTO org) throws UseCaseException {
         try {
             MeasureDTO orgDTO = measureDAO.create(org);

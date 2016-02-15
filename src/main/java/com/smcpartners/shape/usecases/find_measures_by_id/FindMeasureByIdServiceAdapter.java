@@ -43,7 +43,7 @@ public class FindMeasureByIdServiceAdapter implements FindMeasureByIdService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public List<MeasureDTO> findMeasureById(List<OrganizationMeasureDTO> orgM) throws UseCaseException {
         try {
 

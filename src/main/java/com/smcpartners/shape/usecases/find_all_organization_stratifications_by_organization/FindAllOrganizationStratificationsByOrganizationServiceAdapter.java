@@ -43,7 +43,7 @@ public class FindAllOrganizationStratificationsByOrganizationServiceAdapter impl
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public List<OrganizationStratificationDTO> findAllOrganizationStratificationsByOrg(int orgId)throws UseCaseException {
         try {
             // Admin can see all
@@ -57,7 +57,9 @@ public class FindAllOrganizationStratificationsByOrganizationServiceAdapter impl
             int userOrg = user.getOrganizationId();
 
             if (reqRole == SecurityRoleEnum.ADMIN ||
-                    (orgId == userOrg && (reqRole == SecurityRoleEnum.ORG_ADMIN || reqRole == SecurityRoleEnum.REGISTERED))) {
+                    (orgId == userOrg && (reqRole == SecurityRoleEnum.ORG_ADMIN ||
+                            reqRole == SecurityRoleEnum.REGISTERED ||
+                            reqRole == SecurityRoleEnum.DPH_USER))) {
                 return organizationStratificationDAO.findAllOrganizationStratificationByOrgId(orgId);
             } else {
                 throw new Exception("You are not authorized to perform this function.");

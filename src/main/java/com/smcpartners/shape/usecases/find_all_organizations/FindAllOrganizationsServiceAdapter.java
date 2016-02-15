@@ -44,7 +44,7 @@ public class FindAllOrganizationsServiceAdapter implements FindAllOrganizationsS
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public List<OrganizationDTO> findAllOrganizations() throws UseCaseException {
         try {
             List<OrganizationDTO> retLst = new ArrayList<>();
@@ -73,7 +73,8 @@ public class FindAllOrganizationsServiceAdapter implements FindAllOrganizationsS
                     retLst.add(dto);
 
                 });
-            } else if (SecurityRoleEnum.ORG_ADMIN == reqUserRole || SecurityRoleEnum.REGISTERED == reqUserRole){
+            } else if (SecurityRoleEnum.ORG_ADMIN == reqUserRole || SecurityRoleEnum.REGISTERED == reqUserRole ||
+                    SecurityRoleEnum.DPH_USER == reqUserRole){
                 // Find the user
                 UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
 

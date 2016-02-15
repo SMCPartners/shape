@@ -10,7 +10,7 @@ package com.smcpartners.shape.shared.constants;
  * @since May 26, 2013
  */
 public enum SecurityRoleEnum {
-    ADMIN("ADMIN", 6), ORG_ADMIN("ORG_ADMIN", 4), REGISTERED("REGISTERED", 2);
+    ADMIN("ADMIN", 8), DPH_USER("DPH_USER", 6), ORG_ADMIN("ORG_ADMIN", 4), REGISTERED("REGISTERED", 2);
 
     private String name;
     private int precedence;

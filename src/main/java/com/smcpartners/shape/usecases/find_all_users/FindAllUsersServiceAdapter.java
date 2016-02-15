@@ -49,7 +49,7 @@ public class FindAllUsersServiceAdapter implements FindAllUsersService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN})
     public List<UserDTO> findAllUser() throws UseCaseException {
         try {
             List<UserDTO> lst = null;
@@ -59,7 +59,7 @@ public class FindAllUsersServiceAdapter implements FindAllUsersService {
             // The ADMIN role can see everybody
             // The ORG_ADMIN can see others in their ORG
             // Everyone else gets nothing
-            if (reqUserRole == SecurityRoleEnum.ADMIN) {
+            if (reqUserRole == SecurityRoleEnum.ADMIN || reqUserRole == SecurityRoleEnum.DPH_USER) {
                 lst = userDAO.findAll();
             } else if (reqUserRole == SecurityRoleEnum.ORG_ADMIN) {
                 // Find the user

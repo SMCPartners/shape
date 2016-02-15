@@ -33,7 +33,7 @@ public class FindAllProvidersServiceAdapter implements FindAllProvidersService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public List<ProviderDTO> findAllProviders() throws UseCaseException {
         try {
             // Anyone can select a measure
