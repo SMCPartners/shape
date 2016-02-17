@@ -224,15 +224,6 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
 
                         }
 
-
-                        //add arrays to genderData double Array
-                        List<List<Object>> gList = new ArrayList<>();
-                        gList.add(femaleList);
-                        gList.add(maleList);
-                        gList.add(otherGenderList);
-                        //set gender data on dto
-                        ahdDTO.setGenderData(gList);
-
                         retLst.add(ahdDTO);
                     }
                 }

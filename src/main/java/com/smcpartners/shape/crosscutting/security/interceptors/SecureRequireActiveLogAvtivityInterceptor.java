@@ -91,16 +91,16 @@ public class SecureRequireActiveLogAvtivityInterceptor {
                 // If the user has the appropriate role and is logged in then proceed
                 // allowAccess = false;
                 if (allowAccess == false) {
-                    throw new Exception("User does not have dao.");
+                    throw new Exception("You do not have the appropriate role to access this");
                 }
             } else {
-                throw new Exception("User has no dao");
+                throw new Exception("You do not have the appropriate role to access this");
             }
 
             // Check for active user
             boolean isActive = (userDAO.isActive(userId)).isValue();
             if (!isActive) {
-                throw new Exception("User is not active");
+                throw new Exception("You do not have the appropriate role to access this");
             }
 
             // Log Activity
