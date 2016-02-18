@@ -92,12 +92,12 @@ public class SendMailService {
 
     private Email createEmail() throws Exception {
         Email email = new SimpleEmail();
-        email.setSmtpPort(Integer.parseInt(smtpPort));
+       // email.setSmtpPort(Integer.parseInt(smtpPort));
         email.setAuthenticator(new DefaultAuthenticator(fromAddress, fromPwd));
         email.setDebug(Boolean.parseBoolean(debugEnabled));
         email.setHostName(smtpSever);
         email.setFrom(fromAddress);
-        email.setTLS(Boolean.parseBoolean(tlsEnabled));
+       // email.setTLS(Boolean.parseBoolean(tlsEnabled));
         email.setSocketTimeout(10000);
         email.setSocketConnectionTimeout(12000);
         return email;
