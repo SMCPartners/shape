@@ -117,8 +117,6 @@ public class OrganizationMeasureDAOImpl extends AbstractCrudDAO<OrganizationMeas
         et.setAge4564Den(dto.getAge4564Den());
         et.setAgeOver65Num(dto.getAgeOver65Num());
         et.setAgeOver65Den(dto.getAgeOver65Den());
-        et.setAgeUnder17Num(dto.getAgeUnder17Num());
-        et.setAgeUnder17Den(dto.getAgeUnder17Den());
         et.setDenominatorValue(dto.getDenominatorValue());
         et.setEthnicityHispanicLatinoNum(dto.getEthnicityHispanicLatinoNum());
         et.setEthnicityHispanicLatinoDen(dto.getEthnicityHispanicLatinoDen());
@@ -128,8 +126,6 @@ public class OrganizationMeasureDAOImpl extends AbstractCrudDAO<OrganizationMeas
         et.setGenderFemaleDen(dto.getGenderFemaleDen());
         et.setGenderMaleNum(dto.getGenderMaleNum());
         et.setGenderMaleDen(dto.getGenderMaleDen());
-        et.setGenderOtherNum(dto.getGenderOtherNum());
-        et.setGenderOtherDen(dto.getGenderOtherDen());
         et.setId(dto.getId());
         et.setNumeratorValue(dto.getNumeratorValue());
         et.setRaceAfricanAmericanNum(dto.getRaceAfricanAmericanNum());
@@ -177,8 +173,6 @@ public class OrganizationMeasureDAOImpl extends AbstractCrudDAO<OrganizationMeas
         d.setAge4564Den(e.getAge4564Den());
         d.setAgeOver65Num(e.getAgeOver65Num());
         d.setAgeOver65Den(e.getAgeOver65Den());
-        d.setAgeUnder17Num(e.getAgeUnder17Num());
-        d.setAgeUnder17Den(e.getAgeUnder17Den());
         d.setDenominatorValue(e.getDenominatorValue());
         d.setEthnicityHispanicLatinoNum(e.getEthnicityHispanicLatinoNum());
         d.setEthnicityHispanicLatinoDen(e.getEthnicityHispanicLatinoDen());
@@ -188,8 +182,6 @@ public class OrganizationMeasureDAOImpl extends AbstractCrudDAO<OrganizationMeas
         d.setGenderFemaleDen(e.getGenderFemaleDen());
         d.setGenderMaleNum(e.getGenderMaleNum());
         d.setGenderMaleDen(e.getGenderMaleDen());
-        d.setGenderOtherNum(e.getGenderOtherNum());
-        d.setGenderOtherDen(e.getGenderOtherDen());
         d.setId(e.getId());
         d.setNumeratorValue(e.getNumeratorValue());
         d.setRaceAfricanAmericanNum(e.getRaceAfricanAmericanNum());

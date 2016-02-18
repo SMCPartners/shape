@@ -86,12 +86,10 @@ public class OrganizationStratificationDAOImpl extends AbstractCrudDAO<Organizat
         et.setAge1844(dto.getAge1844());
         et.setAge4564(dto.getAge4564());
         et.setAgeOver65(dto.getAgeOver65());
-        et.setAgeUnder17(dto.getAgeUnder17());
         et.setEthnicityHispanicLatino(dto.getEthnicityHispanicLatino());
         et.setEthnicityNotHispanicLatino(dto.getEthnicityNotHispanicLatino());
         et.setGenderFemale(dto.getGenderFemale());
         et.setGenderMale(dto.getGenderMale());
-        et.setGenderOther(dto.getGenderOther());
         et.setId(dto.getId());
         et.setRaceAfricanAmerican(dto.getRaceAfricanAmerican());
         et.setRaceAmericanIndian(dto.getRaceAmericanIndian());
@@ -130,12 +128,10 @@ public class OrganizationStratificationDAOImpl extends AbstractCrudDAO<Organizat
         dto.setAge1844(entity.getAge1844());
         dto.setAge4564(entity.getAge4564());
         dto.setAgeOver65(entity.getAgeOver65());
-        dto.setAgeUnder17(entity.getAgeUnder17());
         dto.setEthnicityHispanicLatino(entity.getEthnicityHispanicLatino());
         dto.setEthnicityNotHispanicLatino(entity.getEthnicityNotHispanicLatino());
         dto.setGenderFemale(entity.getGenderFemale());
         dto.setGenderMale(entity.getGenderMale());
-        dto.setGenderOther(entity.getGenderOther());
         dto.setId(entity.getId());
         dto.setRaceAfricanAmerican(entity.getRaceAfricanAmerican());
         dto.setRaceAmericanIndian(entity.getRaceAmericanIndian());

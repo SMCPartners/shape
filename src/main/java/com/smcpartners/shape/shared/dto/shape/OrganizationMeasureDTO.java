@@ -26,10 +26,6 @@ public class OrganizationMeasureDTO implements Serializable {
     private Integer genderMaleDen;
     private Integer genderFemaleNum;
     private Integer genderFemaleDen;
-    private Integer genderOtherNum;
-    private Integer genderOtherDen;
-    private Integer ageUnder17Num;
-    private Integer ageUnder17Den;
     private Integer age1844Num;
     private Integer age1844Den;
     private Integer age4564Num;
@@ -91,22 +87,6 @@ public class OrganizationMeasureDTO implements Serializable {
     public Integer getGenderFemaleDen() { return genderFemaleDen; }
 
     public void setGenderFemaleDen(Integer genderFemaleDen) { this.genderFemaleDen = genderFemaleDen; }
-
-    public Integer getGenderOtherNum() { return genderOtherNum; }
-
-    public void setGenderOtherNum(Integer genderOtherNum) { this.genderOtherNum = genderOtherNum;  }
-
-    public Integer getGenderOtherDen() { return genderOtherDen; }
-
-    public void setGenderOtherDen(Integer genderOtherDen) { this.genderOtherDen = genderOtherDen; }
-
-    public Integer getAgeUnder17Num() { return ageUnder17Num; }
-
-    public void setAgeUnder17Num(Integer ageUnder17Num) { this.ageUnder17Num = ageUnder17Num; }
-
-    public Integer getAgeUnder17Den() { return ageUnder17Den; }
-
-    public void setAgeUnder17Den(Integer ageUnder17Den) { this.ageUnder17Den = ageUnder17Den; }
 
     public Integer getAge1844Num() { return age1844Num; }
 

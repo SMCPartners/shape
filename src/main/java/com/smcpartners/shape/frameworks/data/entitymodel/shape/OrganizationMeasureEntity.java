@@ -37,10 +37,6 @@ public class OrganizationMeasureEntity {
     private Integer genderMaleDen;
     private Integer genderFemaleNum;
     private Integer genderFemaleDen;
-    private Integer genderOtherNum;
-    private Integer genderOtherDen;
-    private Integer ageUnder17Num;
-    private Integer ageUnder17Den;
     private Integer age1844Num;
     private Integer age1844Den;
     private Integer age4564Num;
@@ -148,44 +144,6 @@ public class OrganizationMeasureEntity {
 
     public void setGenderFemaleDen(Integer genderFemaleDen) {
         this.genderFemaleDen = genderFemaleDen;
-    }
-
-    @Basic
-    @javax.persistence.Column(name = "gender_other_num", nullable = true, insertable = true, updatable = true)
-    public Integer getGenderOtherNum() {
-        return genderOtherNum;
-    }
-
-    public void setGenderOtherNum(Integer genderOtherNum) {
-        this.genderOtherNum = genderOtherNum;
-    }
-
-    @Basic
-    @javax.persistence.Column(name = "gender_other_den", nullable = true, insertable = true, updatable = true)
-    public Integer getGenderOtherDen() {
-        return genderOtherDen;
-    }
-
-    public void setGenderOtherDen(Integer genderOtherDen) { this.genderOtherDen = genderOtherDen; }
-
-    @Basic
-    @javax.persistence.Column(name = "age_under_17_num", nullable = true, insertable = true, updatable = true)
-    public Integer getAgeUnder17Num() {
-        return ageUnder17Num;
-    }
-
-    public void setAgeUnder17Num(Integer ageUnder17Num) {
-        this.ageUnder17Num = ageUnder17Num;
-    }
-
-    @Basic
-    @javax.persistence.Column(name = "age_under_17_den", nullable = true, insertable = true, updatable = true)
-    public Integer getAgeUnder17Den() {
-        return ageUnder17Den;
-    }
-
-    public void setAgeUnder17Den(Integer ageUnder17Den) {
-        this.ageUnder17Den = ageUnder17Den;
     }
 
     @Basic
@@ -406,10 +364,6 @@ public class OrganizationMeasureEntity {
         if (genderMaleDen != null ? !genderMaleDen.equals(that.genderMaleDen) : that.genderMaleDen != null) return false;
         if (genderFemaleNum != null ? !genderFemaleNum.equals(that.genderFemaleNum) : that.genderFemaleNum != null) return false;
         if (genderFemaleDen != null ? !genderFemaleDen.equals(that.genderFemaleDen) : that.genderFemaleDen != null) return false;
-        if (genderOtherNum != null ? !genderOtherNum.equals(that.genderOtherNum) : that.genderOtherNum != null) return false;
-        if (genderOtherDen != null ? !genderOtherDen.equals(that.genderOtherDen) : that.genderOtherDen != null) return false;
-        if (ageUnder17Num != null ? !ageUnder17Num.equals(that.ageUnder17Num) : that.ageUnder17Num != null) return false;
-        if (ageUnder17Den != null ? !ageUnder17Den.equals(that.ageUnder17Den) : that.ageUnder17Den != null) return false;
         if (age1844Num != null ? !age1844Num.equals(that.age1844Num) : that.age1844Num != null) return false;
         if (age1844Den != null ? !age1844Den.equals(that.age1844Den) : that.age1844Den != null) return false;
         if (age4564Num != null ? !age4564Num.equals(that.age4564Num) : that.age4564Num != null) return false;
@@ -459,10 +413,6 @@ public class OrganizationMeasureEntity {
         result = 31 * result + (genderMaleDen != null ? genderMaleDen.hashCode() : 0);
         result = 31 * result + (genderFemaleNum != null ? genderFemaleNum.hashCode() : 0);
         result = 31 * result + (genderFemaleDen != null ? genderFemaleDen.hashCode() : 0);
-        result = 31 * result + (genderOtherNum != null ? genderOtherNum.hashCode() : 0);
-        result = 31 * result + (genderOtherDen != null ? genderOtherDen.hashCode() : 0);
-        result = 31 * result + (ageUnder17Num != null ? ageUnder17Num.hashCode() : 0);
-        result = 31 * result + (ageUnder17Den != null ? ageUnder17Den.hashCode() : 0);
         result = 31 * result + (age1844Num != null ? age1844Num.hashCode() : 0);
         result = 31 * result + (age1844Den != null ? age1844Den.hashCode() : 0);
         result = 31 * result + (age4564Num != null ? age4564Num.hashCode() : 0);

@@ -142,9 +142,6 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
                         try {
 
                             //add to age lists
-                            under17List.add("Under 17");
-                            under17List.add(convertToDoubles(om.getAgeUnder17Num(), om.getAgeUnder17Den()));
-
                             age18to44List.add("18-44");
                             age18to44List.add(convertToDoubles(om.getAge1844Num(), om.getAge1844Den()));
 
@@ -156,7 +153,6 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
 
                             //add arrays to ageData double array
                             List<List<Object>> adList = new ArrayList<>();
-                            adList.add(under17List);
                             adList.add(age18to44List);
                             adList.add(age45to64List);
                             adList.add(age65PlusList);
@@ -205,14 +201,10 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
                             maleList.add("Male");
                             maleList.add(convertToDoubles(om.getGenderMaleNum(), om.getGenderMaleDen()));
 
-                            otherGenderList.add("Other");
-                            otherGenderList.add(convertToDoubles(om.getGenderOtherNum(), om.getGenderOtherDen()));
-
                             //add arrays to genderData double Array
                             List<List<Object>> gList = new ArrayList<>();
                             gList.add(femaleList);
                             gList.add(maleList);
-                            gList.add(otherGenderList);
                             //set gender data on dto
                             ahdDTO.setGenderData(gList);
                         } catch (Exception e) {

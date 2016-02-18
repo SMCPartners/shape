@@ -29,8 +29,6 @@ public class OrganizationStratificationEntity {
     private int id;
     private Integer genderMale;
     private Integer genderFemale;
-    private Integer genderOther;
-    private Integer ageUnder17;
     private Integer age1844;
     private Integer age4564;
     private Integer ageOver65;
@@ -81,26 +79,6 @@ public class OrganizationStratificationEntity {
 
     public void setGenderFemale(Integer genderFemale) {
         this.genderFemale = genderFemale;
-    }
-
-    @Basic
-    @Column(name = "gender_other", nullable = true, insertable = true, updatable = true)
-    public Integer getGenderOther() {
-        return genderOther;
-    }
-
-    public void setGenderOther(Integer genderOther) {
-        this.genderOther = genderOther;
-    }
-
-    @Basic
-    @Column(name = "age_under_17", nullable = true, insertable = true, updatable = true)
-    public Integer getAgeUnder17() {
-        return ageUnder17;
-    }
-
-    public void setAgeUnder17(Integer ageUnder17) {
-        this.ageUnder17 = ageUnder17;
     }
 
     @Basic
@@ -292,8 +270,6 @@ public class OrganizationStratificationEntity {
         if (id != that.id) return false;
         if (genderMale != null ? !genderMale.equals(that.genderMale) : that.genderMale != null) return false;
         if (genderFemale != null ? !genderFemale.equals(that.genderFemale) : that.genderFemale != null) return false;
-        if (genderOther != null ? !genderOther.equals(that.genderOther) : that.genderOther != null) return false;
-        if (ageUnder17 != null ? !ageUnder17.equals(that.ageUnder17) : that.ageUnder17 != null) return false;
         if (age1844 != null ? !age1844.equals(that.age1844) : that.age1844 != null) return false;
         if (age4564 != null ? !age4564.equals(that.age4564) : that.age4564 != null) return false;
         if (ageOver65 != null ? !ageOver65.equals(that.ageOver65) : that.ageOver65 != null) return false;
@@ -328,8 +304,6 @@ public class OrganizationStratificationEntity {
         int result = id;
         result = 31 * result + (genderMale != null ? genderMale.hashCode() : 0);
         result = 31 * result + (genderFemale != null ? genderFemale.hashCode() : 0);
-        result = 31 * result + (genderOther != null ? genderOther.hashCode() : 0);
-        result = 31 * result + (ageUnder17 != null ? ageUnder17.hashCode() : 0);
         result = 31 * result + (age1844 != null ? age1844.hashCode() : 0);
         result = 31 * result + (age4564 != null ? age4564.hashCode() : 0);
         result = 31 * result + (ageOver65 != null ? ageOver65.hashCode() : 0);
