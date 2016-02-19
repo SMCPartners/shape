@@ -66,7 +66,7 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
 
             List<OrganizationMeasureDTO> orgMList = orgMDAO.findOrgMeasureByMeasureIdAndYear(measureId, year);
 
-            if (orgMList != null) {
+            if ( orgMList.size() > 0) {
                 for (OrganizationMeasureDTO om : orgMList) {
                     OrganizationDTO org = oDAO.findById(orgId);
 
@@ -87,7 +87,6 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
                         List<Object> nativeHawaiianList = new ArrayList<>();
                         List<Object> whiteList = new ArrayList<>();
                         List<Object> otherRaceList = new ArrayList<>();
-                        List<Object> under17List = new ArrayList<>();
                         List<Object> age18to44List = new ArrayList<>();
                         List<Object> age45to64List = new ArrayList<>();
                         List<Object> age65PlusList = new ArrayList<>();
@@ -95,7 +94,6 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
                         List<Object> notHispanicList = new ArrayList<>();
                         List<Object> femaleList = new ArrayList<>();
                         List<Object> maleList = new ArrayList<>();
-                        List<Object> otherGenderList = new ArrayList<>();
 
 
                         try {
@@ -221,11 +219,7 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
                 }
             }
 
-            if (retLst != null) {
-                return retLst;
-            } else {
-                throw new Exception ("No matching organizations");
-            }
+            return retLst;
 
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "showAppHistDemographic", e.getMessage(), e);

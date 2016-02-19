@@ -95,13 +95,16 @@ public class ShowAggregateComparisonServiceAdapter implements ShowAggregateCompa
 
             if (SecurityRoleEnum.ORG_ADMIN == reqUserRole || SecurityRoleEnum.REGISTERED == reqUserRole) {
 
-                List<Object> orgList = new ArrayList<>();
+                if (orgMList.size() > 0) {
 
-                orgList.add(orgDTO.getName());
-                orgList.add(orgMList.get(0).getDenominatorValue());
-                orgList.add(orgMList.get(0).getNumeratorValue());
+                    List<Object> orgList = new ArrayList<>();
 
-                retList.add(orgList);
+                    orgList.add(orgDTO.getName());
+                    orgList.add(orgMList.get(0).getDenominatorValue());
+                    orgList.add(orgMList.get(0).getNumeratorValue());
+
+                    retList.add(orgList);
+                }
 
             } else {
 
