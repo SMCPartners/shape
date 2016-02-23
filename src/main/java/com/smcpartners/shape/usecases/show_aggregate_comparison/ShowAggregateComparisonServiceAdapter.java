@@ -134,8 +134,10 @@ public class ShowAggregateComparisonServiceAdapter implements ShowAggregateCompa
         int numSum = 0;
         int[] totals = new int[2];
         for (OrganizationMeasureDTO om : orgMList) {
-            denSum += om.getDenominatorValue();
-            numSum += om.getNumeratorValue();
+            if (om.getDenominatorValue() != null && om.getNumeratorValue() != null) {
+                denSum += om.getDenominatorValue();
+                numSum += om.getNumeratorValue();
+            }
         }
         totals[0] = denSum;
         totals[1] = numSum;

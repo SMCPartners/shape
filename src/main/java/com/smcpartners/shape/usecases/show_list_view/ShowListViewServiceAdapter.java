@@ -76,48 +76,55 @@ public class ShowListViewServiceAdapter implements ShowListViewService {
                             && om.getReportPeriodYear() != null) {
                         //find measure
                         MeasureDTO mdto = mDAO.findById(measureId);
-                        //make ListViewDTO
-                        ListViewDTO lvDTO = new ListViewDTO();
-                        lvDTO.setNqfId(mdto.getNqfId());
-                        lvDTO.setName(mdto.getName());
-                        lvDTO.setDesciption(mdto.getDescription());
-                        lvDTO.setNumeratorValue(om.getNumeratorValue());
-                        lvDTO.setDenominatorValue(om.getDenominatorValue());
+                        //make ListViewDTO'
 
-                        //make arrayLists for chartData and chartOptions
-                        List<Object> dateList = new ArrayList<>();
-                        List<Object> wcList = new ArrayList<>();
-                        List<Object> pcList = new ArrayList<>();
+                        try {
 
-                        //add month and day to dateList
-                        dateList.add(month);
-                        dateList.add(day);
+                            ListViewDTO lvDTO = new ListViewDTO();
+                            lvDTO.setNqfId(mdto.getNqfId());
+                            lvDTO.setName(mdto.getName());
+                            lvDTO.setDesciption(mdto.getDescription());
+                            lvDTO.setNumeratorValue(om.getNumeratorValue());
+                            lvDTO.setDenominatorValue(om.getDenominatorValue());
 
-                        //add the well controlled array list data
-                        wcList.add(numerator);
-                        wcList.add(om.getNumeratorValue());
+                            //make arrayLists for chartData and chartOptions
+                            List<Object> dateList = new ArrayList<>();
+                            List<Object> wcList = new ArrayList<>();
+                            List<Object> pcList = new ArrayList<>();
 
-                        //add the poorly controlled array list data
-                        pcList.add(remOfPatients);
-                        pcList.add(om.getDenominatorValue() - om.getNumeratorValue());
+                            //add month and day to dateList
+                            dateList.add(month);
+                            dateList.add(day);
 
-                        //add all to an embedded ArrayList for formatting
-                        List<List<Object>> newList = new ArrayList<>();
-                        newList.add(dateList);
-                        newList.add(wcList);
-                        newList.add(pcList);
+                            //add the well controlled array list data
+                            wcList.add(numerator);
+                            wcList.add(om.getNumeratorValue());
 
-                        //set chartData on dto
-                        lvDTO.setChartData(newList);
+                            //add the poorly controlled array list data
+                            pcList.add(remOfPatients);
+                            pcList.add(om.getDenominatorValue() - om.getNumeratorValue());
 
-                        //add chartOptions portion to DTO
-                        ChartOptionsDTO cod = new ChartOptionsDTO();
-                        cod.setPieHole(pieHole);
-                        cod.setPieSliceText(pieSliceText);
-                        lvDTO.setChartOptions(cod);
+                            //add all to an embedded ArrayList for formatting
+                            List<List<Object>> newList = new ArrayList<>();
+                            newList.add(dateList);
+                            newList.add(wcList);
+                            newList.add(pcList);
 
-                        //add dto to list
-                        retLst.add(lvDTO);
+                            //set chartData on dto
+                            lvDTO.setChartData(newList);
+
+                            //add chartOptions portion to DTO
+                            ChartOptionsDTO cod = new ChartOptionsDTO();
+                            cod.setPieHole(pieHole);
+                            cod.setPieSliceText(pieSliceText);
+                            lvDTO.setChartOptions(cod);
+
+                            //add dto to list
+                            retLst.add(lvDTO);
+
+                        } catch (Exception e) {
+                            return retLst;
+                        }
                     }
                 }
             }

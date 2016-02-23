@@ -46,6 +46,37 @@ public class OrganizationStratificationEntity {
     private Integer patientsDiabetes;
     private Integer patientsPreDiabetes;
     private Integer patientsHighBp;
+    private boolean primaryCarePractice;
+    private boolean fqhcLookALike;
+    private boolean comHealthCenter;
+    private boolean multiSpecPractice;
+    private boolean pracConsortium;
+    private boolean ambulatoryClinic;
+    private boolean hmo;
+    private boolean aco;
+    private boolean pcmh;
+    private boolean otherOrgDescrip;
+    private boolean physicians;
+    private boolean nursePrac;
+    private boolean rn;
+    private boolean lpn;
+    private boolean pa;
+    private boolean medicalAssist;
+    private boolean residents;
+    private boolean interns;
+    private boolean communityHealthWorkers;
+    private boolean trainedMotivationalInterview;
+    private Integer medicarePercent;
+    private Integer medicaidPercent;
+    private Integer hmoPercent;
+    private Integer ppoPercent;
+    private Integer uninsuredSelfPercent;
+    private Integer privatePercent;
+    private String vendor;
+    private String product;
+    private String versionEHR;
+    private boolean completeCEHRT;
+    private boolean patientPortal;
     private OrganizationEntity organizationByOrganizationId;
     private UserEntity userByUserId;
     private Date rpDate;
@@ -247,6 +278,316 @@ public class OrganizationStratificationEntity {
 
     public void setPatientsHighBp(Integer patientsHighBp) {
         this.patientsHighBp = patientsHighBp;
+    }
+
+    @Basic
+    @Column(name = "primary_care_practice", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isPrimaryCarePractice() {
+        return primaryCarePractice;
+    }
+
+    public void setPrimaryCarePractice(boolean primaryCarePractice) {
+        this.primaryCarePractice = primaryCarePractice;
+    }
+
+    @Basic
+    @Column(name = "fqhc_look_a_like", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isFqhcLookALike() {
+        return fqhcLookALike;
+    }
+
+    public void setFqhcLookALike(boolean fqhcLookALike) {
+        this.fqhcLookALike = fqhcLookALike;
+    }
+
+    @Basic
+    @Column(name = "com_health_center", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isComHealthCenter() {
+        return comHealthCenter;
+    }
+
+    public void setComHealthCenter(boolean comHealthCenter) {
+        this.comHealthCenter = comHealthCenter;
+    }
+
+    @Basic
+    @Column(name = "multi_spec_practice", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isMultiSpecPractice() {
+        return multiSpecPractice;
+    }
+
+    public void setMultiSpecPractice(boolean multiSpecPractice) {
+        this.multiSpecPractice = multiSpecPractice;
+    }
+
+    @Basic
+    @Column(name = "prac_consortium", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isPracConsortium() {
+        return pracConsortium;
+    }
+
+    public void setPracConsortium(boolean pracConsortium) {
+        this.pracConsortium = pracConsortium;
+    }
+
+    @Basic
+    @Column(name = "ambulatory_clinic", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isAmbulatoryClinic() {
+        return ambulatoryClinic;
+    }
+
+    public void setAmbulatoryClinic(boolean ambulatoryClinic) {
+        this.ambulatoryClinic = ambulatoryClinic;
+    }
+
+    @Basic
+    @Column(name = "hmo", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isHmo() {
+        return hmo;
+    }
+
+    public void setHmo(boolean hmo) {
+        this.hmo = hmo;
+    }
+
+    @Basic
+    @Column(name = "aco", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isAco() {
+        return aco;
+    }
+
+    public void setAco(boolean aco) {
+        this.aco = aco;
+    }
+
+    @Basic
+    @Column(name = "pcmh", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isPcmh() {
+        return pcmh;
+    }
+
+    public void setPcmh(boolean pcmh) {
+        this.pcmh = pcmh;
+    }
+
+    @Basic
+    @Column(name = "other_org_descrip", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isOtherOrgDescrip() {
+        return otherOrgDescrip;
+    }
+
+    public void setOtherOrgDescrip(boolean otherOrgDescrip) {
+        this.otherOrgDescrip = otherOrgDescrip;
+    }
+
+    @Basic
+    @Column(name = "physicians", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isPhysicians() {
+        return physicians;
+    }
+
+    public void setPhysicians(boolean physicians) {
+        this.physicians = physicians;
+    }
+
+    @Basic
+    @Column(name = "nurse_prac", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isNursePrac() {
+        return nursePrac;
+    }
+
+    public void setNursePrac(boolean nursePrac) {
+        this.nursePrac = nursePrac;
+    }
+
+    @Basic
+    @Column(name = "rn", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isRn() {
+        return rn;
+    }
+
+    public void setRn(boolean rn) {
+        this.rn = rn;
+    }
+
+    @Basic
+    @Column(name = "lpn", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isLpn() {
+        return lpn;
+    }
+
+    public void setLpn(boolean lpn) {
+        this.lpn = lpn;
+    }
+
+    @Basic
+    @Column(name = "pa", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isPa() {
+        return pa;
+    }
+
+    public void setPa(boolean pa) {
+        this.pa = pa;
+    }
+
+    @Basic
+    @Column(name = "medical_assistant", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isMedicalAssist() {
+        return medicalAssist;
+    }
+
+    public void setMedicalAssist(boolean medicalAssist) {
+        this.medicalAssist = medicalAssist;
+    }
+
+    @Basic
+    @Column(name = "residents", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isResidents() {
+        return residents;
+    }
+
+    public void setResidents(boolean residents) {
+        this.residents = residents;
+    }
+
+    @Basic
+    @Column(name = "interns", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isInterns() {
+        return interns;
+    }
+
+    public void setInterns(boolean interns) {
+        this.interns = interns;
+    }
+
+    @Basic
+    @Column(name = "community_health_workers", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isCommunityHealthWorkers() {
+        return communityHealthWorkers;
+    }
+
+    public void setCommunityHealthWorkers(boolean communityHealthWorkers) {
+        this.communityHealthWorkers = communityHealthWorkers;
+    }
+
+    @Basic
+    @Column(name = "trained_motivational_interview", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isTrainedMotivationalInterview() {
+        return trainedMotivationalInterview;
+    }
+
+    public void setTrainedMotivationalInterview(boolean trainedMotivationalInterview) {
+        this.trainedMotivationalInterview = trainedMotivationalInterview;
+    }
+
+    @Basic
+    @Column(name = "medicare_percent", nullable = true, insertable = true, updatable = true, columnDefinition = "INT(11) default 0")
+    public Integer getMedicarePercent() {
+        return medicarePercent;
+    }
+
+    public void setMedicarePercent(Integer medicarePercent) {
+        this.medicarePercent = medicarePercent;
+    }
+
+    @Basic
+    @Column(name = "medicaid_percent", nullable = true, insertable = true, updatable = true, columnDefinition = "INT(11) default 0")
+    public Integer getMedicaidPercent() {
+        return medicaidPercent;
+    }
+
+    public void setMedicaidPercent(Integer medicaidPercent) {
+        this.medicaidPercent = medicaidPercent;
+    }
+
+    @Basic
+    @Column(name = "hmo_percent", nullable = true, insertable = true, updatable = true, columnDefinition = "INT(11) default 0")
+    public Integer getHmoPercent() {
+        return hmoPercent;
+    }
+
+    public void setHmoPercent(Integer hmoPercent) {
+        this.hmoPercent = hmoPercent;
+    }
+
+    @Basic
+    @Column(name = "ppo_percent", nullable = true, insertable = true, updatable = true, columnDefinition = "INT(11) default 0")
+    public Integer getPpoPercent() {
+        return ppoPercent;
+    }
+
+    public void setPpoPercent(Integer ppoPercent) {
+        this.ppoPercent = ppoPercent;
+    }
+
+    @Basic
+    @Column(name = "uninsured_self_percent", nullable = true, insertable = true, updatable = true, columnDefinition = "INT(11) default 0")
+    public Integer getUninsuredSelfPercent() {
+        return uninsuredSelfPercent;
+    }
+
+    public void setUninsuredSelfPercent(Integer uninsuredSelfPercent) {
+        this.uninsuredSelfPercent = uninsuredSelfPercent;
+    }
+
+    @Basic
+    @Column(name = "private_percent", nullable = true, insertable = true, updatable = true, columnDefinition = "INT(11) default 0")
+    public Integer getPrivatePercent() {
+        return privatePercent;
+    }
+
+    public void setPrivatePercent(Integer privatePercent) {
+        this.privatePercent = privatePercent;
+    }
+
+    @Basic
+    @Column(name = "vendor", nullable = true, insertable = true, updatable = true, length = 255, columnDefinition = "VARCHAR(1) default \'\'")
+    public String getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(String vendor) {
+        this.vendor = vendor;
+    }
+
+    @Basic
+    @Column(name = "product", nullable = true, insertable = true, updatable = true, length = 255, columnDefinition = "VARCHAR(1) default \'\'")
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    @Basic
+    @Column(name = "ehr_version", nullable = true, insertable = true, updatable = true, length = 255, columnDefinition = "VARCHAR(1) default \'\'")
+    public String getVersionEHR() {
+        return versionEHR;
+    }
+
+    public void setVersionEHR(String versionEHR) {
+        this.versionEHR = versionEHR;
+    }
+
+    @Basic
+    @Column(name = "complete_CEHRT", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isCompleteCEHRT() {
+        return completeCEHRT;
+    }
+
+    public void setCompleteCEHRT(boolean completeCEHRT) {
+        this.completeCEHRT = completeCEHRT;
+    }
+
+    @Basic
+    @Column(name = "patient_portal", columnDefinition = "TINYINT", length = 1, nullable = false, insertable = true, updatable = true)
+    public boolean isPatientPortal() {
+        return patientPortal;
+    }
+
+    public void setPatientPortal(boolean patientPortal) {
+        this.patientPortal = patientPortal;
     }
 
     @Basic

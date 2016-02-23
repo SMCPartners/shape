@@ -45,7 +45,7 @@ public class FindAllOrganizationMeasuresByOrganizationServiceAdapter implements 
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED, SecurityRoleEnum.DPH_USER})
     public List<OrganizationMeasureDTO> findAllOrganizationMeasuresByOrg(@PathParam("orgId") int orgId) throws UseCaseException {
         try {
             // Admin can see all
@@ -61,10 +61,9 @@ public class FindAllOrganizationMeasuresByOrganizationServiceAdapter implements 
             // Get users org id
             int userOrg = user.getOrganizationId();
 
-            if (reqRole == SecurityRoleEnum.ADMIN ||
+            if (reqRole == SecurityRoleEnum.ADMIN || reqRole == SecurityRoleEnum.DPH_USER ||
                     (orgId == userOrg && (reqRole == SecurityRoleEnum.ORG_ADMIN ||
-                            reqRole == SecurityRoleEnum.REGISTERED ||
-                            reqRole == SecurityRoleEnum.DPH_USER))) {
+                            reqRole == SecurityRoleEnum.REGISTERED ))) {
                 List<OrganizationMeasureDTO> orgMList = organizationMeasureDAO.findAllOrganizationMeasureByOrgId(orgId);
                 if (orgMList != null) {
                     int reportPeriod = 0;

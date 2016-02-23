@@ -56,10 +56,9 @@ public class FindAllOrganizationStratificationsByOrganizationServiceAdapter impl
             // Get users org id
             int userOrg = user.getOrganizationId();
 
-            if (reqRole == SecurityRoleEnum.ADMIN ||
+            if (reqRole == SecurityRoleEnum.ADMIN || reqRole == SecurityRoleEnum.DPH_USER ||
                     (orgId == userOrg && (reqRole == SecurityRoleEnum.ORG_ADMIN ||
-                            reqRole == SecurityRoleEnum.REGISTERED ||
-                            reqRole == SecurityRoleEnum.DPH_USER))) {
+                            reqRole == SecurityRoleEnum.REGISTERED ))) {
                 return organizationStratificationDAO.findAllOrganizationStratificationByOrgId(orgId);
             } else {
                 throw new Exception("You are not authorized to perform this function.");

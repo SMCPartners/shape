@@ -54,7 +54,7 @@ public class FindAllOrganizationsServiceAdapter implements FindAllOrganizationsS
             UserDTO user = userDAO.findById(requestScopedUserId.getRequestUserId());
             SecurityRoleEnum reqUserRole = SecurityRoleEnum.valueOf(user.getRole());
 
-            if (SecurityRoleEnum.ADMIN == reqUserRole) {
+            if (SecurityRoleEnum.ADMIN == reqUserRole || SecurityRoleEnum.DPH_USER == reqUserRole) {
                 List<OrganizationDTO> lst = organizationDAO.findAll();
                 lst.forEach(l -> {
                     OrganizationDTO dto = new OrganizationDTO();
@@ -73,8 +73,7 @@ public class FindAllOrganizationsServiceAdapter implements FindAllOrganizationsS
                     retLst.add(dto);
 
                 });
-            } else if (SecurityRoleEnum.ORG_ADMIN == reqUserRole || SecurityRoleEnum.REGISTERED == reqUserRole ||
-                    SecurityRoleEnum.DPH_USER == reqUserRole){
+            } else if (SecurityRoleEnum.ORG_ADMIN == reqUserRole || SecurityRoleEnum.REGISTERED == reqUserRole){
                 // Find the user
                 UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
 

@@ -38,6 +38,37 @@ public class OrganizationStratificationDTO implements Serializable {
     private int patientsDiabetes;
     private int patientsPreDiabetes;
     private int patientsHighBp;
+    private boolean primaryCarePractice;
+    private boolean fqhcLookALike;
+    private boolean comHealthCenter;
+    private boolean multiSpecPractice;
+    private boolean pracConsortium;
+    private boolean ambulatoryClinic;
+    private boolean hmo;
+    private boolean aco;
+    private boolean pcmh;
+    private boolean otherOrgDescrip;
+    private boolean physicians;
+    private boolean nursePrac;
+    private boolean rn;
+    private boolean lpn;
+    private boolean pa;
+    private boolean medicalAssist;
+    private boolean residents;
+    private boolean interns;
+    private boolean communityHealthWorkers;
+    private boolean trainedMotivationalInterview;
+    private Integer medicarePercent;
+    private Integer medicaidPercent;
+    private Integer hmoPercent;
+    private Integer ppoPercent;
+    private Integer uninsuredSelfPercent;
+    private Integer privatePercent;
+    private String vendor;
+    private String product;
+    private String versionEHR;
+    private boolean completeCEHRT;
+    private boolean patientPortal;
     private String userId;
     private Date rpDate;
 
@@ -203,4 +234,254 @@ public class OrganizationStratificationDTO implements Serializable {
     public int getPatientsHighBp() {return patientsHighBp;}
 
     public void setPatientsHighBp(int patientsHighBp) {this.patientsHighBp = patientsHighBp;}
+
+    public boolean isPrimaryCarePractice() {
+        return primaryCarePractice;
+    }
+
+    public void setPrimaryCarePractice(boolean primaryCarePractice) {
+        this.primaryCarePractice = primaryCarePractice;
+    }
+
+    public boolean isFqhcLookALike() {
+        return fqhcLookALike;
+    }
+
+    public void setFqhcLookALike(boolean fqhcLookALike) {
+        this.fqhcLookALike = fqhcLookALike;
+    }
+
+    public boolean isComHealthCenter() {
+        return comHealthCenter;
+    }
+
+    public void setComHealthCenter(boolean comHealthCenter) {
+        this.comHealthCenter = comHealthCenter;
+    }
+
+    public boolean isMultiSpecPractice() {
+        return multiSpecPractice;
+    }
+
+    public void setMultiSpecPractice(boolean multiSpecPractice) {
+        this.multiSpecPractice = multiSpecPractice;
+    }
+
+    public boolean isPracConsortium() {
+        return pracConsortium;
+    }
+
+    public void setPracConsortium(boolean pracConsortium) {
+        this.pracConsortium = pracConsortium;
+    }
+
+    public boolean isAmbulatoryClinic() {
+        return ambulatoryClinic;
+    }
+
+    public void setAmbulatoryClinic(boolean ambulatoryClinic) {
+        this.ambulatoryClinic = ambulatoryClinic;
+    }
+
+    public boolean isHmo() {
+        return hmo;
+    }
+
+    public void setHmo(boolean hmo) {
+        this.hmo = hmo;
+    }
+
+    public boolean isAco() {
+        return aco;
+    }
+
+    public void setAco(boolean aco) {
+        this.aco = aco;
+    }
+
+    public boolean isPcmh() {
+        return pcmh;
+    }
+
+    public void setPcmh(boolean pcmh) {
+        this.pcmh = pcmh;
+    }
+
+    public boolean isOtherOrgDescrip() {
+        return otherOrgDescrip;
+    }
+
+    public void setOtherOrgDescrip(boolean otherOrgDescrip) {
+        this.otherOrgDescrip = otherOrgDescrip;
+    }
+
+    public boolean isPhysicians() {
+        return physicians;
+    }
+
+    public void setPhysicians(boolean physicians) {
+        this.physicians = physicians;
+    }
+
+    public boolean isNursePrac() {
+        return nursePrac;
+    }
+
+    public void setNursePrac(boolean nursePrac) {
+        this.nursePrac = nursePrac;
+    }
+
+    public boolean isRn() {
+        return rn;
+    }
+
+    public void setRn(boolean rn) {
+        this.rn = rn;
+    }
+
+    public boolean isLpn() {
+        return lpn;
+    }
+
+    public void setLpn(boolean lpn) {
+        this.lpn = lpn;
+    }
+
+    public boolean isPa() {
+        return pa;
+    }
+
+    public void setPa(boolean pa) {
+        this.pa = pa;
+    }
+
+    public boolean isMedicalAssist() {
+        return medicalAssist;
+    }
+
+    public void setMedicalAssist(boolean medicalAssist) {
+        this.medicalAssist = medicalAssist;
+    }
+
+    public boolean isResidents() {
+        return residents;
+    }
+
+    public void setResidents(boolean residents) {
+        this.residents = residents;
+    }
+
+    public boolean isInterns() {
+        return interns;
+    }
+
+    public void setInterns(boolean interns) {
+        this.interns = interns;
+    }
+
+    public boolean isCommunityHealthWorkers() {
+        return communityHealthWorkers;
+    }
+
+    public void setCommunityHealthWorkers(boolean communityHealthWorkers) {
+        this.communityHealthWorkers = communityHealthWorkers;
+    }
+
+    public boolean isTrainedMotivationalInterview() {
+        return trainedMotivationalInterview;
+    }
+
+    public void setTrainedMotivationalInterview(boolean trainedMotivationalInterview) {
+        this.trainedMotivationalInterview = trainedMotivationalInterview;
+    }
+
+    public Integer getMedicarePercent() {
+        return medicarePercent;
+    }
+
+    public void setMedicarePercent(Integer medicarePercent) {
+        this.medicarePercent = medicarePercent;
+    }
+
+    public Integer getMedicaidPercent() {
+        return medicaidPercent;
+    }
+
+    public void setMedicaidPercent(Integer medicaidPercent) {
+        this.medicaidPercent = medicaidPercent;
+    }
+
+    public Integer getHmoPercent() {
+        return hmoPercent;
+    }
+
+    public void setHmoPercent(Integer hmoPercent) {
+        this.hmoPercent = hmoPercent;
+    }
+
+    public Integer getPpoPercent() {
+        return ppoPercent;
+    }
+
+    public void setPpoPercent(Integer ppoPercent) {
+        this.ppoPercent = ppoPercent;
+    }
+
+    public Integer getUninsuredSelfPercent() {
+        return uninsuredSelfPercent;
+    }
+
+    public void setUninsuredSelfPercent(Integer uninsuredSelfPercent) {
+        this.uninsuredSelfPercent = uninsuredSelfPercent;
+    }
+
+    public Integer getPrivatePercent() {
+        return privatePercent;
+    }
+
+    public void setPrivatePercent(Integer privatePercent) {
+        this.privatePercent = privatePercent;
+    }
+
+    public String getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(String vendor) {
+        this.vendor = vendor;
+    }
+
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public String getVersionEHR() {
+        return versionEHR;
+    }
+
+    public void setVersionEHR(String versionEHR) {
+        this.versionEHR = versionEHR;
+    }
+
+    public boolean isCompleteCEHRT() {
+        return completeCEHRT;
+    }
+
+    public void setCompleteCEHRT(boolean completeCEHRT) {
+        this.completeCEHRT = completeCEHRT;
+    }
+
+    public boolean isPatientPortal() {
+        return patientPortal;
+    }
+
+    public void setPatientPortal(boolean patientPortal) {
+        this.patientPortal = patientPortal;
+    }
 }
+
+
