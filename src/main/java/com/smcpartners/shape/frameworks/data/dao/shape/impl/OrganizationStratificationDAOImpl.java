@@ -83,6 +83,7 @@ public class OrganizationStratificationDAOImpl extends AbstractCrudDAO<Organizat
 
     @Override
     protected OrganizationStratificationEntity mapDtoToEntity(OrganizationStratificationEntity et, OrganizationStratificationDTO dto) {
+        et.setAge17under(dto.getAge17under());
         et.setAge1844(dto.getAge1844());
         et.setAge4564(dto.getAge4564());
         et.setAgeOver65(dto.getAgeOver65());
@@ -156,6 +157,7 @@ public class OrganizationStratificationDAOImpl extends AbstractCrudDAO<Organizat
     @Override
     protected OrganizationStratificationDTO mapEntityToDTO(OrganizationStratificationEntity entity) throws Exception {
         OrganizationStratificationDTO dto = new OrganizationStratificationDTO();
+        dto.setAge17under(entity.getAge17under());
         dto.setAge1844(entity.getAge1844());
         dto.setAge4564(entity.getAge4564());
         dto.setAgeOver65(entity.getAgeOver65());

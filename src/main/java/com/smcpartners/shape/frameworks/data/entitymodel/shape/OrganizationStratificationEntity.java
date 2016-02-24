@@ -29,6 +29,7 @@ public class OrganizationStratificationEntity {
     private int id;
     private Integer genderMale;
     private Integer genderFemale;
+    private Integer age17under;
     private Integer age1844;
     private Integer age4564;
     private Integer ageOver65;
@@ -110,6 +111,16 @@ public class OrganizationStratificationEntity {
 
     public void setGenderFemale(Integer genderFemale) {
         this.genderFemale = genderFemale;
+    }
+
+    @Basic
+    @Column(name = "age_17_under", nullable = true, insertable = true, updatable = true)
+    public Integer getAge17under() {
+        return age17under;
+    }
+
+    public void setAge17under(Integer age17under) {
+        this.age17under = age17under;
     }
 
     @Basic
@@ -541,7 +552,7 @@ public class OrganizationStratificationEntity {
     }
 
     @Basic
-    @Column(name = "vendor", nullable = true, insertable = true, updatable = true, length = 255, columnDefinition = "VARCHAR(1) default \'\'")
+    @Column(name = "vendor", nullable = true, insertable = true, updatable = true, length = 255, columnDefinition = "VARCHAR(50) default \'\'")
     public String getVendor() {
         return vendor;
     }
@@ -551,7 +562,7 @@ public class OrganizationStratificationEntity {
     }
 
     @Basic
-    @Column(name = "product", nullable = true, insertable = true, updatable = true, length = 255, columnDefinition = "VARCHAR(1) default \'\'")
+    @Column(name = "product", nullable = true, insertable = true, updatable = true, length = 255, columnDefinition = "VARCHAR(50) default \'\'")
     public String getProduct() {
         return product;
     }
@@ -561,7 +572,7 @@ public class OrganizationStratificationEntity {
     }
 
     @Basic
-    @Column(name = "ehr_version", nullable = true, insertable = true, updatable = true, length = 255, columnDefinition = "VARCHAR(1) default \'\'")
+    @Column(name = "ehr_version", nullable = true, insertable = true, updatable = true, length = 255, columnDefinition = "VARCHAR(50) default \'\'")
     public String getVersionEHR() {
         return versionEHR;
     }

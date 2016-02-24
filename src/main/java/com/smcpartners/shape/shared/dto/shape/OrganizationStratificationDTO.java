@@ -20,6 +20,7 @@ public class OrganizationStratificationDTO implements Serializable {
     private int id;
     private int genderMale;
     private int genderFemale;
+    private int age17under;
     private int age1844;
     private int age4564;
     private int ageOver65;
@@ -481,6 +482,14 @@ public class OrganizationStratificationDTO implements Serializable {
 
     public void setPatientPortal(boolean patientPortal) {
         this.patientPortal = patientPortal;
+    }
+
+    public int getAge17under() {
+        return age17under;
+    }
+
+    public void setAge17under(int age17under) {
+        this.age17under = age17under;
     }
 }
 
