@@ -114,7 +114,7 @@ public class OrganizationStratificationEntity {
     }
 
     @Basic
-    @Column(name = "age_17_under", nullable = true, insertable = true, updatable = true)
+    @Column(name = "age_17_under", nullable = true, insertable = true, updatable = true, columnDefinition="INT(11) default 0")
     public Integer getAge17under() {
         return age17under;
     }

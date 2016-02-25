@@ -44,7 +44,7 @@ public class EditMeasureServiceAdapter implements EditMeasureService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN})
     public BooleanValueDTO editMeasure(MeasureDTO org) throws UseCaseException {
         try {
             measureDAO.update(org, org.getId());
