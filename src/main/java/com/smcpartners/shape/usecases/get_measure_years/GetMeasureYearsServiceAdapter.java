@@ -44,7 +44,7 @@ public class GetMeasureYearsServiceAdapter implements GetMeasureYearsService {
 
             if (measureList != null) {
                 for (OrganizationMeasureDTO mL : measureList) {
-                    if (mL.getReportPeriodYear() != null) {
+                    if (mL.getReportPeriodYear() != null && mL.getMeasureId() == measureId) {
                         retLst.add(mL.getReportPeriodYear());
                     }
                 }
