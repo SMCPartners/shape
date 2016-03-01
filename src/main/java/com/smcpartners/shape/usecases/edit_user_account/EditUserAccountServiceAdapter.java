@@ -34,7 +34,8 @@ public class EditUserAccountServiceAdapter implements EditUserAccountService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
+    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED,
+                                        SecurityRoleEnum.DPH_USER})
     public BooleanValueDTO editUserAccount(UserDTO user) throws UseCaseException {
         try {
             userDAO.update(user, user.getId());

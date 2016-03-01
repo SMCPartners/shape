@@ -22,3 +22,5 @@ public interface ShowAggregateComparisonService {
     List<List<Object>> showAggregateComparison(@PathParam("measureId") int measureId,
                                              @PathParam("year") int year) throws UseCaseException;
 }
+
+
