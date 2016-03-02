@@ -19,11 +19,11 @@ import java.util.List;
  * Changes:<b/>
  */
 @Path("/admin")
-public interface FindMeasureByIdService {
+public interface FindMeasuresByIdService {
 
     @POST
     @Path("/find/measureById")
     @Produces("application/json")
     @Consumes("application/json")
-    List<MeasureDTO> findMeasureById(List<OrganizationMeasureDTO> orgM) throws UseCaseException;
+    List<MeasureDTO> findMeasuresById(List<OrganizationMeasureDTO> orgM) throws UseCaseException;
 }

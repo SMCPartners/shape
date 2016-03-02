@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  * Changes:<b/>
  */
 @RequestScoped
-public class FindMeasureByIdServiceAdapter implements FindMeasureByIdService {
+public class FindMeasuresByIdServiceAdapter implements FindMeasuresByIdService {
 
     @Inject
     private Logger log;
@@ -39,12 +39,12 @@ public class FindMeasureByIdServiceAdapter implements FindMeasureByIdService {
     @Inject
     private RequestScopedUserId requestScopedUserId;
 
-    public FindMeasureByIdServiceAdapter() {
+    public FindMeasuresByIdServiceAdapter() {
     }
 
     @Override
     @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
-    public List<MeasureDTO> findMeasureById(List<OrganizationMeasureDTO> orgM) throws UseCaseException {
+    public List<MeasureDTO> findMeasuresById(List<OrganizationMeasureDTO> orgM) throws UseCaseException {
         try {
 
             // create LinkedHashSet
