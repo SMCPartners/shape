@@ -9,6 +9,7 @@ import com.smcpartners.shape.frameworks.data.exceptions.DataAccessException;
  */
 public interface CrudDAO<T, K> {
 
+
     /**
      * Create a new instance
      *

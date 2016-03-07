@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 Shape Server Documentation
 ===
 
@@ -12,9 +11,4 @@ Shape Server Documentation
 ## 3. Business Layer Usecases
 ### 3.1
 
-## 4. Cross cutting concerns 
-
-=======
-# shape
-Shape dashboard
->>>>>>> origin/master
+## 4. Cross cutting concerns
