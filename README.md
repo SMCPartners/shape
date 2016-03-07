@@ -12,3 +12,6 @@ Shape Server Documentation
 ### 3.1
 
 ## 4. Cross cutting concerns
+
+# License
+This software is licensed under the MIT License (http://opensource.org/licenses/mit-license.php). See the accompanying license file.
