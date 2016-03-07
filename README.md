@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Shape Server Documentation
 ===
 
@@ -13,3 +14,7 @@ Shape Server Documentation
 
 ## 4. Cross cutting concerns 
 
+=======
+# shape
+Shape dashboard
+>>>>>>> origin/master
