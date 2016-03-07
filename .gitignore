@@ -22,3 +22,7 @@ gradle/*
 
 # Ignore local settings
 settings.gradle
+
+extras
+
+rest-tests
