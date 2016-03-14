@@ -38,7 +38,7 @@ public class FindAllProvidersServiceAdapter implements FindAllProvidersService {
     }
 
     /**
-     * Return a list of providers. The ADMIN and UMASS_USER can see all providers.
+     * Return a list of providers. The ADMIN and DPH_USER can see all providers.
      * The ORG_ADMIN and REGISTERED user can only see providers associated
      * with there organization.
      *
