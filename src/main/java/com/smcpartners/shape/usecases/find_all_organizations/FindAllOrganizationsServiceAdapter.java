@@ -71,14 +71,10 @@ public class FindAllOrganizationsServiceAdapter implements FindAllOrganizationsS
                     dto.setPrimaryContactEmail(l.getPrimaryContactEmail());
                     dto.setPrimaryContactRole(l.getPrimaryContactRole());
                     retLst.add(dto);
-
                 });
             } else if (SecurityRoleEnum.ORG_ADMIN == reqUserRole || SecurityRoleEnum.REGISTERED == reqUserRole){
-                // Find the user
-                UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
-
                 // Find the organization
-                OrganizationDTO orgDTO = organizationDAO.findById(reqUser.getOrganizationId());
+                OrganizationDTO orgDTO = organizationDAO.findById(user.getOrganizationId());
 
                 // Add to lst
                 OrganizationDTO dto = new OrganizationDTO();
@@ -99,7 +95,7 @@ public class FindAllOrganizationsServiceAdapter implements FindAllOrganizationsS
 
             return retLst;
         } catch (Exception e) {
-            log.logp(Level.SEVERE, this.getClass().getName(), "findAllOrganizationNames", e.getMessage(), e);
+            log.logp(Level.SEVERE, this.getClass().getName(), "findAllOrganizations", e.getMessage(), e);
             throw new UseCaseException(e.getMessage());
         }
     }
