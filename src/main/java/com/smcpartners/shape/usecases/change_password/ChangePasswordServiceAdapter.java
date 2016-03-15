@@ -54,10 +54,10 @@ public class ChangePasswordServiceAdapter implements ChangePasswordService {
                                 user.getQuestionTwo(), user.getAnswerOne(), user.getAnswerTwo());
                     }
                 }else{
-                    throw new UseCaseException("Did not meet regex");
+                    throw new UseCaseException("The new password you entered did not meet the required format.");
                 }
             }else{
-                throw new UseCaseException("Not a valid user");
+                throw new UseCaseException("Your current password is not correct.");
             }
             //returns true if new password uses correct regex and is a valid user
             return new BooleanValueDTO(true);

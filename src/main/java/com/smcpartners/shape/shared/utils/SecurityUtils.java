@@ -23,6 +23,11 @@ import java.util.Base64;
  * Responsibilities:<br/>
  * 1. Utilities used in application security<br/>
  *
+ * <p>
+ * Changes:<br/>
+ * 1. Capitalized REGEXP - jjdestef3 - 3/15/16<br/>
+ * </p>
+ *
  * @author John DeStefano
  * @version 1.0
  * @since May 26, 2013
@@ -36,7 +41,7 @@ public class SecurityUtils {
      * One number, one lower case letter, one uppercase letter, one special character (?, !)
      *
      */
-    private static String regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).{6,10}";
+    private static String REGEXP = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\\s).{6,10}";
 
     /**
      * From a base 64 representation, returns the corresponding byte[]
@@ -149,7 +154,7 @@ public class SecurityUtils {
      * @throws Exception
      */
     public static boolean checkPasswordCompliance(String pwd) throws Exception {
-        boolean valid = pwd.matches(regexp);
+        boolean valid = pwd.matches(REGEXP);
         return valid;
     }
 
