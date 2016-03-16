@@ -7,11 +7,13 @@ import com.smcpartners.shape.shared.dto.common.UsecaseResponse;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Various helper methods to support use cases
  * <p>
  * Created by johndestefano on 11/3/15.
  * <p>
+ * <p>
  * Changes:<b/>
+ * </p>
  */
 public class UCHelpers {
 

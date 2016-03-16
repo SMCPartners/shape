@@ -1,7 +1,7 @@
 package com.smcpartners.shape.usecases.find_all_providers;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.ProviderDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
@@ -17,7 +17,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by bhokanson on 12/4/2015.
+ * Responsible:</br>
+ * 1. Return a list of providers. The ADMIN and DPH_USER can see all providers.
+ * The ORG_ADMIN and REGISTERED user can only see providers associated
+ * with there organization</br>
+ * <p>
+ * Created by johndestefano on 3/15/16.
+ * </p>
+ * <p>
+ * Changes:</br>
+ * 1. </br>
+ * </p>
  */
 @RequestScoped
 public class FindAllProvidersServiceAdapter implements FindAllProvidersService {
@@ -46,7 +56,7 @@ public class FindAllProvidersServiceAdapter implements FindAllProvidersService {
      * @throws UseCaseException
      */
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public List<ProviderDTO> findAllProviders() throws UseCaseException {
         try {
             // Get the requester role from the security token

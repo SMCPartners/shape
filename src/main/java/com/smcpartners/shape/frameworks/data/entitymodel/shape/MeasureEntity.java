@@ -4,12 +4,10 @@ import javax.persistence.*;
 
 /**
  * Responsible:</br>
- * 1. </br>
+ * 1.  Entity</br>
  * <p>
- * <p>
- * Created by johndestefano on 10/28/15.
+ * Created by johndestefano on 3/15/16.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>

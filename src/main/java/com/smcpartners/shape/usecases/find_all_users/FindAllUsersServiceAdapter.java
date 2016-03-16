@@ -2,11 +2,11 @@ package com.smcpartners.shape.usecases.find_all_users;
 
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
+import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -18,11 +18,10 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. The ADMIN role can see everybody. The ORG_ADMIN can see others in their ORG
+ * Everyone else gets nothing
  * <p>
  * Created by johndestefano on 9/11/15.
- * <p>
- * <p>
  * <p>
  * Changes:<b/>
  * </p>
@@ -49,7 +48,7 @@ public class FindAllUsersServiceAdapter implements FindAllUsersService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN})
     public List<UserDTO> findAllUser() throws UseCaseException {
         try {
             List<UserDTO> lst = null;

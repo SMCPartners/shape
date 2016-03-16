@@ -6,7 +6,7 @@ import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Support contract between use case and adapter
  * <p>
  * Created by johndestefano on 11/3/15.
  * <p>

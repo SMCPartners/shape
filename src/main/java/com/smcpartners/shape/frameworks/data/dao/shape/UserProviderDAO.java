@@ -5,12 +5,10 @@ import com.smcpartners.shape.shared.dto.shape.UserProviderDTO;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1. Handle CRUD and other data related activities for the UserProvider</br>
  * <p>
  * Created by johndestefano on 10/29/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>

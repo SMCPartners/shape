@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Filters http requests. Used for debugging.
  * <p>
  * Created by johndestefano on 10/15/15.
  * <p>

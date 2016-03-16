@@ -8,11 +8,13 @@ import java.lang.annotation.Target;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Annotate a use case with this if required
  * <p>
  * Created by johndestefano on 10/14/15.
+ * </p>
  * <p>
  * Changes:<b/>
+ * </p>
  */
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)

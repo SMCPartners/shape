@@ -4,7 +4,15 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Created by johndestefano on 9/23/15.
+ * Responsible:</br>
+ * 1. Entity</br>
+ * <p>
+ * Created by johndestefano on 3/15/16.
+ * </p>
+ * <p>
+ * Changes:</br>
+ * 1. </br>
+ * </p>
  */
 @NamedQueries({
         @NamedQuery(name = "ClickLog.findByUser",

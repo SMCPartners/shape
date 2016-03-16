@@ -18,15 +18,13 @@ import java.lang.annotation.*;
 
 /**
  * Responsible:</br>
- * 1. </br
+ * 1. Annotation used as part of the security archeticture</br>
  * <p>
- * <p>
- * Created by johndestefano on 9/14/15.
+ * Created by johndestefano on 3/15/16.
  * </p>
  * <p>
- * <p>
- * Changes:<br>
- * 1.
+ * Changes:</br>
+ * 1. </br>
  * </p>
  */
 @Retention(value = RetentionPolicy.RUNTIME)

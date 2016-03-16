@@ -2,7 +2,7 @@ package com.smcpartners.shape.shared.dto.shape.response;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. DTO
  * <p>
  * Created by johndestefano on 11/5/15.
  * <p>

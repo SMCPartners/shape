@@ -11,7 +11,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 /**
- * Created by johndestefano on 9/14/15.
+ * Responsible:</br>
+ * 1.  Support REST framework</br>
+ * <p>
+ * Created by johndestefano on 3/15/16.
+ * </p>
+ * <p>
+ * Changes:</br>
+ * 1. </br>
+ * </p>
  */
 @Path("/common")
 public interface AuthLoginService {

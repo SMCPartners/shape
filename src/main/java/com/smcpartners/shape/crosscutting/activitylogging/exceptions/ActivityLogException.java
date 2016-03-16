@@ -2,12 +2,10 @@ package com.smcpartners.shape.crosscutting.activitylogging.exceptions;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1. An exception throw due to an error when logging an activity.</br>
  * <p>
  * Created by johndestefano on 9/30/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>

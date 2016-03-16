@@ -22,7 +22,7 @@ import java.util.logging.Level;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1.  Implements UserDAO
  * <p>
  * Created by johndestefano on 9/10/15.
  * <p>

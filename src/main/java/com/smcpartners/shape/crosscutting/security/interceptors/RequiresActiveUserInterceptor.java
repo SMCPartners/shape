@@ -14,7 +14,6 @@ import javax.interceptor.InvocationContext;
  * Responsible:</br>
  * 1. Check that user is logged in.</br>
  * <p>
- * <p>
  * Created by johndestefano on 9/29/15.
  * </p>
  * <p>

@@ -1,13 +1,13 @@
 package com.smcpartners.shape.usecases.add_organization;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
+import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.shape.OrganizationDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.dto.shape.response.IntEntityResponseDTO;
-import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Only ADMIN can add an organization
  * <p>
  * Created by johndestefano on 11/4/15.
  * <p>
@@ -44,7 +44,7 @@ public class AddOrganizationServiceAdapter implements AddOrganizationService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN})
     public IntEntityResponseDTO addOrganization(OrganizationDTO org) throws UseCaseException {
         try {
             // Only ADMIN can add organizations

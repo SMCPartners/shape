@@ -3,18 +3,14 @@ package com.smcpartners.shape.usecases.reset_password;
 import com.smcpartners.shape.crosscutting.email.MailDTO;
 import com.smcpartners.shape.crosscutting.email.SendMailService;
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
-import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.common.UsecaseRequest;
 import com.smcpartners.shape.shared.dto.common.UsecaseResponse;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.dto.shape.request.PasswordUpdateRequestDTO;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
-import com.smcpartners.shape.shared.utils.SecurityUtils;
 import com.smcpartners.shape.shared.utils.UCHelpers;
-import com.smcpartners.shape.usecases.activate_organization.ActivateOrganizationUsecaseAdapter;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -58,7 +54,7 @@ public class ResetPasswordServiceAdapter implements ResetPasswordService, ResetP
     }
 
     @Override
-   // @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.REGISTERED, SecurityRoleEnum.ORG_ADMIN})
+    // @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.REGISTERED, SecurityRoleEnum.ORG_ADMIN})
     public BooleanValueDTO resetPassword(PasswordUpdateRequestDTO userReq) throws UseCaseException {
         try {
             // Request needs the organization id

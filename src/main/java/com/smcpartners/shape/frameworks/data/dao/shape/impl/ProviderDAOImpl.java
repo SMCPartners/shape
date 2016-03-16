@@ -4,11 +4,9 @@ import com.diffplug.common.base.Errors;
 import com.smcpartners.shape.frameworks.data.dao.shape.ProviderDAO;
 import com.smcpartners.shape.frameworks.data.entitymodel.shape.OrganizationEntity;
 import com.smcpartners.shape.frameworks.data.entitymodel.shape.ProviderEntity;
-import com.smcpartners.shape.frameworks.data.entitymodel.shape.UserEntity;
 import com.smcpartners.shape.frameworks.data.exceptions.DataAccessException;
 import com.smcpartners.shape.frameworks.producers.annotations.ShapeDatabase;
 import com.smcpartners.shape.shared.dto.shape.ProviderDTO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -20,12 +18,10 @@ import java.util.logging.Level;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1.  Implements ProviderDAO</br>
  * <p>
  * Created by johndestefano on 10/29/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>

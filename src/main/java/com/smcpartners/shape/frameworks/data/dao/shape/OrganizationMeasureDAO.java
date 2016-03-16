@@ -8,12 +8,10 @@ import java.util.List;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1. Handle CRUD and other data related activities for the OrganizationMeasure</br>
  * <p>
  * Created by johndestefano on 10/29/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>
@@ -42,7 +40,16 @@ public interface OrganizationMeasureDAO extends CrudDAO<OrganizationMeasureDTO, 
      * @return
      * @throws DataAccessException
      */
-
     List<OrganizationMeasureDTO> findOrgMeasureByMeasureIdAndYear(int measureId, int year) throws DataAccessException;
+
+    /**
+     *
+     * @param measureId
+     * @param year
+     * @return
+     * @throws DataAccessException
+     */
+    List<OrganizationMeasureDTO> findOrgMeasureByMeasureIdAndYearAndOrg(int measureId, int year, int orgId) throws DataAccessException;
+
 
 }

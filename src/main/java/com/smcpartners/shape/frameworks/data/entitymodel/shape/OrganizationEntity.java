@@ -5,12 +5,10 @@ import java.util.Date;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1.  Entity </br>
  * <p>
  * Created by johndestefano on 10/28/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>

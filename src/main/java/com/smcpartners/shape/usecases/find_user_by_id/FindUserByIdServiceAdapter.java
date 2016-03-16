@@ -1,10 +1,11 @@
 package com.smcpartners.shape.usecases.find_user_by_id;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
+import com.smcpartners.shape.shared.dto.shape.UserDTO;
+import com.smcpartners.shape.shared.usecasecommon.IllegalAccessException;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -15,12 +16,10 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:</br>
- * 1. </br
- * <p>
+ * 1. ADMIN and DPH_USER can find any user. ORG_ADMIN and REGISTERED user can only find users in their organization.</br
  * <p>
  * Created by johndestefano on 9/28/15.
  * </p>
- * <p>
  * <p>
  * Changes:<br>
  * 1.
@@ -45,7 +44,7 @@ public class FindUserByIdServiceAdapter implements FindUserByIdService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED,
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED,
                                         SecurityRoleEnum.DPH_USER})
     public UserDTO findUser(String targetUserId) throws UseCaseException {
         try {
@@ -53,19 +52,19 @@ public class FindUserByIdServiceAdapter implements FindUserByIdService {
             // ORG_ADMIN can only see users in their ORG
             SecurityRoleEnum reqUserRole = SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole());
 
-            UserDTO u = null;
-            if (SecurityRoleEnum.ADMIN == reqUserRole) {
-                u = userDAO.findById(targetUserId);
+            if (SecurityRoleEnum.ADMIN == reqUserRole || SecurityRoleEnum.DPH_USER == reqUserRole) {
+                return userDAO.findById(targetUserId);
             } else {
                 UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
                 UserDTO targetUser = userDAO.findById(targetUserId);
 
                 if (targetUser.getOrganizationId() == reqUser.getOrganizationId()) {
-                    u = targetUser;
+                    return targetUser;
+                } else {
+                    throw new IllegalAccessException();
                 }
-
             }
-            return u;
+
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "findUser", e.getMessage(), e);
             throw new UseCaseException(e.getMessage());

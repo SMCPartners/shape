@@ -17,12 +17,10 @@ import java.util.logging.Level;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1.  Implements OrganizationDAO</br>
  * <p>
  * Created by johndestefano on 10/29/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>

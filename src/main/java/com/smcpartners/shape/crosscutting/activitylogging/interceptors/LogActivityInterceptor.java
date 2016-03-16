@@ -10,12 +10,10 @@ import javax.interceptor.InvocationContext;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1. Interceptor used with logging. Currently not being used.</br>
  * <p>
  * Created by johndestefano on 9/30/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>

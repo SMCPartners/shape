@@ -1,13 +1,13 @@
 package com.smcpartners.shape.usecases.add_organization_measure;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationMeasureDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
+import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.shape.OrganizationMeasureDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.dto.shape.response.IntEntityResponseDTO;
-import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -19,7 +19,8 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. ADMIN can add for any organization organizations.
+ * ORG_ADMIN and REGISTERED can only add for their organizations<br/>
  * <p>
  * Created by johndestefano on 11/4/15.
  * <p>
@@ -45,7 +46,7 @@ public class AddOrganizationMeasureServiceAdapter implements AddOrganizationMeas
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public IntEntityResponseDTO addOrganizationMeasure(OrganizationMeasureDTO org) throws UseCaseException {
         try {
             // ADMIN can add for any organization organizations

@@ -19,12 +19,10 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:</br>
- * 1. </br
- * <p>
+ * 1. Supports the validation, creation, and extension of JWTs</br
  * <p>
  * Created by johndestefano on 9/14/15.
  * </p>
- * <p>
  * <p>
  * Changes:<br>
  * 1.

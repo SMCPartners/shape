@@ -10,7 +10,15 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
 /**
- * Created by bryanhokanson on 3/2/16.
+ * Responsible:</br>
+ * 1.  Support REST framework</br>
+ * <p>
+ * Created by johndestefano on 3/15/16.
+ * </p>
+ * <p>
+ * Changes:</br>
+ * 1. </br>
+ * </p>
  */
 @Path("/common")
 public interface FindMeasureByIdService {

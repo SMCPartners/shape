@@ -17,10 +17,8 @@ import java.util.logging.Logger;
  * Responsible:</br>
  * 1. Process messages on the JumpActivityQueue</br>
  * <p>
- * <p>
  * Created by johndestefano on 10/3/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>
@@ -38,6 +36,11 @@ public class ShapeActivityQueueMDB implements MessageListener {
     @EJB
     private ClickLogDAO clickLogDAO;
 
+    /**
+     * Message processing method
+     *
+     * @param message
+     */
     @Override
     public void onMessage(Message message) {
         try {

@@ -15,15 +15,13 @@ import java.lang.annotation.*;
 
 /**
  * Responsible:</br>
- * 1. </br
+ * 1. Used with a ServerUserToken when using session based security</br>
  * <p>
- * <p>
- * Created by johndestefano on 9/28/15.
+ * Created by johndestefano on 3/15/16.
  * </p>
  * <p>
- * <p>
- * Changes:<br>
- * 1.
+ * Changes:</br>
+ * 1. </br>
  * </p>
  */
 @Target({ElementType.METHOD, ElementType.TYPE, ElementType.PARAMETER, ElementType.FIELD})

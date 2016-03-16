@@ -5,12 +5,10 @@ import java.util.Date;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1. Holds data for the ClickLog</br>
  * <p>
  * Created by johndestefano on 10/3/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>
@@ -19,11 +17,14 @@ import java.util.Date;
 public class ClickLogDTO implements Serializable {
     private String userId;
     private int clickLogId;
+
     /**
-     * Limit to 255 characters!
+     * Limit to 255 characters! This is usually the long class name of the method being invoked.
      */
     private String event;
+
     private Date eventDt;
+
     private String additionalInfo;
 
     public ClickLogDTO() {

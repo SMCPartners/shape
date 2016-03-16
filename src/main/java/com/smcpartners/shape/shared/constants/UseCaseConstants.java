@@ -2,7 +2,7 @@ package com.smcpartners.shape.shared.constants;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Constants used to support use cases
  * <p>
  * Created by johndestefano on 11/13/15.
  * <p>

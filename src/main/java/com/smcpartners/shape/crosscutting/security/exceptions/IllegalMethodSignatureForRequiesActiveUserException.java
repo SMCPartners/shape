@@ -8,10 +8,8 @@ import java.rmi.RemoteException;
  * 2. This exception is thrown if the method being called does not have the
  * userid as the first parameter.</br>
  * <p>
- * <p>
  * Created by johndestefano on 9/29/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * </p>

@@ -11,12 +11,10 @@ import javax.jms.JMSContext;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1. Puts ClickLogDTO messages on the ShapeActivityQueue</br>
  * <p>
  * Created by johndestefano on 10/3/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>

@@ -10,12 +10,10 @@ import javax.ws.rs.ext.Provider;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1. Maps an activity log exception.</br>
  * <p>
  * Created by johndestefano on 9/30/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>

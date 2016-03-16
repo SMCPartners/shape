@@ -4,7 +4,7 @@ import com.smcpartners.shape.shared.constants.UseCaseConstants;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Returned from a use case
  * <p>
  * Created by johndestefano on 10/7/15.
  * <p>
@@ -12,9 +12,20 @@ import com.smcpartners.shape.shared.constants.UseCaseConstants;
  */
 public class UsecaseResponse extends RequestResponse {
 
+    /**
+     * Any exception thrown in the use case
+     */
     private Exception error;
+
+    /**
+     * Custom error message from a use case
+     */
     private String errMsg;
     private String responseCode;
+
+    /**
+     * Return object from a use case invocation
+     */
     private Object response;
 
     public UsecaseResponse() {

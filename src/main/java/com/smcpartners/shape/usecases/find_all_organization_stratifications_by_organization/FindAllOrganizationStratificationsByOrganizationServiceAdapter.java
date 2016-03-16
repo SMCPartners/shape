@@ -1,12 +1,13 @@
 package com.smcpartners.shape.usecases.find_all_organization_stratifications_by_organization;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationStratificationDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
+import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.shape.OrganizationStratificationDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
-import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
+import com.smcpartners.shape.shared.usecasecommon.IllegalAccessException;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -43,7 +44,7 @@ public class FindAllOrganizationStratificationsByOrganizationServiceAdapter impl
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public List<OrganizationStratificationDTO> findAllOrganizationStratificationsByOrg(int orgId)throws UseCaseException {
         try {
             // Admin can see all
@@ -61,7 +62,7 @@ public class FindAllOrganizationStratificationsByOrganizationServiceAdapter impl
                             reqRole == SecurityRoleEnum.REGISTERED ))) {
                 return organizationStratificationDAO.findAllOrganizationStratificationByOrgId(orgId);
             } else {
-                throw new Exception("You are not authorized to perform this function.");
+                throw new IllegalAccessException();
             }
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "findAllOrganizationMeasuresByOrg", e.getMessage(), e);

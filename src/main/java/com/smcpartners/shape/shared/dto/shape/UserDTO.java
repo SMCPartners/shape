@@ -5,11 +5,13 @@ import java.util.Date;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. DTO
  * <p>
  * Created by johndestefano on 9/11/15.
+ * </p>
  * <p>
  * Changes:<b/>
+ * </p>
  */
 public class UserDTO implements Serializable {
     private String id;

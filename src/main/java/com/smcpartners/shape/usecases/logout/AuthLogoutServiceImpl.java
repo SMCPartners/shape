@@ -1,6 +1,6 @@
 package com.smcpartners.shape.usecases.logout;
 
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
@@ -30,12 +30,12 @@ public class AuthLogoutServiceImpl implements AuthLogoutService {
     private Logger log;
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.REGISTERED})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.REGISTERED})
     public Response logout(String userId) throws UseCaseException {
         try {
             return Response.status(Response.Status.OK).build();
         } catch (Exception e) {
-            log.logp(Level.SEVERE, this.getClass().getName(), "addUser", e.getMessage(), e);
+            log.logp(Level.SEVERE, this.getClass().getName(), "logout", e.getMessage(), e);
             throw new UseCaseException(e.getMessage());
         }
     }

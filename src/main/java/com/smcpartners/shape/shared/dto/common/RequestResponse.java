@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Base class for request and response
  * <p>
  * Created by johndestefano on 10/7/15.
  * <p>

@@ -7,7 +7,15 @@ import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 import javax.ws.rs.*;
 
 /**
- * Created by johndestefano on 9/28/15.
+ * Responsible:</br>
+ * 1.  Support REST framework</br>
+ * <p>
+ * Created by johndestefano on 3/15/16.
+ * </p>
+ * <p>
+ * Changes:</br>
+ * 1. </br>
+ * </p>
  */
 @Path("/admin")
 public interface SelectMeasureService {

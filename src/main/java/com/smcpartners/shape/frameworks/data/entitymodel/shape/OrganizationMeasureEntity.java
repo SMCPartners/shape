@@ -5,12 +5,10 @@ import java.util.Date;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1. Entity</br>
  * <p>
  * Created by johndestefano on 10/28/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>
@@ -26,7 +24,11 @@ import java.util.Date;
                         "WHERE o.organizationByOrganizationId = :org"),
         @NamedQuery(name = "OrganizationMeasure.findByMeasAndYear",
                 query = "SElECT OBJECT(o) FROM OrganizationMeasureEntity o " +
-                        "WHERE o.reportPeriodYear = :year AND o.measureByMeasureId = :meas")
+                        "WHERE o.reportPeriodYear = :year AND o.measureByMeasureId = :meas"),
+        @NamedQuery(name = "OrganizationMeasure.findByMeasYearOrg",
+                query = "SElECT OBJECT(o) FROM OrganizationMeasureEntity o " +
+                        "WHERE o.reportPeriodYear = :year AND o.measureByMeasureId = :meas " +
+                        "AND o.organizationByOrganizationId = :org")
 })
 public class OrganizationMeasureEntity {
     private int id;

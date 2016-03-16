@@ -4,12 +4,10 @@ import java.io.Serializable;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1. Indicates a positive return from a use case</br>
  * <p>
  * Created by johndestefano on 10/6/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>

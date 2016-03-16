@@ -1,12 +1,12 @@
 package com.smcpartners.shape.usecases.unselect_measure;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.MeasureDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
+import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.request.IntEntityIdRequestDTO;
-import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:</br>
- * 1. </br
+ * 1. An ADMIN user can unselect a measure</br
  * <p>
  * <p>
  * Created by johndestefano on 9/28/15.
@@ -50,18 +50,11 @@ public class UnselectMeasureServiceAdapter implements UnselectMeasureService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN})
     public BooleanValueDTO unselectMeasure(IntEntityIdRequestDTO id) throws UseCaseException {
         try {
-            // The ADMIN can select a measure
-            SecurityRoleEnum reqUserRole = SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole());
-
-            if (SecurityRoleEnum.ADMIN == reqUserRole) {
-                measureDAO.changeMeasureSelectStatus(id.getEntId(), false);
-                return new BooleanValueDTO(true);
-            } else {
-                throw new Exception("You are not authorized to perform this function.");
-            }
+            measureDAO.changeMeasureSelectStatus(id.getEntId(), false);
+            return new BooleanValueDTO(true);
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "unselectMeasure", e.getMessage(), e);
             throw new UseCaseException(e.getMessage());

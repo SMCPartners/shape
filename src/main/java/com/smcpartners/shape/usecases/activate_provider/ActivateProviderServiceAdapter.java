@@ -1,13 +1,13 @@
 package com.smcpartners.shape.usecases.activate_provider;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.ProviderDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
+import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.dto.shape.request.IntEntityIdRequestDTO;
-import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. ADMIN and ORG_ADMON can activate a provider
  * <p>
  * Created by johndestefano on 11/4/15.
  * <p>
@@ -44,10 +44,9 @@ public class ActivateProviderServiceAdapter implements ActivateProviderService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
     public BooleanValueDTO activateProvider(IntEntityIdRequestDTO id) throws UseCaseException {
         try {
-            // Only ADMIN can activate an organization
             UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
             SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
             if (reqRole == SecurityRoleEnum.ADMIN || reqRole == SecurityRoleEnum.ORG_ADMIN) {

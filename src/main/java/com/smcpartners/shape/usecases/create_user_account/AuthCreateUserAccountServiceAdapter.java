@@ -3,15 +3,15 @@ package com.smcpartners.shape.usecases.create_user_account;
 import com.smcpartners.shape.crosscutting.email.MailDTO;
 import com.smcpartners.shape.crosscutting.email.SendMailService;
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
+import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.dto.shape.request.CreateUserRequestDTO;
 import com.smcpartners.shape.shared.dto.shape.response.CreateUserResponseDTO;
-import com.smcpartners.shape.shared.utils.RandomPasswordGenerator;
-import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
+import com.smcpartners.shape.shared.utils.RandomPasswordGenerator;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -22,7 +22,10 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. To set the ADMIN role you must be an ADMIN.
+ * To set the ORG_ADMIN role you must be and ADMIN or
+ * An ORG_ADMIN and the new user account must have the
+ * same org id and the user creating the account
  * <p>
  * Created by johndestefano on 11/2/15.
  * <p>
@@ -48,7 +51,7 @@ public class AuthCreateUserAccountServiceAdapter implements AuthCreateUserAccoun
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
     public CreateUserResponseDTO createUserAccount(CreateUserRequestDTO dto) throws UseCaseException {
         try {
             // Check account id to make sure its not in use

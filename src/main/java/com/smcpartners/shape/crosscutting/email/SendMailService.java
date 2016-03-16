@@ -11,12 +11,10 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1. EJB to send out emails. Uses the Apache commons email library</br>
  * <p>
  * Created by johndestefano on 10/6/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>
@@ -77,7 +75,7 @@ public class SendMailService {
     }
 
     /**
-     * Send a mail message
+     * Send an mail message
      *
      * @param mailDTO
      * @throws Exception

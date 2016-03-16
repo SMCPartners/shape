@@ -14,7 +14,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by bhokanson on 12/3/2015.
+ * Responsible:</br>
+ * 1. Request a password change. The user must provide the old password and a new password.</br>
+ * <p>
+ * Created by johndestefano on 3/15/16.
+ * </p>
+ * <p>
+ * Changes:</br>
+ * 1. </br>
+ * </p>
  */
 @RequestScoped
 public class ChangePasswordServiceAdapter implements ChangePasswordService {

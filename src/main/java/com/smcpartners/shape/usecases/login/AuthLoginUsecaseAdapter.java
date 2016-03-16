@@ -5,7 +5,7 @@ import com.smcpartners.shape.shared.usecasecommon.FrameworkUsecaseAdapter;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Supports contract between use case and adapter
  * <p>
  * Created by johndestefano on 10/9/15.
  * <p>

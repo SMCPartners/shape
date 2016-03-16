@@ -1,12 +1,12 @@
 package com.smcpartners.shape.usecases.find_all_organizations;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
+import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.shape.OrganizationDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
-import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. ADMIN and DPH_User roles can see all organizations. ORG_ADMIN and REGISTERED user can see only their organization
  * <p>
  * Created by johndestefano on 11/2/15.
  * <p>
@@ -44,7 +44,7 @@ public class FindAllOrganizationsServiceAdapter implements FindAllOrganizationsS
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public List<OrganizationDTO> findAllOrganizations() throws UseCaseException {
         try {
             List<OrganizationDTO> retLst = new ArrayList<>();

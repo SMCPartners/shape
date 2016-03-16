@@ -1,7 +1,7 @@
 package com.smcpartners.shape.usecases.activate_organization;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
@@ -10,8 +10,8 @@ import com.smcpartners.shape.shared.dto.common.UsecaseRequest;
 import com.smcpartners.shape.shared.dto.common.UsecaseResponse;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.dto.shape.request.IntEntityIdRequestDTO;
-import com.smcpartners.shape.shared.utils.UCHelpers;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
+import com.smcpartners.shape.shared.utils.UCHelpers;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -55,7 +55,7 @@ public class ActivateOrganizationServiceAdapter implements ActivateOrganizationS
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN})
     public BooleanValueDTO activateOrganization(IntEntityIdRequestDTO id) throws UseCaseException {
         try {
             // Request needs the organization id

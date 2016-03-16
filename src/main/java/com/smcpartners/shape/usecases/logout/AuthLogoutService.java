@@ -11,12 +11,10 @@ import javax.ws.rs.core.Response;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1.  Support REST framework</br>
  * <p>
  * Created by johndestefano on 9/30/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>

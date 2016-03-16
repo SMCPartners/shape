@@ -10,7 +10,7 @@ import java.io.IOException;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Filters http responses. Used for debugging.
  * <p>
  * Created by johndestefano on 10/15/15.
  * <p>

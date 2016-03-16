@@ -1,8 +1,10 @@
 package com.smcpartners.shape.usecases.get_measure_years;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.MeasureDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationMeasureDAO;
+import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.shape.OrganizationMeasureDTO;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
@@ -14,7 +16,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by bryanhokanson on 2/26/16.
+ * Responsible:</br>
+ * 1. Any user can find the years a measure has been recorded</br>
+ * <p>
+ * Created by johndestefano on 3/15/16.
+ * </p>
+ * <p>
+ * Changes:</br>
+ * 1. </br>
+ * </p>
  */
 @RequestScoped
 public class GetMeasureYearsServiceAdapter implements GetMeasureYearsService {
@@ -26,7 +36,7 @@ public class GetMeasureYearsServiceAdapter implements GetMeasureYearsService {
     private MeasureDAO measureDAO;
 
     @EJB
-    private OrganizationMeasureDAO orgMDAO;
+    private OrganizationMeasureDAO organizationMeasureDAO;
 
     @Inject
     private RequestScopedUserId requestScopedUserId;
@@ -35,11 +45,12 @@ public class GetMeasureYearsServiceAdapter implements GetMeasureYearsService {
     }
 
     @Override
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED,
+            SecurityRoleEnum.DPH_USER})
     public List<Integer> getMeasureYears(int orgId, int measureId) throws UseCaseException {
         try {
 
-            List<OrganizationMeasureDTO> measureList = orgMDAO.findAllOrganizationMeasureByOrgId(orgId);
-
+            List<OrganizationMeasureDTO> measureList = organizationMeasureDAO.findAllOrganizationMeasureByOrgId(orgId);
             List<Integer> retLst = new ArrayList<>();
 
             if (measureList != null) {
@@ -59,7 +70,6 @@ public class GetMeasureYearsServiceAdapter implements GetMeasureYearsService {
             Collections.reverse(retLst);
 
             return retLst;
-
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "getMeasureYears", e.getMessage(), e);
             throw new UseCaseException(e.getMessage());

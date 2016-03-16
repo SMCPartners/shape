@@ -1,13 +1,14 @@
 package com.smcpartners.shape.usecases.delete_organization_measure;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationMeasureDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.OrganizationMeasureDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
+import com.smcpartners.shape.shared.usecasecommon.IllegalAccessException;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -17,7 +18,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Created by bryanhokanson on 12/21/15.
+ * Responsible:</br>
+ * 1. ADMIN can delete a measure for any organization. ORG_ADMIN or REGISTERED user can
+ * only delte for their organization</br>
+ * <p>
+ * Created by johndestefano on 3/15/16.
+ * </p>
+ * <p>
+ * Changes:</br>
+ * 1. </br>
+ * </p>
  */
 @RequestScoped
 public class DeleteOrganizationMeasureServiceAdapter implements DeleteOrganizationMeasureService {
@@ -39,10 +49,23 @@ public class DeleteOrganizationMeasureServiceAdapter implements DeleteOrganizati
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public BooleanValueDTO deleteOrganizationMeasure(OrganizationMeasureDTO org) throws UseCaseException {
         try {
+            SecurityRoleEnum role = SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole());
+
+            if (SecurityRoleEnum.ADMIN == role) {
                 organizationMeasureDAO.delete(org.getId());
+            } else {
+                // Not the ADMIN
+                UserDTO user = userDAO.findById(requestScopedUserId.getRequestUserId());
+                if (user.getOrganizationId() == org.getOrganizationId()) {
+                    organizationMeasureDAO.delete(org.getId());
+                } else {
+                    throw new IllegalAccessException();
+                }
+            }
+
             return new BooleanValueDTO(true);
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "editOrganizationMeasure", e.getMessage(), e);

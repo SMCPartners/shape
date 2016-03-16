@@ -1,6 +1,6 @@
 package com.smcpartners.shape.gateway.rest.mappedexceptions;
 
-import com.smcpartners.shape.crosscutting.security.exceptions.SecureRequireActiveLogAvtivityException;
+import com.smcpartners.shape.crosscutting.security.exceptions.SecureRequireActiveLogActivityException;
 import com.smcpartners.shape.shared.dto.common.ErrorMsgResponse;
 
 import javax.ws.rs.core.Response;
@@ -9,7 +9,7 @@ import javax.ws.rs.ext.Provider;
 
 /**
  * Responsible:</br>
- * 1. </br>
+ * 1. Maps a SecureRequireActiveLogAvtivityException</br>
  * <p>
  * <p>
  * Created by johndestefano on 10/2/15.
@@ -21,11 +21,11 @@ import javax.ws.rs.ext.Provider;
  * </p>
  */
 @Provider
-public class MappedSecureRequireActiveLogAvtivityException implements ExceptionMapper<SecureRequireActiveLogAvtivityException> {
+public class MappedSecureRequireActiveLogActivityException implements ExceptionMapper<SecureRequireActiveLogActivityException> {
 
     @Override
-    public Response toResponse(SecureRequireActiveLogAvtivityException exception) {
-        ErrorMsgResponse msg = new ErrorMsgResponse(ErrorMessagesEnum.SecureRequireActiveLogAvtivity_ERR.getCode(), Response.Status.UNAUTHORIZED.getStatusCode(),
+    public Response toResponse(SecureRequireActiveLogActivityException exception) {
+        ErrorMsgResponse msg = new ErrorMsgResponse(ErrorMessagesEnum.SecureRequireActiveLogActivity_ERR.getCode(), Response.Status.UNAUTHORIZED.getStatusCode(),
                 exception.getMessage());
         return Response.status(Response.Status.UNAUTHORIZED)
                 .entity(msg)

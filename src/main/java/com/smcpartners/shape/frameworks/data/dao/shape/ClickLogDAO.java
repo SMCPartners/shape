@@ -9,12 +9,10 @@ import java.util.List;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1. Handle CRUD and other data related activities for the ClickLog </br>
  * <p>
  * Created by johndestefano on 10/3/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>

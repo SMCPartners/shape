@@ -10,7 +10,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 /**
- * Created by bryanhokanson on 12/21/15.
+ * Responsible:</br>
+ * 1.  Support REST framework</br>
+ * <p>
+ * Created by johndestefano on 3/15/16.
+ * </p>
+ * <p>
+ * Changes:</br>
+ * 1. </br>
+ * </p>
  */
 @Path("/admin")
 public interface DeleteOrganizationMeasureService {

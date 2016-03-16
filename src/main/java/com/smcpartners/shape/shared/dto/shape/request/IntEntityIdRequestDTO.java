@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. DTO
  * <p>
  * Created by johndestefano on 11/4/15.
  * <p>

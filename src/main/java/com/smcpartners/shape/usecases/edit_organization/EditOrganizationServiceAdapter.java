@@ -1,13 +1,14 @@
 package com.smcpartners.shape.usecases.edit_organization;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
+import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.OrganizationDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
-import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
+import com.smcpartners.shape.shared.usecasecommon.IllegalAccessException;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -18,7 +19,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Only ADMIN or ORG_ADMIN can edi organizations. ORG_ADMIN can only edit there organization
  * <p>
  * Created by johndestefano on 11/4/15.
  * <p>
@@ -44,7 +45,7 @@ public class EditOrganizationServiceAdapter implements EditOrganizationService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
     public BooleanValueDTO editOrganization(OrganizationDTO org) throws UseCaseException {
         try {
             // Only ADMIN or ORG_ADMIN can edi organizations
@@ -55,7 +56,7 @@ public class EditOrganizationServiceAdapter implements EditOrganizationService {
                     (reqRole == SecurityRoleEnum.ORG_ADMIN && reqUser.getOrganizationId() == org.getId())) {
                 organizationDAO.update(org, org.getId());
             } else {
-                throw new Exception("You are not authorized to perform this function.");
+                throw new IllegalAccessException();
             }
 
             // Return value

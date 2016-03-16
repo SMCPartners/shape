@@ -5,12 +5,10 @@ import com.smcpartners.shape.shared.dto.shape.ProviderMeasureResponseDTO;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1. Handle CRUD and other data related activities for the ProviderMeasure</br>
  * <p>
  * Created by johndestefano on 10/29/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>

@@ -23,8 +23,8 @@ import java.util.logging.Logger;
  * userId of the invoker. This will be compared to the userId
  * value in the JWT token. If they don't match an error will be thrown.
  * <p>
- * <p>
  * Created by johndestefano on 9/14/15.
+ * </p>
  */
 @RequestScoped
 public class JWTSecurityAuthorizerWithUserIdParam {

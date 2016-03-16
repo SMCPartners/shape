@@ -11,7 +11,7 @@ import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Use case
  * <p>
  * Created by johndestefano on 10/9/15.
  * <p>

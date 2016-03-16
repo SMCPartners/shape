@@ -4,11 +4,11 @@ package com.smcpartners.shape.crosscutting.security.interceptors;
 import com.smcpartners.shape.crosscutting.activitylogging.ClickLogQueuer;
 import com.smcpartners.shape.crosscutting.activitylogging.dto.ClickLogDTO;
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
-import com.smcpartners.shape.crosscutting.security.exceptions.SecureRequireActiveLogAvtivityException;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
+import com.smcpartners.shape.crosscutting.security.exceptions.SecureRequireActiveLogActivityException;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
-import com.smcpartners.shape.shared.utils.JWTUtils;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
+import com.smcpartners.shape.shared.utils.JWTUtils;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -25,19 +25,22 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1. Checks for a valid token</br>
+ * 2. Gets the userid and role from the token<br/>
+ * 3. Validates the user<br/>
+ * 4. Makes sure the user is still active<br/>
+ * 5. Tests the use role against the sole allowed by the method being invoked<br/>
+ * 6. Logs the event<br/>
  * <p>
  * Created by johndestefano on 10/2/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>
  * </p>
  */
 @Interceptor
-@SecureRequireActiveLogAvtivity
+@SecureRequireActiveLogActivity
 public class SecureRequireActiveLogAvtivityInterceptor {
 
     @Inject
@@ -59,7 +62,7 @@ public class SecureRequireActiveLogAvtivityInterceptor {
     private ClickLogQueuer clickLogQueuer;
 
     @AroundInvoke
-    public Object runInterceptor(InvocationContext ctx) throws SecureRequireActiveLogAvtivityException {
+    public Object runInterceptor(InvocationContext ctx) throws SecureRequireActiveLogActivityException {
         try {
             // Get the token from the request scope
             String token = null;
@@ -83,7 +86,7 @@ public class SecureRequireActiveLogAvtivityInterceptor {
             // Check role
             if (role != null) {
                 // Get the allowed roles
-                SecureRequireActiveLogAvtivity secure = getCustomSecurityBindingAnnotation(ctx
+                SecureRequireActiveLogActivity secure = getCustomSecurityBindingAnnotation(ctx
                         .getMethod());
                 SecurityRoleEnum[] allowedRoles = secure.value();
                 boolean allowAccess = userInRole(allowedRoles, role);
@@ -115,7 +118,7 @@ public class SecureRequireActiveLogAvtivityInterceptor {
             return ctx.proceed();
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "runInterceptor", e.getMessage(), e);
-            throw new SecureRequireActiveLogAvtivityException(e.getMessage());
+            throw new SecureRequireActiveLogActivityException(e.getMessage());
         }
     }
 
@@ -144,18 +147,18 @@ public class SecureRequireActiveLogAvtivityInterceptor {
 
     }
 
-    private SecureRequireActiveLogAvtivity getCustomSecurityBindingAnnotation(Method m) {
+    private SecureRequireActiveLogActivity getCustomSecurityBindingAnnotation(Method m) {
         // Check method first
         for (Annotation a : m.getAnnotations()) {
-            if (a instanceof SecureRequireActiveLogAvtivity) {
-                return (SecureRequireActiveLogAvtivity) a;
+            if (a instanceof SecureRequireActiveLogActivity) {
+                return (SecureRequireActiveLogActivity) a;
             }
         }
 
         // Check type level producers next
         for (Annotation a : m.getDeclaringClass().getAnnotations()) {
-            if (a instanceof SecureRequireActiveLogAvtivity) {
-                return (SecureRequireActiveLogAvtivity) a;
+            if (a instanceof SecureRequireActiveLogActivity) {
+                return (SecureRequireActiveLogActivity) a;
             }
         }
 

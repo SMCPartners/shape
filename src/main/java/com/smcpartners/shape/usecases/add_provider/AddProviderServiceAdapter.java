@@ -1,13 +1,14 @@
 package com.smcpartners.shape.usecases.add_provider;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.ProviderDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
+import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.shape.ProviderDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.dto.shape.response.IntEntityResponseDTO;
-import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
+import com.smcpartners.shape.shared.usecasecommon.IllegalAccessException;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -18,7 +19,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. ADMIN and ORG_ADMIN can add a provider. If its and org admin the provider must be for their organization.
  * <p>
  * Created by johndestefano on 11/4/15.
  * <p>
@@ -44,21 +45,27 @@ public class AddProviderServiceAdapter implements AddProviderService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
     public IntEntityResponseDTO addProvider(ProviderDTO prov) throws UseCaseException {
         try {
             // Only ADMIN can add organizations
             UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
+            ProviderDTO provDTO = null;
 
-            if (SecurityRoleEnum.valueOf(reqUser.getRole()) == SecurityRoleEnum.ADMIN ||
-                   SecurityRoleEnum.valueOf(reqUser.getRole()) == SecurityRoleEnum.ORG_ADMIN) {
-                ProviderDTO provDTO = providerDAO.create(prov);
+            if (SecurityRoleEnum.valueOf(reqUser.getRole()) == SecurityRoleEnum.ADMIN) {
+                provDTO = providerDAO.create(prov);
                 return IntEntityResponseDTO.makeNew(provDTO.getId());
             } else {
-                throw new Exception("You are not authorized to perform this function.");
+                // ORG_ADMIN user
+                if (reqUser.getOrganizationId() == prov.getOrganizationId()) {
+                    provDTO = providerDAO.create(prov);
+                    return IntEntityResponseDTO.makeNew(provDTO.getId());
+                } else {
+                    throw new IllegalAccessException();
+                }
             }
         } catch (Exception e) {
-            log.logp(Level.SEVERE, this.getClass().getName(), "addOrganization", e.getMessage(), e);
+            log.logp(Level.SEVERE, this.getClass().getName(), "addProvider", e.getMessage(), e);
             throw new UseCaseException(e.getMessage());
         }
     }

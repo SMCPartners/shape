@@ -1,7 +1,7 @@
 package com.smcpartners.shape.usecases.show_app_hist_demographic;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.MeasureDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationMeasureDAO;
@@ -54,7 +54,7 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public List<AppHistDemographicsDTO> showAppHistDemographic(@PathParam("orgId") int orgId,
                                                                @PathParam("measureId") int measureId,
                                                                @PathParam("year") int year) throws UseCaseException {

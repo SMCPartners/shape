@@ -1,16 +1,16 @@
 package com.smcpartners.shape.shared.utils;
 
-import com.smcpartners.shape.shared.dto.common.UsecaseResponse;
-
 import java.util.Map;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Helper class to support DTO usage
  * <p>
  * Created by johndestefano on 10/7/15.
  * <p>
+ * <p>
  * Changes:<b/>
+ * </p>
  */
 public class Dtohelpers {
 

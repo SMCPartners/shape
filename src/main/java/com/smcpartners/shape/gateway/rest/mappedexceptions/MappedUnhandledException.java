@@ -9,12 +9,10 @@ import javax.ws.rs.ext.Provider;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1. Maps an unhandled exception</br>
  * <p>
  * Created by johndestefano on 10/2/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>
@@ -25,7 +23,7 @@ public class MappedUnhandledException implements ExceptionMapper<UnhandledExcept
 
     @Override
     public Response toResponse(UnhandledException exception) {
-        ErrorMsgResponse msg = new ErrorMsgResponse(ErrorMessagesEnum.SecureRequireActiveLogAvtivity_ERR.getCode(), Response.Status.UNAUTHORIZED.getStatusCode(),
+        ErrorMsgResponse msg = new ErrorMsgResponse(ErrorMessagesEnum.SecureRequireActiveLogActivity_ERR.getCode(), Response.Status.UNAUTHORIZED.getStatusCode(),
                 exception.getMessage());
         return Response.status(Response.Status.UNAUTHORIZED)
                 .entity(msg)

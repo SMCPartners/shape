@@ -11,10 +11,8 @@ import java.lang.annotation.*;
  * Responsible:</br>
  * 1. </br>
  * <p>
- * <p>
  * Created by johndestefano on 10/2/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>
@@ -24,6 +22,6 @@ import java.lang.annotation.*;
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
 @Documented
-public @interface SecureRequireActiveLogAvtivity {
+public @interface SecureRequireActiveLogActivity {
     @Nonbinding SecurityRoleEnum[] value() default {};
 }

@@ -19,12 +19,10 @@ import java.util.logging.Level;
 
 /**
  * Responsible:</br>
- * 1. </br>
- * <p>
+ * 1.  Implements OrganizationMaeasureDAO</br>
  * <p>
  * Created by johndestefano on 10/29/15.
  * </p>
- * <p>
  * <p>
  * Changes:</br>
  * 1. </br>
@@ -105,6 +103,32 @@ public class OrganizationMeasureDAOImpl extends AbstractCrudDAO<OrganizationMeas
             return retLst;
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "findOrgMeasureByOrgIdAndMeasureId", e.getMessage(), e);
+            throw new DataAccessException(e);
+        }
+    }
+
+    @Override
+    public List<OrganizationMeasureDTO> findOrgMeasureByMeasureIdAndYearAndOrg(int measureId, int year, int orgId) throws DataAccessException {
+        try {
+            MeasureEntity me = em.find(MeasureEntity.class, measureId);
+            OrganizationEntity org = em.find(OrganizationEntity.class, orgId);
+            List<OrganizationMeasureEntity> omLst = em.createNamedQuery("OrganizationMeasure.findByMeasYearOrg")
+                    .setParameter("meas", me)
+                    .setParameter("year", year)
+                    .setParameter("org", org)
+                    .getResultList();
+
+            List<OrganizationMeasureDTO> retLst = new ArrayList<>();
+            if (omLst != null && omLst.size() > 0) {
+                omLst.forEach(Errors.rethrow().wrap(om -> {
+                    OrganizationMeasureDTO dto = this.mapEntityToDTO(om);
+                    retLst.add(dto);
+                }));
+            }
+
+            return retLst;
+        } catch (Exception e) {
+            log.logp(Level.SEVERE, this.getClass().getName(), "findOrgMeasureByMeasureIdAndYearAndOrg", e.getMessage(), e);
             throw new DataAccessException(e);
         }
     }

@@ -1,12 +1,11 @@
 package com.smcpartners.shape.usecases.reset_password;
 
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
-import com.smcpartners.shape.shared.dto.shape.request.PasswordUpdateRequestDTO;
 import com.smcpartners.shape.shared.usecasecommon.FrameworkUsecaseAdapter;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Contract between framework adapter and use case
  * <p>
  * Created by johndestefano on 12/21/15.
  * <p>

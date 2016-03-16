@@ -3,9 +3,16 @@ package com.smcpartners.shape.crosscutting.security;
 import javax.enterprise.context.RequestScoped;
 
 /**
- * Request scoped object to hold userid
+ * Responsible:</br>
+ * 1. Holds information from the callers JWT. This can be used in other classes in an
+ * http request chain.</br>
  * <p>
- * Created by johndestefano on 9/19/15.
+ * Created by johndestefano on 3/15/16.
+ * </p>
+ * <p>
+ * Changes:</br>
+ * 1. </br>
+ * </p>
  */
 @RequestScoped
 public class RequestScopedUserId {

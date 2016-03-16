@@ -1,13 +1,12 @@
 package com.smcpartners.shape.usecases.inactivate_organization;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
-import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
-import com.smcpartners.shape.shared.dto.shape.request.IntEntityIdRequestDTO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
+import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
+import com.smcpartners.shape.shared.dto.shape.request.IntEntityIdRequestDTO;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -18,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Only the ADMIN can inactivate an organization
  * <p>
  * Created by johndestefano on 11/4/15.
  * <p>
@@ -44,17 +43,11 @@ public class InactivateOrganizationServiceAdapter implements InactivateOrganizat
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN})
     public BooleanValueDTO inactivateOrganization(IntEntityIdRequestDTO id) throws UseCaseException {
         try {
             // Only ADMIN can inactivate there organization
-            UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
-            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
-            if (reqRole == SecurityRoleEnum.ADMIN) {
-                organizationDAO.changeOrganizationActiveStatus(id.getEntId(), false);
-            } else {
-                throw new Exception("You are not authorized to perform this function.");
-            }
+            organizationDAO.changeOrganizationActiveStatus(id.getEntId(), false);
 
             // Return value
             return new BooleanValueDTO(true);

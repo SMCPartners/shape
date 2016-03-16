@@ -18,14 +18,6 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 
 /**
- * Session token for server side security
- *
- * @author johndestefano
- * @version 1.0
- * @since 4/3/2012
- */
-
-/**
  * ServerUserToken.java<br/>
  * Responsibilities:<br/>
  * 1. A session scoped component that holds user information<br/>s

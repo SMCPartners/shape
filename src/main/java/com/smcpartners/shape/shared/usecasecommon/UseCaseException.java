@@ -2,12 +2,10 @@ package com.smcpartners.shape.shared.usecasecommon;
 
 /**
  * Responsible:</br>
- * 1. </br
- * <p>
+ * 1. Thrown by a use case on an exception</br
  * <p>
  * Created by johndestefano on 9/28/15.
  * </p>
- * <p>
  * <p>
  * Changes:<br>
  * 1.

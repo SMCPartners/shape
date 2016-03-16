@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Generate a random password
  * <p>
  * Created by johndestefano on 11/2/15.
  * <p>

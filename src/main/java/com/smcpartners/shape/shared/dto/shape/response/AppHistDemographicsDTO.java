@@ -3,7 +3,15 @@ package com.smcpartners.shape.shared.dto.shape.response;
 import java.util.List;
 
 /**
- * Created by bryanhokanson on 12/17/15.
+ * Responsible:</br>
+ * 1.  DTO</br>
+ * <p>
+ * Created by johndestefano on 3/15/16.
+ * </p>
+ * <p>
+ * Changes:</br>
+ * 1. </br>
+ * </p>
  */
 public class AppHistDemographicsDTO {
 

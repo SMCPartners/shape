@@ -1,11 +1,12 @@
 package com.smcpartners.shape.usecases.inactivate_user;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
+import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
-import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
+import com.smcpartners.shape.shared.usecasecommon.IllegalAccessException;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -16,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:</br>
- * 1. </br
+ * 1. The ADMIN can inactivate anyone. ORG_ADMIN can only inactivate users in their ORG</br
  * <p>
  * <p>
  * Created by johndestefano on 9/28/15.
@@ -47,7 +48,7 @@ public class InactivateUserServiceAdapter implements InactivateUserService {
 
     @Override
 
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
     public BooleanValueDTO inactivateUser(String targetUserId) throws UseCaseException {
         try {
             // The ADMIN can inactivate anyone
@@ -68,6 +69,8 @@ public class InactivateUserServiceAdapter implements InactivateUserService {
                 if (targetUser.getOrganizationId() == reqUser.getOrganizationId()) {
                     userDAO.inactivateUser(targetUserId);
                     return new BooleanValueDTO(true);
+                } else {
+                    throw new IllegalAccessException();
                 }
             }
 

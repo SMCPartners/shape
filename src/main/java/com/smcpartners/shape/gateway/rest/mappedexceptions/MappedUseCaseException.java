@@ -8,7 +8,15 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 /**
- * Created by johndestefano on 9/28/15.
+ * Responsible:</br>
+ * 1.Maps a use case excpetion. </br>
+ * <p>
+ * Created by johndestefano on 3/15/16.
+ * </p>
+ * <p>
+ * Changes:</br>
+ * 1. </br>
+ * </p>
  */
 @Provider
 public class MappedUseCaseException implements ExceptionMapper<UseCaseException> {

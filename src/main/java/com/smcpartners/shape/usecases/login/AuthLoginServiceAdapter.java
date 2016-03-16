@@ -2,15 +2,12 @@ package com.smcpartners.shape.usecases.login;
 
 import com.smcpartners.shape.crosscutting.security.exceptions.InactiveUserException;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
-import com.smcpartners.shape.frameworks.data.entitymodel.shape.UserEntity;
 import com.smcpartners.shape.gateway.rest.mappedexceptions.ErrorMessagesEnum;
-import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.common.ErrorMsgResponse;
-import com.smcpartners.shape.shared.dto.shape.request.LoginRequestDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
-import com.smcpartners.shape.shared.usecasecommon.Usecase;
-import com.smcpartners.shape.shared.utils.JWTUtils;
+import com.smcpartners.shape.shared.dto.shape.request.LoginRequestDTO;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
+import com.smcpartners.shape.shared.utils.JWTUtils;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -22,12 +19,10 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:</br>
- * 1. </br
- * <p>
+ * 1. Framework support for use case</br
  * <p>
  * Created by johndestefano on 9/14/15.
  * </p>
- * <p>
  * <p>
  * Changes:<br>
  * 1.
@@ -98,7 +93,7 @@ public class AuthLoginServiceAdapter implements AuthLoginService, AuthLoginUseca
             UserDTO ue = userDAO.validateUser(userId, password);
             return ue;
         } catch (Exception e) {
-            log.logp(Level.SEVERE, this.getClass().getName(), "login", e.getMessage(), e);
+            log.logp(Level.SEVERE, this.getClass().getName(), "getUser", e.getMessage(), e);
             throw new UseCaseException(e.getMessage());
         }
     }

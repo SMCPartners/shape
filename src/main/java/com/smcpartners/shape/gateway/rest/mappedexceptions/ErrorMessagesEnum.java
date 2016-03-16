@@ -2,12 +2,11 @@ package com.smcpartners.shape.gateway.rest.mappedexceptions;
 
 /**
  * Responsible:</br>
- * 1. </br
- * <p>
+ * 1. Used to populate data in the response created by the mapped exceptions.
+ * Mapped exceptions are used within the REST framework.</br
  * <p>
  * Created by johndestefano on 9/28/15.
  * </p>
- * <p>
  * <p>
  * Changes:<br>
  * 1.
@@ -20,7 +19,8 @@ public enum ErrorMessagesEnum {
     IllegalMethodSignatureRequiresActiveUser_ERR(4, 0, "The resource you are calling requires a different signature."),
     Bad_Credentials(5, 0, "Bad userId or password"),
     ActivityLog_ERR(6, 0, "Error logging activity."),
-    SecureRequireActiveLogAvtivity_ERR(7, 0, "Error");
+    SecureRequireActiveLogActivity_ERR(7, 0, "Error"),
+    IllegalAccess_ERR(8, 0, "Attempted illegal access.");
 
     private int code;
 

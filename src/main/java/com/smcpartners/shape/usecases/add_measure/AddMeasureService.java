@@ -11,7 +11,7 @@ import javax.ws.rs.Produces;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Support REST framework
  * <p>
  * Created by johndestefano on 11/4/15.
  * <p>

@@ -1,12 +1,11 @@
 package com.smcpartners.shape.usecases.find_all_organization_stratifications;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationStratificationDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
-import com.smcpartners.shape.shared.dto.shape.OrganizationStratificationDTO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
+import com.smcpartners.shape.shared.dto.shape.OrganizationStratificationDTO;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -18,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. ADMIN can find all organozation stratifications.
  * <p>
  * Created by johndestefano on 11/2/15.
  * <p>
@@ -43,19 +42,12 @@ public class FindAllOrganizationStratificationsServiceAdapter implements FindAll
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN})
     public List<OrganizationStratificationDTO> findAllOrganizationStratifications() throws UseCaseException {
         try {
             // Admin can see all
             // Others only see their organization
-            UserDTO user = userDAO.findById(requestScopedUserId.getRequestUserId());
-            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(user.getRole());
-
-            if (reqRole == SecurityRoleEnum.ADMIN) {
-                return organizationStratificationDAO.findAllOrganizationStratification();
-            } else {
-                throw new Exception("You are not authorized to perform this function.");
-            }
+            return organizationStratificationDAO.findAllOrganizationStratification();
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "findAllOrganizationStratifications", e.getMessage(), e);
             throw new UseCaseException(e.getMessage());

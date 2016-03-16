@@ -1,13 +1,12 @@
 package com.smcpartners.shape.usecases.edit_measure;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
-import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogAvtivity;
+import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.MeasureDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
+import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.MeasureDTO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
-import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -18,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. The ADMIN can edit a measure
  * <p>
  * Created by johndestefano on 11/4/15.
  * <p>
@@ -44,7 +43,7 @@ public class EditMeasureServiceAdapter implements EditMeasureService {
     }
 
     @Override
-    @SecureRequireActiveLogAvtivity({SecurityRoleEnum.ADMIN})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN})
     public BooleanValueDTO editMeasure(MeasureDTO org) throws UseCaseException {
         try {
             measureDAO.update(org, org.getId());
