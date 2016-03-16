@@ -3,10 +3,8 @@ package com.smcpartners.shape.usecases.find_all_organizations;
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationDAO;
-import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.shape.OrganizationDTO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -32,9 +30,6 @@ public class FindAllOrganizationsServiceAdapter implements FindAllOrganizationsS
     private Logger log;
 
     @EJB
-    private UserDAO userDAO;
-
-    @EJB
     private OrganizationDAO organizationDAO;
 
     @Inject
@@ -51,8 +46,7 @@ public class FindAllOrganizationsServiceAdapter implements FindAllOrganizationsS
 
             // ADMIN role can see all organizations
             // ORG_ADMIN can see only their organization
-            UserDTO user = userDAO.findById(requestScopedUserId.getRequestUserId());
-            SecurityRoleEnum reqUserRole = SecurityRoleEnum.valueOf(user.getRole());
+            SecurityRoleEnum reqUserRole = SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole());
 
             if (SecurityRoleEnum.ADMIN == reqUserRole || SecurityRoleEnum.DPH_USER == reqUserRole) {
                 List<OrganizationDTO> lst = organizationDAO.findAll();
@@ -74,7 +68,7 @@ public class FindAllOrganizationsServiceAdapter implements FindAllOrganizationsS
                 });
             } else if (SecurityRoleEnum.ORG_ADMIN == reqUserRole || SecurityRoleEnum.REGISTERED == reqUserRole){
                 // Find the organization
-                OrganizationDTO orgDTO = organizationDAO.findById(user.getOrganizationId());
+                OrganizationDTO orgDTO = organizationDAO.findById(requestScopedUserId.getOrgId());
 
                 // Add to lst
                 OrganizationDTO dto = new OrganizationDTO();

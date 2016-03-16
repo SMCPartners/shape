@@ -19,6 +19,7 @@ public class RequestScopedUserId {
 
     private String requestUserId;
     private String securityRole;
+    private int orgId;
 
 
     public RequestScopedUserId() {
@@ -42,5 +43,13 @@ public class RequestScopedUserId {
 
     public void setSecurityRole(String securityRole) {
         this.securityRole = securityRole;
+    }
+
+    public int getOrgId() {
+        return orgId;
+    }
+
+    public void setOrgId(int orgId) {
+        this.orgId = orgId;
     }
 }

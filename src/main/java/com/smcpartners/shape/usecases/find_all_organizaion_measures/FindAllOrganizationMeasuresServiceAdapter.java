@@ -1,12 +1,9 @@
 package com.smcpartners.shape.usecases.find_all_organizaion_measures;
 
-import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationMeasureDAO;
-import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.shape.OrganizationMeasureDTO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -18,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1. Finds measures. The Admin can see all measures and is the only role with access to this feature
+ * 1. Finds measures. This is an ADMIN only function
  * <p>
  * Created by johndestefano on 11/2/15.
  * <p>
@@ -31,13 +28,7 @@ public class FindAllOrganizationMeasuresServiceAdapter implements FindAllOrganiz
     private Logger log;
 
     @EJB
-    private UserDAO userDAO;
-
-    @EJB
     private OrganizationMeasureDAO organizationMeasureDAO;
-
-    @Inject
-    private RequestScopedUserId requestScopedUserId;
 
     public FindAllOrganizationMeasuresServiceAdapter() {
     }
@@ -47,15 +38,7 @@ public class FindAllOrganizationMeasuresServiceAdapter implements FindAllOrganiz
     public List<OrganizationMeasureDTO> findAllOrganizationMeasures() throws UseCaseException {
         try {
             // Admin can see all
-            // Others only see their organization
-            UserDTO user = userDAO.findById(requestScopedUserId.getRequestUserId());
-            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(user.getRole());
-
-            if (reqRole == SecurityRoleEnum.ADMIN) {
-                return organizationMeasureDAO.findAllOrganizationMeasure();
-            } else {
-                throw new Exception("You are not authorized to perform this function.");
-            }
+            return organizationMeasureDAO.findAllOrganizationMeasure();
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "findAllOrganizationMeasures", e.getMessage(), e);
             throw new UseCaseException(e.getMessage());

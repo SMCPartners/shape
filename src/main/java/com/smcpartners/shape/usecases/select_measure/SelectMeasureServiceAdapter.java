@@ -1,9 +1,7 @@
 package com.smcpartners.shape.usecases.select_measure;
 
-import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.MeasureDAO;
-import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.request.IntEntityIdRequestDTO;
@@ -35,13 +33,7 @@ public class SelectMeasureServiceAdapter implements SelectMeasureService {
     private Logger log;
 
     @EJB
-    private UserDAO userDAO;
-
-    @EJB
     private MeasureDAO measureDAO;
-
-    @Inject
-    private RequestScopedUserId requestScopedUserId;
 
     /**
      * Default constructor

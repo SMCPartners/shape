@@ -1,9 +1,7 @@
 package com.smcpartners.shape.usecases.find_all_organization_stratifications;
 
-import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationStratificationDAO;
-import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.shape.OrganizationStratificationDTO;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
@@ -30,13 +28,7 @@ public class FindAllOrganizationStratificationsServiceAdapter implements FindAll
     private Logger log;
 
     @EJB
-    private UserDAO userDAO;
-
-    @EJB
     private OrganizationStratificationDAO organizationStratificationDAO;
-
-    @Inject
-    private RequestScopedUserId requestScopedUserId;
 
     public FindAllOrganizationStratificationsServiceAdapter() {
     }
@@ -46,7 +38,6 @@ public class FindAllOrganizationStratificationsServiceAdapter implements FindAll
     public List<OrganizationStratificationDTO> findAllOrganizationStratifications() throws UseCaseException {
         try {
             // Admin can see all
-            // Others only see their organization
             return organizationStratificationDAO.findAllOrganizationStratification();
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "findAllOrganizationStratifications", e.getMessage(), e);

@@ -15,7 +15,6 @@ import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.PathParam;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,6 +23,7 @@ import java.util.logging.Logger;
 /**
  * Created by bryanhokanson on 12/14/15.
  */
+//TODO: Not documented what is this supposed to do?
 @RequestScoped
 public class ShowListViewServiceAdapter implements ShowListViewService {
 
@@ -50,9 +50,7 @@ public class ShowListViewServiceAdapter implements ShowListViewService {
 
     @Override
     @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
-    public List<ListViewDTO> showListView(@PathParam("orgId") int orgId,
-                                          @PathParam("measureId") int measureId,
-                                          @PathParam("year") int year) throws UseCaseException {
+    public List<ListViewDTO> showListView(int orgId, int measureId, int year) throws UseCaseException {
         try {
 
             //set return list

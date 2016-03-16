@@ -59,14 +59,11 @@ public class InactivateUserServiceAdapter implements InactivateUserService {
                 userDAO.inactivateUser(targetUserId);
                 return new BooleanValueDTO(true);
             } else if (SecurityRoleEnum.ORG_ADMIN == reqUserRole) {
-                // Find the org of the requesting user
-                UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
-
                 // Find the org of the target user
                 UserDTO targetUser = userDAO.findById(targetUserId);
 
                 // If they match then inactivate
-                if (targetUser.getOrganizationId() == reqUser.getOrganizationId()) {
+                if (targetUser.getOrganizationId() == requestScopedUserId.getOrgId()) {
                     userDAO.inactivateUser(targetUserId);
                     return new BooleanValueDTO(true);
                 } else {

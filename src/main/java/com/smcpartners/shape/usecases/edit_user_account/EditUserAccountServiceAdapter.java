@@ -48,7 +48,11 @@ public class EditUserAccountServiceAdapter implements EditUserAccountService {
     public BooleanValueDTO editUserAccount(UserDTO user) throws UseCaseException {
         try {
             // The account must be for the requesting user
-            if (requestScopedUserId.getRequestUserId().equalsIgnoreCase(user.getId())) {
+            // Must be the same organization
+            // Must be the same role
+            if (requestScopedUserId.getRequestUserId().equalsIgnoreCase(user.getId())
+                    && requestScopedUserId.getOrgId() == user.getOrganizationId()
+                    && requestScopedUserId.getSecurityRole().equalsIgnoreCase(user.getRole())) {
                 userDAO.update(user, user.getId());
             } else {
                 throw new IllegalAccessException();

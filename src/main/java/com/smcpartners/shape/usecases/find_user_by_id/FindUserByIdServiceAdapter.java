@@ -55,10 +55,9 @@ public class FindUserByIdServiceAdapter implements FindUserByIdService {
             if (SecurityRoleEnum.ADMIN == reqUserRole || SecurityRoleEnum.DPH_USER == reqUserRole) {
                 return userDAO.findById(targetUserId);
             } else {
-                UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
                 UserDTO targetUser = userDAO.findById(targetUserId);
 
-                if (targetUser.getOrganizationId() == reqUser.getOrganizationId()) {
+                if (targetUser.getOrganizationId() == requestScopedUserId.getOrgId()) {
                     return targetUser;
                 } else {
                     throw new IllegalAccessException();

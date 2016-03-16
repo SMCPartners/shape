@@ -3,10 +3,8 @@ package com.smcpartners.shape.usecases.add_provider;
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.ProviderDAO;
-import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.shape.ProviderDTO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.dto.shape.response.IntEntityResponseDTO;
 import com.smcpartners.shape.shared.usecasecommon.IllegalAccessException;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
@@ -32,9 +30,6 @@ public class AddProviderServiceAdapter implements AddProviderService {
     private Logger log;
 
     @EJB
-    private UserDAO userDAO;
-
-    @EJB
     private ProviderDAO providerDAO;
 
     @Inject
@@ -49,15 +44,14 @@ public class AddProviderServiceAdapter implements AddProviderService {
     public IntEntityResponseDTO addProvider(ProviderDTO prov) throws UseCaseException {
         try {
             // Only ADMIN can add organizations
-            UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
             ProviderDTO provDTO = null;
 
-            if (SecurityRoleEnum.valueOf(reqUser.getRole()) == SecurityRoleEnum.ADMIN) {
+            if (SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole()) == SecurityRoleEnum.ADMIN) {
                 provDTO = providerDAO.create(prov);
                 return IntEntityResponseDTO.makeNew(provDTO.getId());
             } else {
                 // ORG_ADMIN user
-                if (reqUser.getOrganizationId() == prov.getOrganizationId()) {
+                if (requestScopedUserId.getOrgId() == prov.getOrganizationId()) {
                     provDTO = providerDAO.create(prov);
                     return IntEntityResponseDTO.makeNew(provDTO.getId());
                 } else {

@@ -16,7 +16,6 @@ import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.PathParam;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +25,7 @@ import java.util.logging.Logger;
 /**
  * Created by bryanhokanson on 12/17/15.
  */
+//TODO: Not documented. What is this supposed to do?
 @RequestScoped
 public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemographicService {
 
@@ -55,9 +55,7 @@ public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemograp
 
     @Override
     @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
-    public List<AppHistDemographicsDTO> showAppHistDemographic(@PathParam("orgId") int orgId,
-                                                               @PathParam("measureId") int measureId,
-                                                               @PathParam("year") int year) throws UseCaseException {
+    public List<AppHistDemographicsDTO> showAppHistDemographic(int orgId, int measureId, int year) throws UseCaseException {
         try{
 
             List<AppHistDemographicsDTO> retLst = new ArrayList<>();

@@ -3,10 +3,8 @@ package com.smcpartners.shape.usecases.find_all_organization_stratifications_by_
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationStratificationDAO;
-import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.shape.OrganizationStratificationDTO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.usecasecommon.IllegalAccessException;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
@@ -19,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. ADMIN and DPH_USER can see all. Others can see only their organzations
  * <p>
  * Created by johndestefano on 11/2/15.
  * <p>
@@ -34,10 +32,7 @@ public class FindAllOrganizationStratificationsByOrganizationServiceAdapter impl
     @EJB
     private OrganizationStratificationDAO organizationStratificationDAO;
 
-    @EJB
-    private UserDAO userDAO;
-
-    @Inject
+   @Inject
     private RequestScopedUserId requestScopedUserId;
 
     public FindAllOrganizationStratificationsByOrganizationServiceAdapter() {
@@ -51,14 +46,10 @@ public class FindAllOrganizationStratificationsByOrganizationServiceAdapter impl
             // Other only see their organization
 
             // Get user and find security role
-            UserDTO user = userDAO.findById(requestScopedUserId.getRequestUserId());
-            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(user.getRole());
-
-            // Get users org id
-            int userOrg = user.getOrganizationId();
+            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole());
 
             if (reqRole == SecurityRoleEnum.ADMIN || reqRole == SecurityRoleEnum.DPH_USER ||
-                    (orgId == userOrg && (reqRole == SecurityRoleEnum.ORG_ADMIN ||
+                    (orgId == requestScopedUserId.getOrgId() && (reqRole == SecurityRoleEnum.ORG_ADMIN ||
                             reqRole == SecurityRoleEnum.REGISTERED ))) {
                 return organizationStratificationDAO.findAllOrganizationStratificationByOrgId(orgId);
             } else {

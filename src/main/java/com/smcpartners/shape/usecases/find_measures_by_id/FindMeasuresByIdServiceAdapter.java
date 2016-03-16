@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1.
+ * 1. Users can find measures by ID
  * <p>
  * Created by bhokanson on 12/1/15.
  * <p>
@@ -44,6 +44,7 @@ public class FindMeasuresByIdServiceAdapter implements FindMeasuresByIdService {
     public FindMeasuresByIdServiceAdapter() {
     }
 
+    //TODO: Can a user only find measures for their own organization?
     @Override
     @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public List<MeasureDTO> findMeasuresById(List<OrganizationMeasureDTO> orgM) throws UseCaseException {

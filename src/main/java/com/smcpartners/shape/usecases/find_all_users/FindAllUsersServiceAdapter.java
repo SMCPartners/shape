@@ -3,7 +3,6 @@ package com.smcpartners.shape.usecases.find_all_users;
 
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
-import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationDAO;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
@@ -35,10 +34,7 @@ public class FindAllUsersServiceAdapter implements FindAllUsersService {
     @EJB
     private UserDAO userDAO;
 
-    @EJB
-    private OrganizationDAO organizationDAO;
-
-    @Inject
+     @Inject
     private RequestScopedUserId requestScopedUserId;
 
     /**
@@ -62,9 +58,7 @@ public class FindAllUsersServiceAdapter implements FindAllUsersService {
                 lst = userDAO.findAll();
             } else if (reqUserRole == SecurityRoleEnum.ORG_ADMIN) {
                 // Find the user
-                UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
-                int orgId = reqUser.getOrganizationId();
-                lst = userDAO.findByOrg(orgId);
+                lst = userDAO.findByOrg(requestScopedUserId.getOrgId());
             }
             return lst;
         } catch (Exception e) {

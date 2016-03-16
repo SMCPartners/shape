@@ -1,9 +1,7 @@
 package com.smcpartners.shape.usecases.inactivate_organization;
 
-import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationDAO;
-import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.request.IntEntityIdRequestDTO;
@@ -30,14 +28,7 @@ public class InactivateOrganizationServiceAdapter implements InactivateOrganizat
     private Logger log;
 
     @EJB
-    private UserDAO userDAO;
-
-    @EJB
     private OrganizationDAO organizationDAO;
-
-    @Inject
-    private RequestScopedUserId requestScopedUserId;
-
 
     public InactivateOrganizationServiceAdapter() {
     }
@@ -52,7 +43,7 @@ public class InactivateOrganizationServiceAdapter implements InactivateOrganizat
             // Return value
             return new BooleanValueDTO(true);
         } catch (Exception e) {
-            log.logp(Level.SEVERE, this.getClass().getName(), "addOrganization", e.getMessage(), e);
+            log.logp(Level.SEVERE, this.getClass().getName(), "inactivateOrganization", e.getMessage(), e);
             throw new UseCaseException(e.getMessage());
         }
     }

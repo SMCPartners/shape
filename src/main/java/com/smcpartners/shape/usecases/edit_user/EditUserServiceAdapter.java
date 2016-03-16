@@ -45,26 +45,23 @@ public class EditUserServiceAdapter implements EditUserService {
     @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
     public BooleanValueDTO editUser(UserDTO user) throws UseCaseException {
         try {
-            // Only ADMIN can edit user
-            UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
-            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
+            // ADMIN can edit user
+            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole());
             if (reqRole == SecurityRoleEnum.ADMIN) {
                 userDAO.update(user, user.getId());
             } else if (reqRole == SecurityRoleEnum.ORG_ADMIN) {
-
+                // Org admin can edit user in their org
                 // Check role.
-                if (reqUser.getRole().equals("ADMIN")){
+                if (user.getRole().equals("ADMIN")){
                     throw new Exception("You cannot change a users role to be higher than yours");
                 }
 
                 // Check organization
-                if (reqUser.getOrganizationId() != user.getOrganizationId()) {
+                if (requestScopedUserId.getOrgId() != user.getOrganizationId()) {
                     throw new Exception("You can't change the users organization.");
                 }
 
                 userDAO.update(user, user.getId());
-            } else {
-                throw new Exception("You are not authorized to perform this function.");
             }
 
             // Return value

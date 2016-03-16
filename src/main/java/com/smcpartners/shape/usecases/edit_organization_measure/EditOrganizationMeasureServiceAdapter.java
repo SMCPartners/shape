@@ -3,11 +3,9 @@ package com.smcpartners.shape.usecases.edit_organization_measure;
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationMeasureDAO;
-import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.OrganizationMeasureDTO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.usecasecommon.IllegalAccessException;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
@@ -33,9 +31,6 @@ public class EditOrganizationMeasureServiceAdapter implements EditOrganizationMe
     private Logger log;
 
     @EJB
-    private UserDAO userDAO;
-
-    @EJB
     private OrganizationMeasureDAO organizationMeasureDAO;
 
     @Inject
@@ -56,10 +51,8 @@ public class EditOrganizationMeasureServiceAdapter implements EditOrganizationMe
             if (SecurityRoleEnum.ADMIN == role ) {
                 organizationMeasureDAO.update(org, org.getId());
             } else {
-                // Not the ADMIN
-                UserDTO userDTO = userDAO.findById(requestScopedUserId.getRequestUserId());
-
-                if (userDTO.getOrganizationId() == org.getOrganizationId()) {
+                // Not the ADMIN. Can only do for their organization
+                if (requestScopedUserId.getOrgId() == org.getOrganizationId()) {
                     organizationMeasureDAO.update(org, org.getId());
                 } else {
                     throw new IllegalAccessException();

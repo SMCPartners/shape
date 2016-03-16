@@ -3,10 +3,8 @@ package com.smcpartners.shape.usecases.add_organization_stratification;
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationStratificationDAO;
-import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.shape.OrganizationStratificationDTO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.dto.shape.response.IntEntityResponseDTO;
 import com.smcpartners.shape.shared.usecasecommon.IllegalAccessException;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
@@ -33,9 +31,6 @@ public class AddOrganizationStratificationServiceAdapter implements AddOrganizat
     private Logger log;
 
     @EJB
-    private UserDAO userDAO;
-
-    @EJB
     private OrganizationStratificationDAO organizationStratificationDAO;
 
     @Inject
@@ -52,10 +47,9 @@ public class AddOrganizationStratificationServiceAdapter implements AddOrganizat
             // ADMIN can add for any organizations
             // ORG_ADMIN and REGISTERED can only add for their organizations
             // The date for the report is now
-            UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
 
             // Users role
-            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
+            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole());
             Date now = new Date();
             OrganizationStratificationDTO orgDTO = null;
 
@@ -64,7 +58,7 @@ public class AddOrganizationStratificationServiceAdapter implements AddOrganizat
                 orgDTO = organizationStratificationDAO.create(org);
             } else {
                 // Does the orgs organization match the requesting users organization
-                if (reqUser.getOrganizationId() == org.getOrganizationId()) {
+                if (requestScopedUserId.getOrgId() == org.getOrganizationId()) {
                     org.setRpDate(now);
                     orgDTO = organizationStratificationDAO.create(org);
                 } else {

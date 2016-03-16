@@ -15,7 +15,6 @@ import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.PathParam;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -59,8 +58,7 @@ public class ShowAggregateComparisonServiceAdapter implements ShowAggregateCompa
 
     @Override
     @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
-    public List<List<Object>> showAggregateComparison(@PathParam("measureId") int measureId,
-                                                          @PathParam("year") int year) throws UseCaseException {
+    public List<List<Object>> showAggregateComparison(int measureId, int year) throws UseCaseException {
         try {
 
             // Get requesting users role

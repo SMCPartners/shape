@@ -3,11 +3,9 @@ package com.smcpartners.shape.usecases.edit_provider;
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.ProviderDAO;
-import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.ProviderDTO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.usecasecommon.IllegalAccessException;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
@@ -32,9 +30,6 @@ public class EditProviderServiceAdapter implements EditProviderService {
     private Logger log;
 
     @EJB
-    private UserDAO userDAO;
-
-    @EJB
     private ProviderDAO providerDAO;
 
     @Inject
@@ -49,12 +44,11 @@ public class EditProviderServiceAdapter implements EditProviderService {
     public BooleanValueDTO editProvider(ProviderDTO prov) throws UseCaseException {
         try {
             // Only ADMIN or ORG_ADMIN can edit provider
-            // ORG_ADMIN can only edit there organization
-            UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
-            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
+            // ORG_ADMIN can only edit their organization
+            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole());
 
             if (reqRole == SecurityRoleEnum.ADMIN ||
-                    (reqRole == SecurityRoleEnum.ORG_ADMIN && reqUser.getOrganizationId() == prov.getOrganizationId())) {
+                    (reqRole == SecurityRoleEnum.ORG_ADMIN && requestScopedUserId.getOrgId() == prov.getOrganizationId())) {
                 providerDAO.update(prov, prov.getId());
             } else {
                 throw new IllegalAccessException();

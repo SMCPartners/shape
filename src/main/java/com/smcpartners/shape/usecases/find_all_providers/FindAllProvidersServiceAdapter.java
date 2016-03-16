@@ -3,10 +3,8 @@ package com.smcpartners.shape.usecases.find_all_providers;
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.ProviderDAO;
-import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.shape.ProviderDTO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -38,9 +36,6 @@ public class FindAllProvidersServiceAdapter implements FindAllProvidersService {
     @EJB
     private ProviderDAO providerDAO;
 
-    @EJB
-    private UserDAO userDAO;
-
     @Inject
     private RequestScopedUserId requestScopedUserId;
 
@@ -60,17 +55,15 @@ public class FindAllProvidersServiceAdapter implements FindAllProvidersService {
     public List<ProviderDTO> findAllProviders() throws UseCaseException {
         try {
             // Get the requester role from the security token
-            UserDTO user = userDAO.findById(requestScopedUserId.getRequestUserId());
-            SecurityRoleEnum reqUserRole = SecurityRoleEnum.valueOf(user.getRole());
+            SecurityRoleEnum reqUserRole = SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole());
             List<ProviderDTO> retLst = null;
 
-            // ADMIN or DPH_USER
+            // ADMIN or DPH_USER get everything
             if (SecurityRoleEnum.ADMIN == reqUserRole || SecurityRoleEnum.DPH_USER == reqUserRole) {
-                // ADMIN or DPH_USER get everything
                 retLst = providerDAO.findAll();
             } else if (SecurityRoleEnum.ORG_ADMIN == reqUserRole || SecurityRoleEnum.REGISTERED == reqUserRole) {
                 // ORG_ADMIN or REGISTERED get only the requester organization
-                retLst = providerDAO.findAllByOrg(user.getOrganizationId());
+                retLst = providerDAO.findAllByOrg(requestScopedUserId.getOrgId());
             }
 
             // Return results

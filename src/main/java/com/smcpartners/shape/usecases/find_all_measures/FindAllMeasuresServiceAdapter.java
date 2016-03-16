@@ -1,6 +1,5 @@
 package com.smcpartners.shape.usecases.find_all_measures;
 
-import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.MeasureDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
@@ -30,9 +29,6 @@ public class FindAllMeasuresServiceAdapter implements FindAllMeasuresService {
 
     @EJB
     private MeasureDAO measureDAO;
-
-    @Inject
-    private RequestScopedUserId requestScopedUserId;
 
     public FindAllMeasuresServiceAdapter() {
     }

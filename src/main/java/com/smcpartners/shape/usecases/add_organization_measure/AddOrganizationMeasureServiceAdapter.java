@@ -3,11 +3,10 @@ package com.smcpartners.shape.usecases.add_organization_measure;
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.OrganizationMeasureDAO;
-import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.shape.OrganizationMeasureDTO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.dto.shape.response.IntEntityResponseDTO;
+import com.smcpartners.shape.shared.usecasecommon.IllegalAccessException;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -19,7 +18,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1. ADMIN can add for any organization organizations.
+ * 1. ADMIN can add for any organization measure.
  * ORG_ADMIN and REGISTERED can only add for their organizations<br/>
  * <p>
  * Created by johndestefano on 11/4/15.
@@ -31,9 +30,6 @@ public class AddOrganizationMeasureServiceAdapter implements AddOrganizationMeas
 
     @Inject
     private Logger log;
-
-    @EJB
-    private UserDAO userDAO;
 
     @EJB
     private OrganizationMeasureDAO organizationMeasureDAO;
@@ -52,22 +48,26 @@ public class AddOrganizationMeasureServiceAdapter implements AddOrganizationMeas
             // ADMIN can add for any organization organizations
             // ORG_ADMIN and REGISTERED can only add for their organizations
             // The date for the report is now
-            UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
-
-            // Get Users organization
-            int orgId = reqUser.getOrganizationId();
 
             // Users role
-            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
+            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole());
+            Date now = new Date();
+            OrganizationMeasureDTO orgDTO = null;
 
-            if (reqRole == SecurityRoleEnum.ADMIN ||
-                    ((reqRole == SecurityRoleEnum.ORG_ADMIN || reqRole == SecurityRoleEnum.REGISTERED))) {
-                Date now = new Date();
+            // ADMIN role
+            if (reqRole == SecurityRoleEnum.ADMIN) {
                 org.setRpDate(now);
-                OrganizationMeasureDTO orgDTO = organizationMeasureDAO.create(org);
+                orgDTO = organizationMeasureDAO.create(org);
                 return IntEntityResponseDTO.makeNew(orgDTO.getId());
             } else {
-                throw new Exception("You are not authorized to perform this function.");
+                // For other users only allow add for their organization
+                if (org.getOrganizationId() == requestScopedUserId.getOrgId()) {
+                    org.setRpDate(now);
+                    orgDTO = organizationMeasureDAO.create(org);
+                    return IntEntityResponseDTO.makeNew(orgDTO.getId());
+                } else {
+                    throw new IllegalAccessException();
+                }
             }
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "addOrganizationMeasure", e.getMessage(), e);

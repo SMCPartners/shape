@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:</br>
- * 1. </br>
+ * 1.Application logout </br>
  * <p>
  * <p>
  * Created by johndestefano on 9/30/15.
@@ -23,6 +23,7 @@ import java.util.logging.Logger;
  * 1. </br>
  * </p>
  */
+//TODO: Seems like and user role should be able to call this?
 @RequestScoped
 public class AuthLogoutServiceImpl implements AuthLogoutService {
 

@@ -7,7 +7,6 @@ import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.OrganizationDTO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.usecasecommon.IllegalAccessException;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
@@ -48,12 +47,11 @@ public class EditOrganizationServiceAdapter implements EditOrganizationService {
     @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
     public BooleanValueDTO editOrganization(OrganizationDTO org) throws UseCaseException {
         try {
-            // Only ADMIN or ORG_ADMIN can edi organizations
+            // Only ADMIN or ORG_ADMIN can edit organizations
             // ORG_ADMIN can only edit there organization
-            UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
-            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
+            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole());
             if (reqRole == SecurityRoleEnum.ADMIN ||
-                    (reqRole == SecurityRoleEnum.ORG_ADMIN && reqUser.getOrganizationId() == org.getId())) {
+                    (reqRole == SecurityRoleEnum.ORG_ADMIN && requestScopedUserId.getOrgId() == org.getId())) {
                 organizationDAO.update(org, org.getId());
             } else {
                 throw new IllegalAccessException();

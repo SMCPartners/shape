@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1. Adapter for framework services
+ * 1. Adapter for framework services. Any user can reset their password
  * <p>
  * Created by jjdestef3 on 12/21/15.
  * <p>

@@ -62,7 +62,7 @@ public class AuthLoginServiceAdapter implements AuthLoginService, AuthLoginUseca
                         throw new Exception ("Password has expired, please use Forgot Password to generate a new one");
                     }
                     String var = ue.isResetPwd() ? "true" : "false";
-                    String token = jwtUtils.generateToken(ue.getId().toUpperCase(), ue.getRole(), true);
+                    String token = jwtUtils.generateToken(ue.getId().toUpperCase(), ue.getRole(), ue.getOrganizationId(), true);
                     return Response.status(Response.Status.OK).entity("{\"token\":\"" + token + "\", \"resetRequired\":"
                             + var + "}").header("Authorization", "Bearer " + token).build();
                 }else{

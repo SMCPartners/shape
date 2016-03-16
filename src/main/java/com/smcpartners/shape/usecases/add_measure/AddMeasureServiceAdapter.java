@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1. Create a new measure
+ * 1. Create a new measure. Only an ADMIN can add a measure.
  * <p>
  * Created by johndestefano on 11/4/15.
  * <p>
@@ -43,8 +43,7 @@ public class AddMeasureServiceAdapter implements AddMeasureService {
     }
 
     @Override
-    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN,
-            SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN})
     public IntEntityResponseDTO addMeasure(MeasureDTO org) throws UseCaseException {
         try {
             MeasureDTO orgDTO = measureDAO.create(org);

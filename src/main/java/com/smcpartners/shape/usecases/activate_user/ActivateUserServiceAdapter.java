@@ -6,6 +6,7 @@ import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
+import com.smcpartners.shape.shared.usecasecommon.IllegalAccessException;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.annotation.PostConstruct;
@@ -65,22 +66,21 @@ public class ActivateUserServiceAdapter implements ActivateUserService, Activate
     public BooleanValueDTO activateUser(String targetUserId) throws UseCaseException {
         try {
             // Find the requesting users role
-            UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
-            SecurityRoleEnum reqUserRoleEnum = SecurityRoleEnum.valueOf(reqUser.getRole());
+            SecurityRoleEnum reqUserRoleEnum = SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole());
 
             // If its ADMIN then make the changes
             // If its ORG_ADMIN find the requesting users organization
             // Make sure the requesting users organization matches the target users organization
             // Make the change
-            if (reqUserRoleEnum == SecurityRoleEnum.ADMIN || reqUserRoleEnum == SecurityRoleEnum.ORG_ADMIN) {
+            if (reqUserRoleEnum == SecurityRoleEnum.ADMIN) {
                 userDAO.activateUser(targetUserId);
             } else {
-                int reqUserOrgId = reqUser.getOrganizationId();
+                // Its an org admin so only for there organization
                 UserDTO targetUser  = userDAO.findById(targetUserId);
-                if (targetUser.getOrganizationId() == reqUserOrgId) {
+                if (targetUser.getOrganizationId() == requestScopedUserId.getOrgId()) {
                     userDAO.activateUser(targetUserId);
                 } else {
-                    throw new Exception("Requesting user does not have authority.");
+                    throw new IllegalAccessException();
                 }
             }
 

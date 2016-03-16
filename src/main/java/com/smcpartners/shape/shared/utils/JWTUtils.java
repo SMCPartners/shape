@@ -31,9 +31,12 @@ import java.util.logging.Logger;
 @ApplicationScoped
 public class JWTUtils {
 
-    private static final String ROLE = "role";
     @Inject
     private Logger log;
+
+    private static final String ROLE = "role";
+    private static final String ORGID = "orgId";
+
     @Inject
     @ConfigProperty(name = "appKey")
     private String appKey;
@@ -69,14 +72,16 @@ public class JWTUtils {
      *
      * @param userId
      * @param role
+     * @param orgId
      * @param neverExpire
      * @return
      * @throws Exception
      */
-    public String generateToken(String userId, String role, boolean neverExpire) throws Exception {
+    public String generateToken(String userId, String role, int orgId, boolean neverExpire) throws Exception {
         return Jwts.builder()
                 .setSubject(userId)
                 .setHeaderParam(ROLE, role)
+                .setHeaderParam(ORGID, ""+orgId)
                 .setExpiration(neverExpire ? null : new Date(this.calcExpire()))
                 .signWith(SignatureAlgorithm.HS512, key)
                 .compact();
@@ -127,6 +132,26 @@ public class JWTUtils {
     }
 
     /**
+     * Get users OrgId
+     *
+     * @param token
+     * @return
+     * @throws Exception
+     */
+    public int getOrgId(String token) throws Exception {
+        try {
+            Jws<Claims> claims = this.validateToken(token);
+            String orgId = (String) claims.getHeader().get(ORGID);
+            return Integer.parseInt(orgId);
+        } catch (SignatureException e) {
+            log.logp(Level.SEVERE, this.getClass().getName(), "getOrgId", e.getMessage(), e);
+            throw new Exception(e);
+        }
+    }
+
+
+
+    /**
      * Return jwt values
      *
      * @param token
@@ -134,12 +159,14 @@ public class JWTUtils {
      * @throws Exception
      */
     public Map<String, String> getValues(String token) throws Exception {
-        Map<String, String> retMap = new HashMap<String, String>();
+        Map<String, String> retMap = new HashMap<>();
         Jws<Claims> claims = this.validateToken(token);
         String role = (String) claims.getHeader().get(ROLE);
+        String orgId = (String) claims.getHeader().get(ORGID);
         String user = claims.getBody().getSubject();
         retMap.put("userId", user);
         retMap.put("role", role);
+        retMap.put("orgId", orgId);
         return retMap;
     }
 

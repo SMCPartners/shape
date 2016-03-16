@@ -82,6 +82,7 @@ public class SecureRequireActiveLogAvtivityInterceptor {
             Map<String, String> tokenValues = jwtUtils.getValues(token);
             String role = tokenValues.get("role");
             String userId = tokenValues.get("userId");
+            int orgId = Integer.parseInt(tokenValues.get("orgId"));
 
             // Check role
             if (role != null) {
@@ -113,6 +114,7 @@ public class SecureRequireActiveLogAvtivityInterceptor {
             // Set request object
             requestScopedUserId.setRequestUserId(userId);
             requestScopedUserId.setSecurityRole(role);
+            requestScopedUserId.setOrgId(orgId);
 
             // Proceed with method invocation
             return ctx.proceed();
@@ -163,7 +165,7 @@ public class SecureRequireActiveLogAvtivityInterceptor {
         }
 
         // Didn't find one, that's a problem
-        throw new RuntimeException("@SecureAccessJWT not found on method "
+        throw new RuntimeException("@SecureRequireActiveLogActivity not found on method "
                 + m.getName() + " or its class " + m.getClass().getName());
     }
 }

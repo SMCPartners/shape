@@ -3,11 +3,11 @@ package com.smcpartners.shape.usecases.activate_provider;
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.ProviderDAO;
-import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
-import com.smcpartners.shape.shared.dto.shape.UserDTO;
+import com.smcpartners.shape.shared.dto.shape.ProviderDTO;
 import com.smcpartners.shape.shared.dto.shape.request.IntEntityIdRequestDTO;
+import com.smcpartners.shape.shared.usecasecommon.IllegalAccessException;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
 import javax.ejb.EJB;
@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1. ADMIN and ORG_ADMON can activate a provider
+ * 1. ADMIN and ORG_ADMIN can activate a provider but ORG_ADMIN only for their organization
  * <p>
  * Created by johndestefano on 11/4/15.
  * <p>
@@ -29,9 +29,6 @@ public class ActivateProviderServiceAdapter implements ActivateProviderService {
 
     @Inject
     private Logger log;
-
-    @EJB
-    private UserDAO userDAO;
 
     @EJB
     private ProviderDAO providerDAO;
@@ -47,12 +44,21 @@ public class ActivateProviderServiceAdapter implements ActivateProviderService {
     @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
     public BooleanValueDTO activateProvider(IntEntityIdRequestDTO id) throws UseCaseException {
         try {
-            UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
-            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(reqUser.getRole());
-            if (reqRole == SecurityRoleEnum.ADMIN || reqRole == SecurityRoleEnum.ORG_ADMIN) {
+            SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole());
+
+            // ADMIN
+            if (reqRole == SecurityRoleEnum.ADMIN) {
                 providerDAO.changeProviderActiveStatus(id.getEntId(), true);
             } else {
-                throw new Exception("You are not authorized to perform this function.");
+                // For ORG_ADMIN
+                // Find the provider to see if they are in the requester organization
+                ProviderDTO provider = providerDAO.findById(id.getEntId());
+
+                if (provider.getOrganizationId() == requestScopedUserId.getOrgId()) {
+                    providerDAO.changeProviderActiveStatus(id.getEntId(), true);
+                } else {
+                    throw new IllegalAccessException();
+                }
             }
 
             // Return value
