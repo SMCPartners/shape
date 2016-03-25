@@ -65,7 +65,8 @@ public class FindAllOrganizationMeasuresByOrganizationServiceAdapter implements 
         }
     }
 
-    //TODO: Document
+    //returns the list of organization measures in the most recent reporting period year. If there is a list of org
+    //measures in 2014, 2015, 2016, returns 2016's measures
     private List<OrganizationMeasureDTO> getRetLst(List<OrganizationMeasureDTO> orgMList) {
         List<OrganizationMeasureDTO> retList = new ArrayList<>();
         if (orgMList != null) {

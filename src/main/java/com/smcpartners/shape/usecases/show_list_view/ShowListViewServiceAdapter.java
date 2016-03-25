@@ -21,9 +21,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Responsible:</br>
+ * 1.  Formats measure information for a specific organization in a list format. Will only display the measures from
+ * the most recent reporting year. For example, if the most recent measure information is from 2016,
+ * but there is measure information from 2014 and 2015, it will display the list for 2016 reports. </br>
+ * <p>
  * Created by bryanhokanson on 12/14/15.
+ * </p>
+ * <p>
+ * Changes:</br>
+ * 1. </br>
+ * </p>
  */
-//TODO: Not documented what is this supposed to do?
 @RequestScoped
 public class ShowListViewServiceAdapter implements ShowListViewService {
 
@@ -67,7 +76,8 @@ public class ShowListViewServiceAdapter implements ShowListViewService {
             //get the org measures that match the orgId, put them in a list
             List<OrganizationMeasureDTO> orgMList = orgMDAO.findAllOrganizationMeasureByOrgId(orgId);
 
-            if (orgMList != null) {//loop through list, for each measure, do something
+            //loop through list, for each measure, do something
+            if (orgMList != null) {
                 for (OrganizationMeasureDTO om : orgMList) {
                     //if the org measure reporting year matches year passed in, continue
                     if (om.getReportPeriodYear() == year && om.getMeasureId() == measureId
