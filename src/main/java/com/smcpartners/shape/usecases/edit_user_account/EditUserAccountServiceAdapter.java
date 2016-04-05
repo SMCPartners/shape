@@ -50,8 +50,12 @@ public class EditUserAccountServiceAdapter implements EditUserAccountService {
             // The account must be for the requesting user
             // Must be the same organization
             // Must be the same role
+            UserDTO targetUser = userDAO.findById(user.getId());
+
             if (requestScopedUserId.getRequestUserId().equalsIgnoreCase(user.getId())
+                    && targetUser.getId().equalsIgnoreCase(user.getId())
                     && requestScopedUserId.getOrgId() == user.getOrganizationId()
+                    && targetUser.getOrganizationId() == user.getOrganizationId()
                     && requestScopedUserId.getSecurityRole().equalsIgnoreCase(user.getRole())) {
                 userDAO.update(user, user.getId());
             } else {

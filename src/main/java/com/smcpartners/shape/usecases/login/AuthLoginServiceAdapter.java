@@ -48,6 +48,7 @@ public class AuthLoginServiceAdapter implements AuthLoginService, AuthLoginUseca
     }
 
     @Override
+    // @LogLogin
     public Response login(LoginRequestDTO loginRequest) throws UseCaseException {
         try {
             UserDTO ue = this.getUser(loginRequest.getUserId(), loginRequest.getPassword());

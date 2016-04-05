@@ -25,6 +25,8 @@ public class ClickLogEntity {
     private String event;
     private Date eventDt;
     private String additionalInfo;
+    private String requestInfo;
+    private String responseInfo;
     private UserEntity userByUserId;
 
     @Id
@@ -69,6 +71,26 @@ public class ClickLogEntity {
         this.additionalInfo = additionalInfo;
     }
 
+    @Lob
+    @Column(name = "requestInfo", nullable = true, insertable = true, updatable = true)
+    public String getRequestInfo() {
+        return requestInfo;
+    }
+
+    public void setRequestInfo(String requestInfo) {
+        this.requestInfo = requestInfo;
+    }
+
+    @Lob
+    @Column(name = "responseInfo", nullable = true, insertable = true, updatable = true)
+    public String getResponseInfo() {
+        return responseInfo;
+    }
+
+    public void setResponseInfo(String responseInfo) {
+        this.responseInfo = responseInfo;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -95,7 +117,7 @@ public class ClickLogEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = true)
     public UserEntity getUserByUserId() {
         return userByUserId;
     }

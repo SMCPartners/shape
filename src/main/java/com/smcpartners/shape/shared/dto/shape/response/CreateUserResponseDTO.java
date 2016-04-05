@@ -18,6 +18,10 @@ public class CreateUserResponseDTO implements Serializable {
     public CreateUserResponseDTO() {
     }
 
+    public CreateUserResponseDTO(String id) {
+        this.id = id;
+    }
+
     public String getId() {
         return id;
     }

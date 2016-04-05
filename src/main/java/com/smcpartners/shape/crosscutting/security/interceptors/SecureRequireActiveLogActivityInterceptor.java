@@ -6,9 +6,11 @@ import com.smcpartners.shape.crosscutting.activitylogging.dto.ClickLogDTO;
 import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.crosscutting.security.exceptions.SecureRequireActiveLogActivityException;
+import com.smcpartners.shape.crosscutting.security.producers.JSONConverter;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.utils.JWTUtils;
+import org.apache.deltaspike.core.api.config.ConfigProperty;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -41,7 +43,7 @@ import java.util.logging.Logger;
  */
 @Interceptor
 @SecureRequireActiveLogActivity
-public class SecureRequireActiveLogAvtivityInterceptor {
+public class SecureRequireActiveLogActivityInterceptor {
 
     @Inject
     private Logger log;
@@ -50,10 +52,17 @@ public class SecureRequireActiveLogAvtivityInterceptor {
     private HttpServletRequest request;
 
     @Inject
+    @ConfigProperty(name = "com.smc.server-core.full_click_logging")
+    private boolean fullClickLogging;
+
+    @Inject
     private JWTUtils jwtUtils;
 
     @Inject
     private RequestScopedUserId requestScopedUserId;
+
+    @Inject
+    private JSONConverter jsonConverter;
 
     @EJB
     private UserDAO userDAO;
@@ -107,17 +116,32 @@ public class SecureRequireActiveLogAvtivityInterceptor {
                 throw new Exception("You do not have the appropriate role to access this");
             }
 
-            // Log Activity
-            ClickLogDTO clDTO = getClickLogDTO(ctx, userId);
-            clickLogQueuer.sendMessage(clDTO);
-
             // Set request object
             requestScopedUserId.setRequestUserId(userId);
             requestScopedUserId.setSecurityRole(role);
             requestScopedUserId.setOrgId(orgId);
 
             // Proceed with method invocation
-            return ctx.proceed();
+            if (fullClickLogging) {
+                Object retObj = ctx.proceed();
+
+                // Log Activity
+                ClickLogDTO clDTO = getClickLogDTO(ctx, userId);
+                //TODO: Figure out what to use for request info
+                if (retObj != null) {
+                    String jsonRet = jsonConverter.getMapper().writeValueAsString(retObj);
+                    clDTO.setResponseInfo(jsonRet);
+                }
+                clickLogQueuer.sendMessage(clDTO);
+
+                return retObj;
+            } else {
+                // Log Activity
+                ClickLogDTO clDTO = getClickLogDTO(ctx, userId);
+                clickLogQueuer.sendMessage(clDTO);
+
+                return ctx.proceed();
+            }
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "runInterceptor", e.getMessage(), e);
             throw new SecureRequireActiveLogActivityException(e.getMessage());

@@ -24,6 +24,7 @@ import java.util.logging.Logger;
  * <p>
  * Changes:<b/>
  */
+//TODO: Should a registered user be able ot edit or delete an organization measure
 @RequestScoped
 public class EditOrganizationMeasureServiceAdapter implements EditOrganizationMeasureService {
 

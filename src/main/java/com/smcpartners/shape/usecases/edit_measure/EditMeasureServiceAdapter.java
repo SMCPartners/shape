@@ -1,5 +1,6 @@
 package com.smcpartners.shape.usecases.edit_measure;
 
+import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.crosscutting.security.annotations.SecureRequireActiveLogActivity;
 import com.smcpartners.shape.frameworks.data.dao.shape.MeasureDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
@@ -15,7 +16,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1. The ADMIN can edit a measure
+ * 1. The ADMIN can edit a measure.
  * <p>
  * Created by johndestefano on 11/4/15.
  * <p>
@@ -30,16 +31,17 @@ public class EditMeasureServiceAdapter implements EditMeasureService {
     @EJB
     private MeasureDAO measureDAO;
 
+    @Inject
+    private RequestScopedUserId requestScopedUserId;
 
     public EditMeasureServiceAdapter() {
     }
 
     @Override
     @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN})
-    public BooleanValueDTO editMeasure(MeasureDTO org) throws UseCaseException {
+    public BooleanValueDTO editMeasure(MeasureDTO measure) throws UseCaseException {
         try {
-            measureDAO.update(org, org.getId());
-
+            measureDAO.update(measure, measure.getId());
             // Return value
             return new BooleanValueDTO(true);
         } catch (Exception e) {

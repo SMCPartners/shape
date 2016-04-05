@@ -4,7 +4,8 @@
     <interceptors>
         <!-- Specify the order of interceptor execution here -->
         <!-- class>org.apache.deltaspike.jpa.impl.transaction.TransactionalInterceptor</class -->
-        <class>com.smcpartners.shape.crosscutting.security.interceptors.SecureRequireActiveLogAvtivityInterceptor</class>
+        <class>com.smcpartners.shape.crosscutting.security.interceptors.SecureRequireActiveLogActivityInterceptor</class>
+        <class>com.smcpartners.shape.crosscutting.security.interceptors.LogLoginInterceptor</class>
         <class>org.apache.deltaspike.security.impl.extension.SecurityInterceptor</class>
         <class>com.smcpartners.shape.crosscutting.security.interceptors.RequiresActiveUserInterceptor</class>
         <class>com.smcpartners.shape.crosscutting.activitylogging.interceptors.LogActivityInterceptor</class>

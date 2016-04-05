@@ -71,6 +71,8 @@ public class ClickLogDAOImpl extends AbstractCrudDAO<ClickLogDTO, ClickLogEntity
         dto.setEvent(entity.getEvent());
         dto.setEventDt(entity.getEventDt());
         dto.setUserId(entity.getUserByUserId().getId());
+        dto.setRequestInfo(entity.getRequestInfo());
+        dto.setResponseInfo(entity.getResponseInfo());
         return dto;
     }
 
@@ -82,6 +84,8 @@ public class ClickLogDAOImpl extends AbstractCrudDAO<ClickLogDTO, ClickLogEntity
         et.setEvent(dto.getEvent());
         et.setEventDt(dto.getEventDt());
         et.setUserByUserId(user);
+        et.setRequestInfo(dto.getRequestInfo());
+        et.setResponseInfo(dto.getResponseInfo());
         return et;
     }
 }

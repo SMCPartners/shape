@@ -33,7 +33,7 @@ public abstract class AbstractCrudDAO<T, E, K> implements CrudDAO<T, K> {
             E e = em.find(this.getGenericEntityClass(), key);
             em.remove(e);
         } catch (Exception e) {
-            log.logp(Level.SEVERE, this.getClass().getName(), "validateUser", e.getMessage(), e);
+            log.logp(Level.SEVERE, this.getClass().getName(), "delete", e.getMessage(), e);
             throw new DataAccessException(e);
         }
     }
@@ -44,7 +44,7 @@ public abstract class AbstractCrudDAO<T, E, K> implements CrudDAO<T, K> {
             E e = em.find(this.getGenericEntityClass(), key);
             return this.mapEntityToDTO(e);
         } catch (Exception e) {
-            log.logp(Level.SEVERE, this.getClass().getName(), "validateUser", e.getMessage(), e);
+            log.logp(Level.SEVERE, this.getClass().getName(), "findById", e.getMessage(), e);
             throw new DataAccessException(e);
         }
     }

@@ -15,9 +15,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * Responsible:</br>
- * 1. Admin or org_admin can edit the user. The org-admin can't make the user an ADMIN or change the organization.</br>
- * <p>
+ * Responsible:<br/>
+ * 1. Admin level users can edit users. The ORG_ADMIN can only edit users for their
+ * organization and only if they are not ADMINs. No one can edit a users organization and ORG_ADMIN can't make a user
+ * an ADMIN<p>
  * Created by johndestefano on 3/15/16.
  * </p>
  * <p>
@@ -45,23 +46,30 @@ public class EditUserServiceAdapter implements EditUserService {
     @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
     public BooleanValueDTO editUser(UserDTO user) throws UseCaseException {
         try {
-            // ADMIN can edit user
+            // ADMIN can edit user but not the users organization
+            UserDTO targetUser = userDAO.findById(user.getId());
             SecurityRoleEnum reqRole = SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole());
             if (reqRole == SecurityRoleEnum.ADMIN) {
-                userDAO.update(user, user.getId());
-            } else if (reqRole == SecurityRoleEnum.ORG_ADMIN) {
-                // Org admin can edit user in their org
-                // Check role.
-                if (user.getRole().equals("ADMIN")){
-                    throw new Exception("You cannot change a users role to be higher than yours");
+                if (targetUser.getOrganizationId() == user.getOrganizationId()) {
+                    userDAO.update(user, user.getId());
+                } else {
+                    throw new IllegalAccessException();
                 }
-
-                // Check organization
-                if (requestScopedUserId.getOrgId() != user.getOrganizationId()) {
-                    throw new Exception("You can't change the users organization.");
+            } else {
+                // ORG_ADMIN can edit user for their organization but not change
+                // the organization or change to role to ADMIN
+                // ORG_ADMIN Can't edit ADMIN
+                if (!targetUser.getRole().equals("ADMIN")
+                        // Must be the same organization as requester
+                        && targetUser.getOrganizationId() == requestScopedUserId.getOrgId()
+                        // No funny business with the incoming data
+                        && user.getOrganizationId() == targetUser.getOrganizationId()
+                        // ORG_ADMIN can't make the role ADMIN
+                        && !user.getRole().equalsIgnoreCase("ADMIN")){
+                    userDAO.update(user, user.getId());
+                } else {
+                    throw new IllegalAccessException();
                 }
-
-                userDAO.update(user, user.getId());
             }
 
             // Return value

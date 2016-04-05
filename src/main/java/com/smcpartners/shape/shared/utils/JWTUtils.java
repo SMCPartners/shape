@@ -149,8 +149,6 @@ public class JWTUtils {
         }
     }
 
-
-
     /**
      * Return jwt values
      *

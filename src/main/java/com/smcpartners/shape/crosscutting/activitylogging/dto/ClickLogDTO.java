@@ -27,6 +27,9 @@ public class ClickLogDTO implements Serializable {
 
     private String additionalInfo;
 
+    private String requestInfo;
+    private String responseInfo;
+
     public ClickLogDTO() {
     }
 
@@ -68,5 +71,21 @@ public class ClickLogDTO implements Serializable {
 
     public void setAdditionalInfo(String additionalInfo) {
         this.additionalInfo = additionalInfo;
+    }
+
+    public String getRequestInfo() {
+        return requestInfo;
+    }
+
+    public void setRequestInfo(String requestInfo) {
+        this.requestInfo = requestInfo;
+    }
+
+    public String getResponseInfo() {
+        return responseInfo;
+    }
+
+    public void setResponseInfo(String responseInfo) {
+        this.responseInfo = responseInfo;
     }
 }

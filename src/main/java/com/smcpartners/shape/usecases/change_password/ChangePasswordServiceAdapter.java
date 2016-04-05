@@ -41,6 +41,7 @@ public class ChangePasswordServiceAdapter implements ChangePasswordService {
     public ChangePasswordServiceAdapter() {
     }
 
+    //TODO: Is this safe? Anyone could change anyone else's password?
     @Override
     public BooleanValueDTO changeUserPassword(CreateUserRequestDTO user) throws UseCaseException {
         try {

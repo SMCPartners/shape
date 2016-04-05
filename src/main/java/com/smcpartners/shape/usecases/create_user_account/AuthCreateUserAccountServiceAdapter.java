@@ -56,58 +56,43 @@ public class AuthCreateUserAccountServiceAdapter implements AuthCreateUserAccoun
         try {
             // Check account id to make sure its not in use
             BooleanValueDTO checkRetDTO = userDAO.checkUserId(dto.getId());
-
-            // Get the user trying to do the create
-            UserDTO reqUser = userDAO.findById(requestScopedUserId.getRequestUserId());
-
             if (!checkRetDTO.isValue()) {
                 // Load this object
-                UserDTO nDTO = new UserDTO();
+                UserDTO nDTO = null;
 
                 // Check the role being set
                 // To set the ADMIN role you must be an ADMIN
                 // To set the ORG_ADMIN role you must be and ADMIN or
                 // An ORG_ADMIN and the new user account must have the
                 // same org id and the user creating the account
-                SecurityRoleEnum reqUserRole = SecurityRoleEnum.valueOf(reqUser.getRole());
-                int reqUserOrgId = reqUser.getOrganizationId();
-                int targetUserOrgId = dto.getOrganizationId();
-                SecurityRoleEnum targetUserRole = SecurityRoleEnum.valueOf(dto.getRole());
-                if (reqUserRole == SecurityRoleEnum.ADMIN) {
-                    nDTO.setRole(dto.getRole());
-                    nDTO.setAdmin(true);
-                } else if (targetUserOrgId == reqUserOrgId && targetUserRole != SecurityRoleEnum.ADMIN) {
-                    nDTO.setRole(dto.getRole());
-                    nDTO.setAdmin(false);
+
+                // Is the requesting user an ADMIN, if so they can add for any role and any organization
+                if (SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole()) == SecurityRoleEnum.ADMIN) {
+                    nDTO = this.createUserDTO(dto, true);
                 } else {
-                    throw new Exception("You don't have the authority to create a user with this role.");
+                    // For Org admin check that the role is anything but ADMIN
+                    // And the new user is in the same org as the org admin.
+                    if (!dto.getRole().equalsIgnoreCase(SecurityRoleEnum.ADMIN.getName()) && requestScopedUserId.getOrgId() == dto.getOrganizationId()) {
+                        nDTO = this.createUserDTO(dto, false);
+                    } else {
+                        throw new IllegalAccessException();
+                    }
                 }
 
-                // Creating a new user sets the password to a random generated one
-                String pWd = RandomPasswordGenerator.generateApplicationDefaultPwd();
+                // First add the database
+                UserDTO respDTO = userDAO.create(nDTO);
 
-                // Set the UserDTO
-                // New account must reset password
-                // New account is active by default
-                // New account has fake password
-                nDTO.setResetPwd(true);
-                nDTO.setActive(true);
-                nDTO.setCreateDt(new Date());
-                nDTO.setEmail(dto.getEmail());
-                nDTO.setFirstName(dto.getFirstName());
-                nDTO.setLastName(dto.getLastName());
-                nDTO.setOrganizationId(dto.getOrganizationId());
-                nDTO.setId(dto.getId());
-                nDTO.setPassword(pWd);
-
+                // Next send a confirmation email with the random password and account set to change password.
+                // This will result in the user having to change their password.
                 MailDTO mail = new MailDTO();
                 mail.setToEmail(nDTO.getEmail());
+                //TODO: The text here should be externalized to the deltaspike proprties file
                 mail.setSubject("Welcome to SHAPE Dashboard");
                 mail.setMessage("Hello " + nDTO.getFirstName() + "," + "\n" + "\n" +
                         "You have been added as a registered user to the eHealthConnecticut SHAPE dashboard. " +
                         "To access the dashboard please use the following credentials:" + "\n" + "\n" +
                         "Dashboard Website Address: https://shape.ehealthconnecticut.org" + "\n" +
-                        "Temporary Password: " + pWd + "\n" + "\n" +
+                        "Temporary Password: " + nDTO.getPassword() + "\n" + "\n" +
                         "You will be prompted to update your password upon login." + "\n" + "\n" +
                         "If you experience issues with logging in or have any questions please contact Julia Moore" +
                         " at jmoore@smcpartners.com." + "\n" + "\n" +
@@ -115,13 +100,8 @@ public class AuthCreateUserAccountServiceAdapter implements AuthCreateUserAccoun
                         "eHealthConnecticut");
                 sms.sendEmailMsg(mail);
 
-                UserDTO respDTO = userDAO.create(nDTO);
-
-
                 // Generate return
-                CreateUserResponseDTO createUserRespDTO = new CreateUserResponseDTO();
-                createUserRespDTO.setId(respDTO.getId());
-                return createUserRespDTO;
+                return new CreateUserResponseDTO(respDTO.getId());
             } else {
                 throw new Exception("User id is in use.");
             }
@@ -129,5 +109,52 @@ public class AuthCreateUserAccountServiceAdapter implements AuthCreateUserAccoun
             log.logp(Level.SEVERE, this.getClass().getName(), "createUserAccount", e.getMessage(), e);
             throw new UseCaseException(e.getMessage());
         }
+    }
+
+    /**
+     * Creates a UserDTO from the CreateUserRequestDTO. Applies the following rules:<br/>
+     * 1. Only and ADMIN (creatorIsAdmin == true) can create an ADMIN<br/>
+     * 2. The initial password will be randomly generated<br/>
+     *
+     * @param newUserDTO
+     * @param creatorIsAdmin
+     * @return
+     * @throws Exception
+     */
+    private UserDTO createUserDTO(CreateUserRequestDTO newUserDTO, boolean creatorIsAdmin) throws Exception {
+        UserDTO nDTO = new UserDTO();
+
+        // Set the role.
+        // Only an ADMIN can make another ADMIN
+        if(creatorIsAdmin) {
+            nDTO.setRole(newUserDTO.getRole());
+            if (SecurityRoleEnum.valueOf(newUserDTO.getRole()) == SecurityRoleEnum.ADMIN) {
+                nDTO.setAdmin(true);
+            } else {
+                nDTO.setAdmin(true);
+            }
+        } else {
+            nDTO.setRole(newUserDTO.getRole());
+            nDTO.setAdmin(true);
+        }
+
+        // Creating a new user sets the password to a random generated one
+        String pWd = RandomPasswordGenerator.generateApplicationDefaultPwd();
+
+        // Set the UserDTO
+        // New account must reset password
+        // New account is active by default
+        // New account has fake password
+        nDTO.setResetPwd(true);
+        nDTO.setActive(true);
+        nDTO.setCreateDt(new Date());
+        nDTO.setEmail(newUserDTO.getEmail());
+        nDTO.setFirstName(newUserDTO.getFirstName());
+        nDTO.setLastName(newUserDTO.getLastName());
+        nDTO.setOrganizationId(newUserDTO.getOrganizationId());
+        nDTO.setId(newUserDTO.getId());
+        nDTO.setPassword(pWd);
+
+        return nDTO;
     }
 }
