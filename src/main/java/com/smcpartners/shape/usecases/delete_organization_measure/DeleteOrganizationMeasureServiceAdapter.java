@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:</br>
- * 1. ADMIN can delete a measure for any organization. ORG_ADMIN can
+ * 1. ADMIN can delete a measure for any organization. ORG_ADMIN and REGISTERD USER can
  * only delete for their organization</br>
  * <p>
  * Created by johndestefano on 3/15/16.
@@ -44,7 +44,7 @@ public class DeleteOrganizationMeasureServiceAdapter implements DeleteOrganizati
     }
 
     @Override
-    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
+    @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public BooleanValueDTO deleteOrganizationMeasure(OrganizationMeasureDTO org) throws UseCaseException {
         try {
             SecurityRoleEnum role = SecurityRoleEnum.valueOf(requestScopedUserId.getSecurityRole());
