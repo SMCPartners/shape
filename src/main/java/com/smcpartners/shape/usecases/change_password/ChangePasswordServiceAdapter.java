@@ -4,6 +4,7 @@ import com.smcpartners.shape.crosscutting.security.RequestScopedUserId;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.request.CreateUserRequestDTO;
+import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.utils.SecurityUtils;
 import com.smcpartners.shape.shared.usecasecommon.UseCaseException;
 
@@ -53,15 +54,27 @@ public class ChangePasswordServiceAdapter implements ChangePasswordService {
             //check new password validity
             boolean validPassword = SecurityUtils.checkPasswordCompliance(newPwd);
             //check if valid user
-            if (dao.validateUser(userId, userPwd) != null) {
+            UserDTO userDataFromDatabase = dao.validateUser(userId, userPwd);
+            if (userDataFromDatabase != null) {
                 //check if valid password with correct regex
                 if (validPassword) {
-                    dao.changePassword(userId, userPwd, newPwd);
-                    dao.resetPasswordToggle(userId, false);
-                    if (user.getQuestionOne() != null && user.getQuestionTwo() != null) {
-                        dao.addUserSecurityQuestions(userId, user.getQuestionOne(),
-                                user.getQuestionTwo(), user.getAnswerOne(), user.getAnswerTwo());
+
+                    // check if a correct security question and answer were sent
+                    // receives as question 1 and answer 1 but could be either
+                    // (question 1 and answer 1) or (question two and answer two)
+                    if (
+                            user.getQuestionOne().equals( userDataFromDatabase.getQuestionOne() ) &&
+                            user.getAnswerOne().equals( userDataFromDatabase.getAnswerOne() )
+                        ||
+                            user.getQuestionOne().equals( userDataFromDatabase.getQuestionTwo() ) &&
+                            user.getAnswerOne().equals( userDataFromDatabase.getAnswerTwo() )
+                    ) {
+                        dao.changePassword(userId, userPwd, newPwd);
+                        dao.resetPasswordToggle(userId, false);
+                    } else {
+                        throw new UseCaseException("Security question or answer incorrect");
                     }
+
                 }else{
                     throw new UseCaseException("The new password you entered did not meet the required format.");
                 }

@@ -107,7 +107,7 @@ public class ResetPasswordServiceAdapter implements ResetPasswordService, ResetP
             return userDAO.findById(userId);
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "getUserData", e.getMessage(), e);
-            throw new UseCaseException(e.getMessage());
+            throw new UseCaseException("Incorrect username");
         }
     }
 }

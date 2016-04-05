@@ -20,7 +20,9 @@ import java.util.logging.Logger;
 
 /**
  * Responsible:<br/>
- * 1. Users can find measures by ID
+ * 1. Takes a list of Organization Measure DTOs from FindAllOrganizationMeasuresByOrg service and returns the specific
+ * measures for just that organization. Since there will be duplicates, the service adds them to a Hashset and returns
+ * them back as a list to remove duplicates.
  * <p>
  * Created by bhokanson on 12/1/15.
  * <p>
@@ -44,7 +46,6 @@ public class FindMeasuresByIdServiceAdapter implements FindMeasuresByIdService {
     public FindMeasuresByIdServiceAdapter() {
     }
 
-    //TODO: Can a user only find measures for their own organization?
     @Override
     @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.DPH_USER, SecurityRoleEnum.ORG_ADMIN, SecurityRoleEnum.REGISTERED})
     public List<MeasureDTO> findMeasuresById(List<OrganizationMeasureDTO> orgM) throws UseCaseException {

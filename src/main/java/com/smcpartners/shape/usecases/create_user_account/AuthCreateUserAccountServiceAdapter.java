@@ -98,7 +98,11 @@ public class AuthCreateUserAccountServiceAdapter implements AuthCreateUserAccoun
                         " at jmoore@smcpartners.com." + "\n" + "\n" +
                         "Thank you, " + "\n" + "\n" +
                         "eHealthConnecticut");
-                sms.sendEmailMsg(mail);
+                try {
+                  sms.sendEmailMsg(mail);
+                } catch (Exception e) {
+                  throw new Exception("Sending email failed, you may have entered your email address incorrectly");
+                }
 
                 // Generate return
                 return new CreateUserResponseDTO(respDTO.getId());

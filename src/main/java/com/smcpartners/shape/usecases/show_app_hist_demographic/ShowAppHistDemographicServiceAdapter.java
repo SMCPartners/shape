@@ -23,9 +23,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Responsible:<br/>
+ * 1. Formats the demographic information to align with Google Charts Polymer element that uses Google Charts API.
+ * If there is no data for a specific demographic, it will send back a false for the front end to display a message of
+ * no data available. Formats into two decimal percentage.
+ * <p>
  * Created by bryanhokanson on 12/17/15.
+ * <p>
+ * Changes:<b/>
  */
-//TODO: Not documented. What is this supposed to do?
 @RequestScoped
 public class ShowAppHistDemographicServiceAdapter implements ShowAppHistDemographicService {
 

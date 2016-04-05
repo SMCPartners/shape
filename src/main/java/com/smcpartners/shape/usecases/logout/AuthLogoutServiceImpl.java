@@ -24,6 +24,7 @@ import java.util.logging.Logger;
  * </p>
  */
 //TODO: Seems like and user role should be able to call this?
+    //TODO: The logout functionality is handled on the front end, not sure if we should delete this? BH 3/25
 @RequestScoped
 public class AuthLogoutServiceImpl implements AuthLogoutService {
 
