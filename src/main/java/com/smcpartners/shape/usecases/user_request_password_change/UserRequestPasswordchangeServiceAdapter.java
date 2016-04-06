@@ -60,7 +60,7 @@ public class UserRequestPasswordchangeServiceAdapter implements UserRequestPassw
             // Get the user and check password
             UserDTO userDTO = userDAO.validateUser(userId, pwdResetReq.getOldPassword());
             if (userDTO == null) {
-                throw new IllegalAccessException();
+                throw new IllegalAccessException("Incorrect old password");
             }
 
             // Compare the answer returned to the question sent
