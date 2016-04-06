@@ -56,38 +56,36 @@ public class UserRequestPasswordchangeServiceAdapter implements UserRequestPassw
         try {
             // The user requesting the change must be the same user as the change is for
             String userId = requestScopedUserId.getRequestUserId();
-            if (pwdResetReq.getUserId().equalsIgnoreCase(userId)) {
-                // Get the user and check password
-                UserDTO userDTO = userDAO.validateUser(userId, pwdResetReq.getOldPassword());
-                if (userDTO == null) {
-                    throw new IllegalAccessException();
-                }
 
-                // Compare the answer returned to the question sent
-                String answer = null;
-                if (userDTO.getUserResetPwdChallenge() == 1) {
-                    answer = userDTO.getAnswerOne();
-                } else if (userDTO.getUserResetPwdChallenge() == 2) {
-                    answer = userDTO.getAnswerTwo();
-                } else {
-                    // Can't send back anything else
-                    throw new IllegalAccessException();
-                }
-
-                // If answer doesn't match throw exception
-                if (!pwdResetReq.getQuestionAnswer().equals(answer)) {
-                    throw new IllegalAccessException("Answer doesn't match question.");
-                }
-
-                // Set the new password for the user
-                // This will also set the user request password change flag to 0
-                userDAO.forcePasswordChange(userId, pwdResetReq.getNewPassword());
-
-                // Return value
-                return BooleanValueDTO.get(true);
-            } else {
+            // Get the user and check password
+            UserDTO userDTO = userDAO.validateUser(userId, pwdResetReq.getOldPassword());
+            if (userDTO == null) {
                 throw new IllegalAccessException();
             }
+
+            // Compare the answer returned to the question sent
+            String answer = null;
+            if (userDTO.getUserResetPwdChallenge() == 1) {
+                answer = userDTO.getAnswerOne();
+            } else if (userDTO.getUserResetPwdChallenge() == 2) {
+                answer = userDTO.getAnswerTwo();
+            } else {
+                // Can't send back anything else
+                throw new IllegalAccessException();
+            }
+
+            // If answer doesn't match throw exception
+            if (!pwdResetReq.getQuestionAnswer().equals(answer)) {
+                throw new IllegalAccessException("Answer doesn't match question.");
+            }
+
+            // Set the new password for the user
+            // This will also set the user request password change flag to 0
+            userDAO.forcePasswordChange(userId, pwdResetReq.getNewPassword());
+
+            // Return value
+            return BooleanValueDTO.get(true);
+
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "requestPasswordChange", e.getMessage(), e);
             throw new UseCaseException(e.getMessage());
