@@ -2,11 +2,10 @@ package com.smcpartners.shape.frameworks.data.dao.shape;
 
 import com.smcpartners.shape.frameworks.data.dao.CrudDAO;
 import com.smcpartners.shape.frameworks.data.exceptions.DataAccessException;
+import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 import com.smcpartners.shape.shared.dto.common.BooleanValueDTO;
 import com.smcpartners.shape.shared.dto.shape.UserDTO;
-import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
 
-import javax.xml.crypto.Data;
 import java.util.List;
 
 /**
@@ -164,4 +163,12 @@ public interface UserDAO extends CrudDAO<UserDTO, String> {
 
     void addUserSecurityQuestions(String userId, String question1, String question2,
                                   String answer1, String answer2) throws DataAccessException;
+
+    /**
+     * Choice will always be 1 or 2
+     *
+     * @param choice
+     * @throws DataAccessException
+     */
+    void setUserResetPwdChallenge(String userId, int choice) throws DataAccessException;
 }

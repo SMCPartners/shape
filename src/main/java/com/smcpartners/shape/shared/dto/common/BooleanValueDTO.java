@@ -31,4 +31,8 @@ public class BooleanValueDTO implements Serializable {
     public void setValue(boolean value) {
         this.value = value;
     }
+
+    public static BooleanValueDTO get(boolean retVal) {
+        return new BooleanValueDTO(retVal);
+    }
 }

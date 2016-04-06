@@ -45,6 +45,11 @@ public class UserEntity {
     private String questionTwo;
     private String answerOne;
     private String answerTwo;
+    /**
+     * This field stores the password cahllenge question that was last sent to the
+     * user when they request a password reset
+     */
+    private int userResetPwdChallenge;
     private Collection<UserProviderEntity> userProvidersById;
     private OrganizationEntity organizationById;
 
@@ -246,6 +251,16 @@ public class UserEntity {
 
     public void setAnswerTwo(String answerTwo) {
         this.answerTwo = answerTwo;
+    }
+
+    @Basic
+    @Column(name = "UserResetPwdChallenge", nullable = true, insertable = true, updatable = true)
+    public int getUserResetPwdChallenge() {
+        return userResetPwdChallenge;
+    }
+
+    public void setUserResetPwdChallenge(int userResetPwdChallenge) {
+        this.userResetPwdChallenge = userResetPwdChallenge;
     }
 
     @Override

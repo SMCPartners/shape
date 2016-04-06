@@ -40,6 +40,18 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
     }
 
     @Override
+    public void setUserResetPwdChallenge(String userId, int choice) throws DataAccessException {
+        try {
+            UserEntity ue = em.find(UserEntity.class, userId);
+            ue.setUserResetPwdChallenge(choice);
+            em.merge(ue);
+        } catch (Exception e) {
+            log.logp(Level.SEVERE, this.getClass().getName(), "validateUser", e.getMessage(), e);
+            throw new DataAccessException(e);
+        }
+    }
+
+    @Override
     public UserDTO validateUser(String userId, String password) throws DataAccessException {
         try {
             UserEntity ue = em.find(UserEntity.class, userId);
@@ -88,6 +100,7 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
                 ue.setLastName(lastName);
                 ue.setEmail(email);
                 ue.setResetPwd(resetPwd);
+                ue.setUserResetPwdChallenge(0);
                 em.persist(ue);
                 em.flush();
                 em.refresh(ue);
@@ -141,6 +154,7 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
                 // Update and save
                 ue.setPasswordSalt(sp.getSalt());
                 ue.setPasswordDigest(sp.getPwdDigest());
+                ue.setUserResetPwdChallenge(0);
                 ue = em.merge(ue);
                 return this.mapEntityToDTO(ue);
             } else {
@@ -164,6 +178,7 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
                 // Update and save
                 ue.setPasswordSalt(sp.getSalt());
                 ue.setPasswordDigest(sp.getPwdDigest());
+                ue.setUserResetPwdChallenge(0);
                 ue = em.merge(ue);
             } else {
                 throw new DataAccessException("User does not exist!");
@@ -301,6 +316,7 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
                 ue.setQuestionTwo(dto.getQuestionTwo());
                 ue.setAnswerOne(dto.getAnswerOne());
                 ue.setAnswerTwo(dto.getAnswerTwo());
+                ue.setUserResetPwdChallenge(dto.getUserResetPwdChallenge());
                 ue = em.merge(ue);
                 return this.mapEntityToDTO(ue);
             } else {
@@ -370,6 +386,7 @@ public class UserDAOImpl extends AbstractCrudDAO<UserDTO, UserEntity, String> im
         dto.setQuestionTwo(entity.getQuestionTwo());
         dto.setAnswerOne(entity.getAnswerOne());
         dto.setAnswerTwo(entity.getAnswerTwo());
+        dto.setUserResetPwdChallenge(entity.getUserResetPwdChallenge());
         return dto;
     }
 

@@ -33,6 +33,7 @@ public class UserDTO implements Serializable {
     private String questionTwo;
     private String answerOne;
     private String answerTwo;
+    private int userResetPwdChallenge;
 
     /**
      * Constructor
@@ -159,4 +160,12 @@ public class UserDTO implements Serializable {
     public String getModifiedBy() { return modifiedBy; }
 
     public void setModifiedBy(String modifiedBy) { this.modifiedBy = modifiedBy; }
+
+    public int getUserResetPwdChallenge() {
+        return userResetPwdChallenge;
+    }
+
+    public void setUserResetPwdChallenge(int userResetPwdChallenge) {
+        this.userResetPwdChallenge = userResetPwdChallenge;
+    }
 }
