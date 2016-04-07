@@ -60,7 +60,7 @@ public class UserRequestPasswordchangeServiceAdapter implements UserRequestPassw
                 // Get the user and check password
                 UserDTO userDTO = userDAO.validateUser(userId, pwdResetReq.getOldPassword());
                 if (userDTO == null) {
-                    throw new IllegalAccessException();
+                    throw new IllegalAccessException("Incorrect old password");
                 }
 
                 // Compare the answer returned to the question sent
@@ -86,7 +86,7 @@ public class UserRequestPasswordchangeServiceAdapter implements UserRequestPassw
                 // Return value
                 return BooleanValueDTO.get(true);
             } else {
-                throw new IllegalAccessException();
+                throw new IllegalAccessException("Your account is not allowed to reset this user's password");
             }
         } catch (Exception e) {
             log.logp(Level.SEVERE, this.getClass().getName(), "requestPasswordChange", e.getMessage(), e);
