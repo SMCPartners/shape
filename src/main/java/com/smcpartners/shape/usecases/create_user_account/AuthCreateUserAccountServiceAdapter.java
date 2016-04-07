@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  * 1. To set the ADMIN role you must be an ADMIN.
  * To set the ORG_ADMIN role you must be and ADMIN or
  * An ORG_ADMIN and the new user account must have the
- * same org id and the user creating the account
+ * same org id and the user creating the account. The userid must be greater than 4 characters.
  * <p>
  * Created by johndestefano on 11/2/15.
  * <p>
@@ -54,6 +54,11 @@ public class AuthCreateUserAccountServiceAdapter implements AuthCreateUserAccoun
     @SecureRequireActiveLogActivity({SecurityRoleEnum.ADMIN, SecurityRoleEnum.ORG_ADMIN})
     public CreateUserResponseDTO createUserAccount(CreateUserRequestDTO dto) throws UseCaseException {
         try {
+            // User id must be at least 4 characters
+            if (dto.getId().length() < 4) {
+                throw new Exception("User id must be at least 4 characters.");
+            }
+
             // Check account id to make sure its not in use
             BooleanValueDTO checkRetDTO = userDAO.checkUserId(dto.getId());
             if (!checkRetDTO.isValue()) {
