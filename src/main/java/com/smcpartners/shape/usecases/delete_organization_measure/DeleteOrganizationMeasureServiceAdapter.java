@@ -60,7 +60,7 @@ public class DeleteOrganizationMeasureServiceAdapter implements DeleteOrganizati
                 if (requestScopedUserId.getOrgId() == dto.getOrganizationId()) {
                     organizationMeasureDAO.delete(org.getId());
                 } else {
-                    throw new IllegalAccessException();
+                    throw new IllegalAccessException("Your account is not allowed to delete this measure");
                 }
             }
 
