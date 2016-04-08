@@ -254,7 +254,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "UserResetPwdChallenge", nullable = true, insertable = true, updatable = true)
+    @Column(name = "UserResetPwdChallenge", columnDefinition = "INT(11) default 0", nullable = true, insertable = true, updatable = true)
     public int getUserResetPwdChallenge() {
         return userResetPwdChallenge;
     }
