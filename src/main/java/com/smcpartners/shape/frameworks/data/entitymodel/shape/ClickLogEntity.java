@@ -40,8 +40,8 @@ public class ClickLogEntity {
         this.clickLogId = clickLogId;
     }
 
-    @Basic
-    @Column(name = "event", nullable = false, insertable = true, updatable = true, length = 100)
+    @Lob
+    @Column(name = "event", nullable = false, insertable = true, updatable = true)
     public String getEvent() {
         return event;
     }
