@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  * </p>
  */
 @MessageDriven(name = "JumpActivityQueueMDB", activationConfig = {
-        @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "jms/queue/JumpActivityQueue"),
+        @ActivationConfigProperty(propertyName = "destinationLookup", propertyValue = "jms/queue/ShapeActivityQueue"),
         @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Queue"),
         @ActivationConfigProperty(propertyName = "acknowledgeMode", propertyValue = "Auto-acknowledge")})
 public class ShapeActivityQueueMDB implements MessageListener {
