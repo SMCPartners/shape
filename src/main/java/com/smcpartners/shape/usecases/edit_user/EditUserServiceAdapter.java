@@ -53,7 +53,7 @@ public class EditUserServiceAdapter implements EditUserService {
                 if (targetUser.getOrganizationId() == user.getOrganizationId()) {
                     userDAO.update(user, user.getId());
                 } else {
-                    throw new IllegalAccessException();
+                    throw new IllegalAccessException("Your account does not have permission to edit this user.");
                 }
             } else {
                 // ORG_ADMIN can edit user for their organization but not change
@@ -68,7 +68,7 @@ public class EditUserServiceAdapter implements EditUserService {
                         && !user.getRole().equalsIgnoreCase("ADMIN")){
                     userDAO.update(user, user.getId());
                 } else {
-                    throw new IllegalAccessException();
+                    throw new IllegalAccessException("Your account does not have permission to edit this user.");
                 }
             }
 
