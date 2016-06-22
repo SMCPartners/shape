@@ -9,6 +9,7 @@ import com.smcpartners.shape.crosscutting.security.exceptions.SecureRequireActiv
 import com.smcpartners.shape.crosscutting.security.producers.JSONConverter;
 import com.smcpartners.shape.frameworks.data.dao.shape.UserDAO;
 import com.smcpartners.shape.shared.constants.SecurityRoleEnum;
+import com.smcpartners.shape.shared.dto.shape.UserDTO;
 import com.smcpartners.shape.shared.utils.JWTUtils;
 import org.apache.deltaspike.core.api.config.ConfigProperty;
 
@@ -32,13 +33,14 @@ import java.util.logging.Logger;
  * 3. Validates the user<br/>
  * 4. Makes sure the user is still active<br/>
  * 5. Tests the use role against the sole allowed by the method being invoked<br/>
- * 6. Logs the event<br/>
+ * 6. Logs the event
+ * 7. Check the role in the token against the current role to make sure they are the same.<br/>
  * <p>
  * Created by johndestefano on 10/2/15.
  * </p>
  * <p>
  * Changes:</br>
- * 1. </br>
+ * 1. updates the check for role in token and current role. - jjdestef - 05/09/2016</br>
  * </p>
  */
 @Interceptor
@@ -111,9 +113,14 @@ public class SecureRequireActiveLogActivityInterceptor {
             }
 
             // Check for active user
-            boolean isActive = (userDAO.isActive(userId)).isValue();
-            if (!isActive) {
+            UserDTO userDTO = userDAO.findById(userId);
+            if (!userDTO.isActive()) {
                 throw new Exception("You do not have the appropriate role to access this");
+            }
+
+            // Check the users role in the token is the same as the current role
+            if (!userDTO.getRole().equalsIgnoreCase(role)) {
+                throw new Exception("User role is not the same as the role in the identity you are using. You must login again.");
             }
 
             // Set request object

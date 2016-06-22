@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  * Responsible:</br>
@@ -92,15 +93,22 @@ public class ShowAggregateComparisonServiceAdapter implements ShowAggregateCompa
                 UserDTO user = userDAO.findById(requestScopedUserId.getRequestUserId());
 
                 // Look up data
-                orgMList = organizationMeasureDAO.findOrgMeasureByMeasureIdAndYearAndOrg(measureId, year, user.getOrganizationId());
+                //orgMList = organizationMeasureDAO.findOrgMeasureByMeasureIdAndYearAndOrg(measureId, year, user.getOrganizationId());
+                orgMList = organizationMeasureDAO.findOrgMeasureByMeasureIdAndYear(measureId, year);
                 retLst = createReturnLst(orgMList);
 
                 if (orgMList != null && orgMList.size() > 0) {
-                    List<Object> orgList = new ArrayList<>();
-                    orgList.add(user.getOrganizationName());
-                    orgList.add(orgMList.get(0).getDenominatorValue());
-                    orgList.add(orgMList.get(0).getNumeratorValue());
-                    retLst.add(orgList);
+                    // Filter out org
+                    List<OrganizationMeasureDTO> singleOrgLst = orgMList.stream()
+                            .filter(organizationMeasureDTO -> organizationMeasureDTO.getOrganizationId() == user.getOrganizationId())
+                            .collect(Collectors.toList());
+                    if (singleOrgLst != null && singleOrgLst.size() >0) {
+                        List<Object> orgList = new ArrayList<>();
+                        orgList.add(user.getOrganizationName());
+                        orgList.add(singleOrgLst.get(0).getDenominatorValue());
+                        orgList.add(singleOrgLst.get(0).getNumeratorValue());
+                        retLst.add(orgList);
+                    }
                 }
 
                 // Return list

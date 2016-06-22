@@ -5,7 +5,8 @@ import javax.enterprise.context.RequestScoped;
 /**
  * Responsible:</br>
  * 1. Holds information from the callers JWT. This can be used in other classes in an
- * http request chain.</br>
+ * http request chain. This only works if the class target method is annotated with
+ * SecureRequireActiveLogActivityInterceptor or JWTSecurityAuthorizerWithUserIdParam</br>
  * <p>
  * Created by johndestefano on 3/15/16.
  * </p>

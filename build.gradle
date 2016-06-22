@@ -35,6 +35,8 @@ dependencies {
     providedCompile 'org.jboss.resteasy:resteasy-jackson2-provider:3.0.10.Final'
     providedCompile 'org.jboss.resteasy:resteasy-jaxrs:3.0.10.Final'
     providedCompile 'org.jboss.resteasy:resteasy-cache-core:3.0.10.Final'
+    providedCompile 'org.jboss.resteasy:resteasy-multipart-provider:3.0.10.Final'
+
 
     // Libs
     compile 'org.apache.deltaspike.core:deltaspike-core-api:1.2.1'
@@ -46,6 +48,7 @@ dependencies {
     compile 'io.jsonwebtoken:jjwt:0.5.1'
     compile 'org.apache.commons:commons-email:1.4'
     compile 'commons-io:commons-io:2.4'
+    compile 'org.apache.poi:poi:3.14'
 
     // Mighty handy to handle java 8 short comings
     compile 'com.diffplug.durian:durian:3.2.0'
